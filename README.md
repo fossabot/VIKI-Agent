@@ -14,6 +14,7 @@
 [![Documentation: visual guide](https://img.shields.io/badge/docs-visual%20guide-1f1f1f?style=flat-square)](https://takehiro177.github.io/VIKI-Agent/)
 [![Pull requests welcome](https://img.shields.io/badge/PRs-welcome-1f1f1f?style=flat-square)](CONTRIBUTING.md)
 [![Sponsor VIKI Agent on GitHub](https://img.shields.io/badge/sponsor-VIKI%20Agent-1f1f1f?style=flat-square&logo=githubsponsors&logoColor=ea4aaa)](https://github.com/sponsors/takehiro177)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftakehiro177%2FVIKI-Agent.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftakehiro177%2FVIKI-Agent?ref=badge_shield)
 
 [Visual guide](https://takehiro177.github.io/VIKI-Agent/) · [Showcase](https://takehiro177.github.io/VIKI-Agent/showcase/) ·
 [Get started](docs/getting-started.md) · [Manual](docs/using-the-app.md) ·
@@ -239,6 +240,9 @@ VIKI Agent comes without any warranty, as the license's sections 15 and 16 state
 holder is liable for damages arising from its use, as far as the law allows.
 
 Copyright (C) 2026 VIKI Agent contributors.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftakehiro177%2FVIKI-Agent.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftakehiro177%2FVIKI-Agent?ref=badge_large)
 
 ### Third-party software and trademarks
 
