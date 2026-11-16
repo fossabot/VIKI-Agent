@@ -1,0 +1,66 @@
+.avatar {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--s1);
+  border: 1px solid var(--avatar-accent);
+  forced-color-adjust: none;
+}
+
+.avatar[data-shape="circle"] {
+  border-radius: 50%;
+}
+
+.avatar[data-shape="rounded"] {
+  border-radius: 25%;
+}
+
+.avatar[data-shape="square"] {
+  border-radius: 0;
+}
+
+/* Each accent is its own tokens.css token, per theme, checked for contrast on --s1. */
+.avatar[data-accent="orange"] {
+  --avatar-accent: var(--accent-orange);
+}
+
+.avatar[data-accent="red"] {
+  --avatar-accent: var(--accent-red);
+}
+
+.avatar[data-accent="slate"] {
+  --avatar-accent: var(--accent-slate);
+}
+
+.avatar[data-accent="blue"] {
+  --avatar-accent: var(--accent-blue);
+}
+
+.avatar[data-accent="green"] {
+  --avatar-accent: var(--accent-green);
+}
+
+.avatar[data-accent="purple"] {
+  --avatar-accent: var(--accent-purple);
+}
+
+.avatar img {
+  display: block;
+  filter: grayscale(1);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bots show their avatars in colour (BotAvatar); everywhere else stays grayscale. */
+.avatar[data-color="true"] img {
+  filter: none;
+}
+
+.avatar-initials {
+  color: var(--avatar-accent);
+  font-weight: 600;
+}

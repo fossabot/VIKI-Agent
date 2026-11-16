@@ -1,0 +1,50 @@
+/* ChatOnlyBanner and ReadinessBanner. Self-contained: this
+   stylesheet owns its own banner chrome rather than sharing `.banner` with ReconnectBanner.css,
+   so the two never fight over one class's cascade order. Visually the same shape (a full-width
+   strip on the tokens.css role token --fill-popover, the fill ReconnectBanner.css and
+   StaleWindow.css also use) because both sit in the same banner slot and stack. */
+.chat-only-banner,
+.readiness-banner {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 28px;
+  background: var(--fill-popover);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.chat-only-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.readiness-banner button {
+  margin-left: auto;
+}
+
+.chat-only-banner [aria-disabled="true"],
+.readiness-banner [aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* S (below 800px): text then buttons on their own line, 16px gutter. */
+@media not all and (min-width: 800px) {
+  .chat-only-banner,
+  .readiness-banner {
+    flex-wrap: wrap;
+    padding: 9px 16px;
+  }
+
+  .chat-only-banner-actions,
+  .readiness-banner button {
+    margin-left: 0;
+    width: 100%;
+  }
+}

@@ -1,0 +1,221 @@
+/* The launcher panel. Anchored beside the draggable
+   launcher rather than centred like Search/SearchPalette.css's `.palette`: LauncherPanel.tsx
+   computes `left`/`top`/`width`/`height` in script (the launcher's own position only exists at
+   render time, as the `anchor` prop) and sets them inline; this file draws the chrome and the
+   full-window fallback for when that script leaves them unset.
+
+   Prefix `dloop-panel`; `dloop-item-` and `dloop-chat-` are ItemCard's and LauncherChat's own
+   families of the same `dloop-` name (ItemCard.css, LauncherChat.css) for different surfaces.
+   `.chip`, `.btn` and `.menu-panel`/`.mi` are base.css's shared primitives, reused as-is; no
+   colour is declared here beyond what tokens already carry.
+
+   z-index 44 for the panel, 43 for its backdrop (see tokens.css's stacking-order comment). */
+
+.dloop-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  /* Transparent by design: unlike the search palette's dimmed scrim, opening the panel
+     must not darken the rest of the window. */
+  background: transparent;
+  z-index: 43;
+}
+
+.dloop-panel {
+  position: fixed;
+  z-index: 44;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  background: var(--g1);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  /* The one visual cue separating the panel from the page behind it, now that the backdrop
+     itself is transparent (base.css's `.menu-panel` shadow, reused). */
+  box-shadow: 0 12px 32px var(--shadow);
+  overflow: hidden;
+  /* Last resort: the header, the chat region's own floor (its min-height: auto below) and,
+     rarely, an error line or the weekly check card can still add up to more than a dragged-down
+     or saved-small panel's own height. Scrolling the whole panel keeps Message VIKI reachable
+     instead of letting `overflow: hidden` above clip it silently. */
+  overflow-y: auto;
+}
+
+/* Below a 560x480 window (LauncherPanel.tsx's `isFullWindow`) the script leaves `style` empty
+   and this takes over instead: a full-window sheet rather than a box beside the launcher. */
+.dloop-panel--full {
+  inset: 0;
+}
+
+.dloop-panel-header {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 12px 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dloop-panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dloop-panel-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+.dloop-panel-status {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12.5px;
+  color: var(--t3);
+}
+
+.dloop-panel-turn-on {
+  align-self: flex-start;
+}
+
+.dloop-panel-menu-wrap {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+}
+
+/* Same tier as ItemCard.css's own "⋯" dropdown (tokens.css's stacking-order comment): a local
+   menu over this panel's own header, not a page-level overlay. */
+.dloop-panel-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 5;
+  margin-top: 4px;
+  min-width: 180px;
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+
+/* base.css's own comment on `.mi` leaves row hover/focus highlighting to each menu on purpose
+   (ItemCard.css restates the same three declarations for its own "⋯" menu; this is this menu's
+   copy). */
+.dloop-panel-menu .mi:hover,
+.dloop-panel-menu .mi:focus-visible {
+  background: var(--fill-hi);
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+  outline: none;
+}
+
+.dloop-panel-body {
+  flex: 0 1 auto;
+  max-height: 45%;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.dloop-panel-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dloop-panel-items > * + * {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.dloop-panel-empty {
+  margin: 0;
+  color: var(--t2);
+}
+
+/* The weekly check card: its own section after the items, shown only while
+   `view.review.due`. */
+.dloop-panel-review {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.dloop-panel-review-text {
+  margin: 0;
+}
+
+.dloop-panel-review-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* VIKI's chat in its own region, visually separated from the items above it, always
+   present. Grows to take whatever height dloop-panel-body above does not use (that
+   rule's own 45% cap), and is itself a column so its child (.dloop-chat, LauncherChat.css) can
+   grow its own message box while its composer stays put at the foot.
+
+   No min-height: 0 here or on .dloop-chat below: that would let the flex-shrink algorithm
+   squeeze this region — and so .dloop-chat's own actions row, messages box and Composer — below
+   their real content height whenever dloop-panel-body's items reached its 45% cap on a small
+   panel. The squeeze would not actually shrink the Composer (nothing inside sets its own
+   min-height: 0), it would just overflow this now-too-small box and get clipped by
+   .dloop-panel's overflow, pushing Message VIKI out of reach. Leaving min-height at its default
+   `auto` instead gives this region (and .dloop-chat) their content's own floor:
+   dloop-panel-body shrinks first, down to 0 and scrolling, before this region gives up any of
+   its own height. MIN_PANEL_HEIGHT (LauncherPanel.tsx) keeps the panel itself tall enough for
+   that floor to still fit. */
+.dloop-panel-chat {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+  padding: 8px 12px 12px;
+}
+
+.dloop-panel-chat > .dloop-chat {
+  flex: 1 1 auto;
+}
+
+/* The two outer-edge resize handles, present only once the dialog carries data-grow-x and
+   data-grow-y (LauncherPanel.tsx: not full-window, and onSaveSize given). Unlike
+   Shell/ResizeHandle.css's own rails, which centre the strip over an edge shared with a sibling
+   pane, this panel has no sibling to share an edge with: the handle sits flush with whichever
+   outer edge actually moves when its axis grows, so `transform: none` drops that file's centring
+   and left/right (or top/bottom) is picked by growX/growY instead. */
+.dloop-panel > .resize-handle {
+  transform: none;
+}
+
+.dloop-panel[data-grow-x="left"] > .resize-handle[aria-orientation="vertical"] {
+  left: 0;
+}
+
+.dloop-panel[data-grow-x="right"] > .resize-handle[aria-orientation="vertical"] {
+  right: 0;
+}
+
+.dloop-panel[data-grow-y="up"] > .resize-handle[aria-orientation="horizontal"] {
+  top: 0;
+}
+
+.dloop-panel[data-grow-y="down"] > .resize-handle[aria-orientation="horizontal"] {
+  bottom: 0;
+}
+
+@media (forced-colors: active) {
+  .dloop-panel-menu .mi:hover,
+  .dloop-panel-menu .mi:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

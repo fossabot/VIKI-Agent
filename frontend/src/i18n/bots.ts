@@ -1,0 +1,272 @@
+import { defineCatalog } from "./defineCatalog";
+
+export const catalog = defineCatalog({
+  en: {
+    "bots.memory": "Bot memory",
+    "bots.memory.help":
+      "VIKI Agent requests this folder for Claude Code's native memory. New conversations may recall notes from it when autoMemoryEnabled is enabled. A managed autoMemoryDirectory setting takes precedence and can select another folder. Conversations started before Bot memory keep Claude Code's own memory settings.",
+    "bots.memory.source": "Source {ref}/",
+    "bots.memory.remaining": "{count} more",
+    "bots.memory.omitted": "{count} entries omitted.",
+    "bots.memory.how": "How Bot memory works",
+    "bots.memory.view": "View memory",
+    "bots.memory.allFiles": "All files",
+    "bots.memory.openInVault": "Open in Vault",
+    "bots.memory.refresh": "Refresh memory",
+    "bots.memory.loading": "Loading memory files…",
+    "bots.memory.empty":
+      "No memory saved yet. The folder appears when {name} first saves a memory, if Claude Code's auto memory is on.",
+    "bots.memory.own":
+      "Each Bot has its own memory folder. VIKI Agent asks Claude Code to keep {name}'s memory here in new chats and routine runs.",
+    "bots.memory.retry": "Try again",
+    "bots.memory.openInEditor": "Open in VS Code",
+    "bots.memory.editorHint":
+      "VS Code edits the file directly. Claude Code may also change it while this Bot works.",
+    "bots.memory.edit": "Edit",
+    "bots.memory.edit.label": "New text of this file",
+    "bots.memory.edit.save": "Save",
+    "bots.memory.edit.note":
+      "Save does not write the file. It prepares an unsent message to {name} that asks it to replace the file with this text. {name} changes the file only after you send the message, under Claude Code's own permission settings.",
+    "bots.memory.edit.prepared":
+      "An unsent draft for {name} is ready. The file is unchanged until you send it.",
+    "bots.memory.edit.error": "The message could not be prepared. Nothing was changed.",
+    "bots.memory.edit.tooLarge":
+      "This text is too large to prepare as one message. Shorten it and try again. Nothing was changed.",
+    "bots.memory.edit.endings":
+      "This file uses CRLF line endings or starts with a byte order mark. The message asks {name} to keep the file's line endings.",
+    "bots.memory.edit.mixedEndings":
+      "This file has a lone CR or mixes line ending styles, which this editor would change. Edit it in your own editor, or ask {name} to change it.",
+    "bots.memory.discard.label": "Discard this edit?",
+    "bots.memory.discard.body":
+      "Your edit of this memory file is not saved. Closing the viewer discards it.",
+    "bots.memory.discard.confirm": "Discard edit",
+    "bots.memory.removeKept":
+      "Memory files stay in the vault under bot-memory/. A Bot added again starts with a new, empty memory folder.",
+    "bots.memory.keptApp": "Kept on this computer in VIKI Agent's data folder, outside the vault.",
+    "bots.memory.sourceApp": "Source {folder}",
+    "bots.memory.removeKeptApp":
+      "Memory files stay on this computer in VIKI Agent's data folder. A Bot added again starts with a new, empty memory folder.",
+    "bots.memory.partial": "This list may be incomplete.",
+    "bots.memory.error": "Could not read Bot memory.",
+    "bots.memory.fileError": "Could not read this memory file.",
+    "bots.memory.metadata.absent": "No title metadata was found.",
+    "bots.memory.metadata.unsupported": "Some title metadata could not be read.",
+    "bots.memory.metadata.truncated": "Title metadata was cut off while reading.",
+    "bots.memory.metadata.changed": "This file changed while its title was being read.",
+    "bots.memory.metadata.unreadable": "Title metadata could not be read.",
+    "bots.memory.metadata.unknown": "Title metadata status is unknown.",
+    "bots.memory.metadata.notRead": "Details not read for this file.",
+    "bots.memory.askChange": "Ask {name} to change…",
+    "bots.memory.askChangeHint": "This opens an unsent draft in the Bot’s main chat.",
+    "bots.memory.changeRequest":
+      "Please change the memory files in {ref}/ as follows. Do not change other files.\n\nRequested change: ",
+    "bots.memory.review": "Ask to review",
+    "bots.memory.forget": "Ask to forget all…",
+    "bots.memory.requests":
+      "These requests open as drafts targeting the folder shown. Review and send them in chat. The forget request asks you to confirm the files before any deletion.",
+    "bots.memory.openVault": "Open this Bot's vault to view its memory.",
+    "bots.memory.unavailable": "Bot memory can't be shown right now.",
+    "bots.memory.noBinding":
+      "This conversation started before Bot memory, so the request can't be added. Start a new conversation for this Bot, then ask again.",
+    "bots.memory.draftError":
+      "The memory request could not be added to the draft. Return to the Bot and prepare it again.",
+    "bots.memory.reviewRequest":
+      "Review every memory file in this Bot's requested folder at {ref}/. List each exact source path and summarize what you find. Do not change the files.",
+    "bots.memory.forgetRequest":
+      "I want to forget the memory files in this Bot's requested folder at {ref}/. First list every exact source path and explain what would be deleted. Ask me to confirm the listed files before changing or deleting anything. Delete only the confirmed files, within this folder. Conversation history is separate and should be kept.",
+    "bots.memory.replaceRequest":
+      "Replace the whole file {ref} with exactly the text in the fenced block below, and change no other file. It must match the file I was shown, whose SHA-256 is {sha256}: first check the file's current SHA-256. If it differs or you cannot check it, change nothing and tell me. Otherwise write exactly the text between the two fence lines, without the line break after the opening fence line or before the closing one, add and remove nothing, then tell me the exact path you wrote.{endings}\n\n{fence}\n{text}\n{fence}",
+    "bots.memory.replaceRequest.endings":
+      "The file uses CRLF line endings or starts with a byte order mark, which the text below does not show: keep the file's line endings and byte order mark when you write it.",
+    "bots.thread.objective": "Objective",
+    "bots.threads.unarchive": "Unarchive conversation",
+    "bots.threads.unarchiveError":
+      "The conversation could not be unarchived. Refresh and try again.",
+    "bots.thread.artifacts": "Artifacts",
+    "bots.thread.decisions": "Decisions",
+    "bots.thread.questions": "Open questions",
+    "bots.thread.criteria": "Done when",
+    "bots.thread.evidence": "Evidence",
+    "bots.thread.restored":
+      "Saved thread reopened paused. Review the log before sending another message.",
+    "bots.thread.saveError":
+      "Thread changes could not be saved. Reload saved threads before continuing; check individual chats for accepted sends.",
+    "bots.thread.sourceError":
+      "Some source messages are unavailable. Reload saved threads to try again, or open the individual Bot chat to review its history.",
+    "bots.thread.loadingSources": "Loading thread history…",
+    "bots.thread.memberLimit":
+      "This thread has 64 saved participants. Start a new thread to add another Bot; earlier chat references stay in this log.",
+    "bots.thread.checkerRequired":
+      "Work is ready for review. Select Checker and send a review request to finish the thread.",
+    "bots.thread.noProgress":
+      "Paused after two handoffs without new progress. Review the result and choose the next step.",
+    "bots.thread.reload": "Reload saved threads",
+    "bots.thread.resetRequired":
+      "Saved sends were reset. Reload saved threads to continue. Reloading clears unsent messages and attachments.",
+    "bots.thread.remove": "Delete thread group",
+    "bots.thread.removeHelp":
+      "Only the thread group is deleted. The Bots' chats and their Claude Code transcripts stay.",
+    "bots.thread.list": "Threads",
+    "bots.thread.loading": "Loading saved threads…",
+    "bots.thread.loadingBots": "Loading Bots…",
+    "bots.thread.removeAsk": "Delete thread group…",
+    "bots.thread.removeBlocked":
+      "A thread is running. Delete this group after the current run ends.",
+    "bots.thread.removeTitle": "Delete “{title}”?",
+    "bots.thread.removeDraft": "Unsent text and files in this thread are discarded.",
+    "bots.thread.removed": "Deleted “{title}”.",
+    "bots.thread.lastActivity": "Last activity {time}",
+    "bots.thread.page": "Bot threads",
+    "bots.thread.new": "New Bot thread",
+    "bots.thread.untitled": "New thread",
+    "bots.thread.intro":
+      "Bring your Bots into one conversation. Follow their work and handoffs here.",
+    "bots.thread.window":
+      "Thread groups are saved and reopen paused. Unsent messages clear on refresh. Replies come from each Bot's existing chat history; deleting a group keeps those chats.",
+    "bots.thread.disconnected": "Waiting for VIKI Agent to reconnect before sending.",
+    "bots.thread.choose": "Choose participants",
+    "bots.thread.participants": "Participants",
+    "bots.thread.hide": "Hide participants",
+    "bots.thread.show": "Show participants",
+    "bots.thread.membersHelp":
+      "Choose up to 64 Bots. Turning a Bot off stops the current handoff. Earlier replies stay in the log.",
+    "bots.thread.create": "Create thread",
+    "bots.thread.empty": "Start a thread and choose the Bots you want to work together.",
+    "bots.thread.prompt": "Message the thread",
+    "bots.thread.send": "Send to team",
+    "bots.thread.to": "To",
+    "bots.thread.talkTo": "Talk to {name}…",
+    "bots.thread.log": "Conversation log",
+    "bots.thread.latest": "Jump to latest",
+    "bots.thread.openChat": "Open Bot chat",
+    "bots.thread.preparing": "Preparing Bot…",
+    "bots.thread.noReply": "No reply received. Open the Bot chat to review the send.",
+    "bots.thread.idle": "Ready",
+    "bots.thread.running": "Working",
+    "bots.thread.paused": "Paused",
+    "bots.thread.done": "Finished",
+    "bots.thread.off": "Not participating",
+    "bots.thread.ready": "Ready to participate",
+    "bots.thread.needsYou": "Needs your answer",
+    "bots.thread.stopped": "Thread stopped. You can send another message when you are ready.",
+    "bots.thread.finished": "Checker reports PASS with criteria, artifact references and evidence.",
+    "bots.thread.waiting": "Waiting for your message. The Bot did not request another handoff.",
+    "bots.thread.limit":
+      "Paused after 24 Bot turns. Review the log and send a message to continue.",
+    "bots.thread.failed":
+      "The thread paused because a Bot or send could not be confirmed. Open its chat to review the result and any saved draft before continuing.",
+    "bots.thread.contextChanged":
+      "Thread paused because the active workspace or app availability changed.",
+    "bots.thread.membersChanged": "Thread paused because a participant was turned off.",
+    "bots.thread.steerRefused": "The working Bot didn't take your message. It is back in the box.",
+    "bots.thread.steerUnread":
+      "Your message hasn't reached the Bot. The thread is paused; open the Bot's chat to check.",
+    "bots.thread.steerWait": "Wait for the next Bot to start, then steer.",
+    "bots.thread.steerFiles": "Files go with your next message, after this run.",
+    "bots.thread.steerWaiting": "Waiting for {name} to read this",
+    "bots.thread.loadError": "Bots or saved threads could not be loaded. Reload to try again.",
+    "bots.thread.refresh": "Refresh participants",
+    "bots.thread.noVault": "Open a persistent vault to start a Bot thread.",
+    "bots.thread.noBots": "No participants selected.",
+    "bots.thread.otherRunning": "Another thread is running. Send when it ends.",
+    "bots.thread.needsText": "Write a message for the team.",
+    "bots.thread.handoff": "Requested handoff",
+    "bots.thread.capacity":
+      "VIKI Agent can save 20 thread groups, with 200 messages each. Delete a group to make room.",
+    "bots.threads": "Task threads",
+    "bots.threads.new": "New task thread",
+    "bots.threads.help": "Start a focused task with this Bot. Its main chat stays available.",
+    "bots.threads.context":
+      "A new thread uses the current profile without copying other chats. Provider memory still follows Claude Code.",
+    "bots.threads.empty": "No other chats with this profile in this vault yet.",
+    "bots.threads.shared":
+      "Includes other interactive chats using this profile in this vault. Routine runs are separate.",
+    "bots.threads.loading": "Loading task threads…",
+    "bots.threads.refresh": "Refresh threads",
+    "bots.threads.error": "Task threads could not be loaded. Refresh to try again.",
+    "bots.threads.prepareError": "The thread could not be prepared. Try again or refresh the Bot.",
+    "bots.threads.blocked": "This thread cannot start: {reasons}.",
+    "bots.threads.more":
+      "Showing the newest 50 threads. Use Search sessions to find older saved chats.",
+    "bots.threads.archived": "Archived",
+    "bots.threads.showArchived": "Show archived threads",
+    "bots.threads.open": "Open thread {title}",
+    "bots.threads.preparing": "Preparing thread…",
+    "bots.chat": "Bot chat",
+    "bots.thread": "Task thread",
+    "bots.chat.main": "Main Bot chat",
+    "bots.chat.open": "Open main chat",
+    "bots.chat.all": "All Bots",
+    "bots.chat.manage": "Chats & routines",
+    "bots.chat.memory": "Memory",
+    "bots.activity.routines": "This Bot's routines",
+    "bots.search": "Find a Bot",
+    "bots.search.empty": "No Bots match your search.",
+    "bots.home.title": "Choose a Bot for the work",
+    "bots.home.body":
+      "Keep ongoing work in a Bot's main chat. Start a task thread for a separate topic. Chief can route work through Kanban when its skills are installed.",
+    "bots.home.context":
+      "Opening Bots does not send a message. Pick one specialist to keep the conversation focused.",
+    "bots.config": "Bot settings",
+    "bots.agents.help":
+      "Bots own conversations and routines. Profiles configure them; subagents and skills support their work.",
+    "bots.subagents": "Subagents",
+    "bots.subagents.tab": "Subagents & skills",
+    "bots.config.help":
+      "A profile supplies a Bot's name, instructions and configuration. Edit it once for future chats and routine runs; existing chats keep their pinned revision.",
+    "bots.subagents.help":
+      "Native subagents handle delegated tasks inside a chat. Research Bot can use the researcher subagent through installed skills; they serve different roles. Subagents do not get a Bot chat or recurring routine of their own.",
+    "bots.profile.open": "Open Bot",
+    "bots.profile.add": "Use as Bot",
+    "bots.profile.failed":
+      "The Bot could not be opened. Refresh Bots to check whether it was created.",
+    "bots.profile.existing": "This profile already has a Bot in the selected vault.",
+    "bots.profile.new": "Manage profiles",
+
+    "bots.confirm.newChat": "New conversation",
+    "bots.confirm.remove": "Remove {name}",
+    "bots.confirm.removeAction": "Remove",
+    "bots.confirm.reset": "Reset Bots",
+    "bots.confirm.discard": "Discard changes",
+    "bots.confirm.discardAction": "Discard",
+    "bots.team.addMissing": "Add missing Bots",
+    "bots.team.adding": "Adding Bots…",
+    "bots.team.added": "Added {names}.",
+    "bots.team.present": "Already in your team: {names}.",
+    "bots.team.failed": "{name} was not added: {reason}",
+    "bots.team.none": "Every seat already has a Bot.",
+    "bots.starter.compare": "Compare with the latest starter",
+    "bots.starter.differs":
+      "This profile differs from the latest {name} starter. Your text stays until you replace it.",
+    "bots.starter.use": "Use the starter text",
+    "bots.starter.purpose": "Purpose",
+    "bots.starter.instructions": "Instructions",
+    "bots.config.missingSeats":
+      "Some team seats have no profile yet. Bots › Core team › Add missing Bots creates them.",
+    "bots.code_folder.title": "Code folder",
+    "bots.code_folder.none": "None",
+    "bots.code_folder.hint":
+      "New conversations and task threads of this Bot each work in their own copy of this folder.",
+    "bots.code_folder.permissions":
+      "VIKI Agent gives the chat only that copy; Claude Code's permissions decide the rest.",
+    "bots.code_folder.change_title": "Change code folder?",
+    "bots.code_folder.change_body":
+      "Chats using the previous folder's copy will stop starting. Give that folder back to continue them, or start a new conversation.",
+    "bots.code_folder.remove_copies":
+      "Its code copies are removed, or archived when they hold changes. A copy VIKI Agent can't safely clean up stays in the Worktrees tab, marked Released.",
+    "bots.code_folder.needs_ordinary":
+      "This Bot needs an ordinary vault before it can use a code folder.",
+    "bots.code_folder.untrusted": "Trust this code folder in Settings before giving it to the Bot.",
+    "bots.code_folder.missing": "This code folder is no longer registered. Choose another folder.",
+    "bots.code_folder.not_repository": "Choose a Git repository's top-level folder.",
+    "bots.code_folder.no_commits": "This repository needs a commit before the Bot can use it.",
+    "bots.code_folder.git_unavailable": "Git is unavailable. Check it, then try again.",
+    "bots.code_folder.conflict":
+      "This Bot changed in another window. Read its settings again before saving.",
+    "bots.code_folder.git_settings_changed":
+      "This folder's Git settings changed. Undo the change, or select Confirm the current settings in the Code view's Worktrees tab.",
+    "bots.code_folder.failed": "Couldn't save the code folder. Try again.",
+    "bots.code_folder.review_existing": "Works in a copy of {name} (branch {branch})",
+    "bots.code_folder.review_pending": "Gets a copy of {name} when you send",
+  },
+});

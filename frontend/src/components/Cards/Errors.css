@@ -1,0 +1,62 @@
+/* ErrorCard/RateLimitCard and BlockedCard, following the design's error cards and its
+   already-open card. `.chip` and `.chip.dim` are reused as-is from styles/base.css; `.card`,
+   `.card-head`, `.card-question` and `.card-actions` are reused from Cards.css for
+   BlockedCard's shell rather than a second copy of it — see BlockedCard.tsx's own header
+   comment. This file only carries what neither of those already has: the error cards' own
+   smaller shell, BlockedCard's holder line, and the body-line rule the two card kinds share
+   (the design uses the same body scale for both). */
+
+/* --- error card / rate-limit card ------------------------------------------------------------- */
+
+.error-card {
+  margin-top: 16px;
+  /* The design's own values: the border and the fill are tokens.css role tokens, --b-strong and
+     --fill-error, the same --b-strong Composer.css uses for its pill, so each theme sets its own
+     instead of rounding either to a neighbouring token. */
+  border: 1px solid var(--b-strong);
+  border-left: 2px solid var(--or);
+  border-radius: 8px;
+  background: var(--fill-error);
+  padding: 12px 14px 14px;
+}
+
+/* A rate-limit WARNING wears the same shell without the alarm: the turn it sits under
+   succeeded, so the orange accent (which every other user of this shell earns by having
+   failed) would overstate it. --line is the quiet border the panels already use. */
+.error-card.notice {
+  border-left-color: var(--line);
+}
+
+.error-title {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 23px;
+  font-weight: 500;
+  color: var(--t0);
+}
+
+/* .card-actions (Cards.css) already gives the retry button's row its 12px-above spacing; no
+   error-card-specific override needed. */
+
+/* --- blocked card (session already open elsewhere) -------------------------------------------- */
+
+.blocked-holder {
+  font-size: 12px;
+  color: var(--t2);
+}
+
+/* error-card's and blocked-card's body line share one scale — one selector list rather than
+   two copies that would drift when either is retuned. */
+.error-line,
+.blocked-line {
+  margin-top: 4px;
+  font-size: 13.5px;
+  line-height: 21px;
+  color: var(--t2);
+}
+
+/* --- sign-in strip (SignInStrip) --------------------------------------------------------------- */
+
+.signin-strip {
+  margin-top: 8px;
+}

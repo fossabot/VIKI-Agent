@@ -1,0 +1,152 @@
+.session-tabs {
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 6px 12px;
+  flex-shrink: 0;
+}
+.session-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 1 190px;
+  min-width: 110px;
+  max-width: 220px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  color: var(--t2);
+}
+.session-tab[data-selected="true"] {
+  color: var(--t0);
+  border-color: var(--or);
+}
+/* A pane's active tab while another pane has the focus: the selected look, dimmed. */
+.session-tab[data-active="true"] {
+  color: var(--t1);
+  border-color: rgb(var(--or-rgb) / 0.4);
+}
+.session-tab:has(.session-tab-stem) {
+  flex: 0 1 auto;
+  max-width: 260px;
+}
+.session-tab-select {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+.session-tab-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* A file tab's label: the stem and extension sit side by side so the extension never shrinks. */
+.session-tab-label:has(.session-tab-stem) {
+  display: flex;
+  min-width: 0;
+}
+.session-tab-stem {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-transform: none;
+}
+.session-tab-ext {
+  flex: none;
+  white-space: nowrap;
+  text-transform: none;
+}
+.session-tab-dirty {
+  flex: none;
+  margin-left: 4px;
+}
+.session-tab-pin,
+.session-tab-menu {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.session-tab-pin[aria-pressed="true"] {
+  color: var(--or);
+}
+.session-tab-close {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.session-organizer {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+.session-organizer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.session-organizer-error {
+  color: var(--or-hi);
+}
+.session-organization {
+  margin: 8px 0;
+  font-size: 12px;
+}
+.session-organization > button,
+.session-organization summary {
+  padding: 6px 0;
+  color: var(--t2);
+  cursor: pointer;
+}
+.session-organizer input {
+  min-width: 0;
+  width: 100%;
+  padding: 6px;
+  background: var(--g2);
+  border: 1px solid var(--line);
+  color: var(--t1);
+}
+.session-organizer button {
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.missing-sessions {
+  margin: 8px 0;
+  font-size: 12px;
+}
+.missing-sessions h3 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--t2);
+}
+.missing-sessions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.missing-session-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--t2);
+}

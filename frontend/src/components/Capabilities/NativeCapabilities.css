@@ -1,0 +1,84 @@
+.native-capabilities {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+  color: var(--t1);
+}
+
+.native-capabilities .btn {
+  max-width: 100%;
+  height: auto;
+  min-height: 32px;
+  white-space: normal;
+}
+
+.native-capabilities p,
+.native-capabilities h3 {
+  margin: 0 0 6px;
+  overflow-wrap: anywhere;
+}
+
+.native-capabilities-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+}
+
+.native-capabilities-controls label {
+  display: grid;
+  flex: 1 1 180px;
+  min-width: 0;
+  gap: 6px;
+}
+
+.native-capabilities-controls input,
+.native-capabilities-controls select {
+  width: 100%;
+  min-width: 0;
+}
+
+.native-capabilities-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  align-items: start;
+  gap: 16px;
+}
+
+.native-capabilities-layout ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  list-style: none;
+}
+
+.native-capabilities-layout button {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--s0);
+  display: grid;
+  width: 100%;
+  gap: 6px;
+  color: var(--t1);
+  font: inherit;
+  text-align: start;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.native-capabilities-layout button[aria-pressed="true"] {
+  border-color: var(--or);
+  background: var(--s1);
+}
+
+.native-capabilities button:focus-visible,
+.native-capabilities input:focus-visible,
+.native-capabilities select:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}

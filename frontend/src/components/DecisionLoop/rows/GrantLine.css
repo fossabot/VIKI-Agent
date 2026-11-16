@@ -1,0 +1,38 @@
+/* One grant line of "What VIKI may do" (GrantLine.tsx). The page is the container. */
+.dloop-grant {
+  display: grid;
+  gap: 8px;
+}
+
+.dloop-grant-label {
+  margin: 0;
+  color: var(--t0);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dloop-grant .dloop-choice {
+  grid-template-columns: repeat(3, max-content);
+  align-items: center;
+}
+
+.dloop-grant .dloop-choice-option {
+  align-items: center;
+  padding: 4px 10px;
+}
+
+.dloop-grant-nested {
+  display: grid;
+  gap: 8px;
+  margin-left: 16px;
+}
+
+@container (width < 480px) {
+  .dloop-grant .dloop-choice {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dloop-grant-nested {
+    margin-left: 8px;
+  }
+}

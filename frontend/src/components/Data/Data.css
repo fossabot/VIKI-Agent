@@ -1,0 +1,256 @@
+/* DataView and its four panels. `.app-view`'s own padding and scrolling are Shell.css's;
+   everything here is what the Data view adds inside that region. */
+
+.data-view-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.data-panel {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--hair);
+}
+
+.data-panel:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.data-category {
+  margin-top: 16px;
+}
+
+.data-category h3 {
+  font-size: 13px;
+  color: var(--t2);
+  margin: 0 0 8px;
+}
+
+.data-empty {
+  color: var(--t2);
+  font-size: 13px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 6px 10px 6px 0;
+  border-bottom: 1px solid var(--hair);
+  vertical-align: top;
+  /* A path or a sha256 has no natural break point; without this the Data view scrolls sideways
+     at 400px even though the narrow rule below already stacks the table. The export
+     result's own `dd` rule further down carries the matching declaration. */
+  overflow-wrap: anywhere;
+}
+
+.data-table th {
+  color: var(--t2);
+  font-weight: 500;
+}
+
+.data-partial,
+.data-not-read {
+  display: block;
+  color: var(--t3);
+  font-size: 12px;
+}
+
+.data-inline-chip {
+  margin-left: 8px;
+}
+
+.data-details {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.data-export-kind,
+.data-export-include,
+.data-reset-categories {
+  border: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.data-export-kind label,
+.data-export-include label {
+  display: block;
+  margin: 6px 0;
+}
+
+.data-export-warning {
+  margin: 0 0 6px 22px;
+  color: var(--t3);
+  font-size: 12px;
+}
+
+.data-export-preview,
+.data-import-preview {
+  margin-top: 16px;
+}
+
+.data-export-content pre,
+.data-import-textarea {
+  width: 100%;
+  max-height: 240px;
+  overflow: auto;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.data-import-textarea {
+  min-height: 160px;
+}
+
+.data-export-result {
+  margin-top: 12px;
+}
+
+.data-export-result dt {
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.data-export-result dd {
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.data-backup-warning {
+  margin: 8px 0;
+  color: var(--t2);
+  font-size: 13px;
+}
+
+.data-backup-restore {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hair);
+}
+
+.data-import-workspaces {
+  margin: 12px 0;
+  padding-left: 20px;
+  color: var(--t2);
+  font-size: 13px;
+}
+
+.data-reset-categories {
+  list-style: none;
+  padding: 0;
+}
+
+.data-reset-categories li {
+  margin: 12px 0;
+}
+
+.data-reset-scope {
+  margin: 2px 0 0 22px;
+  color: var(--t2);
+  font-size: 12.5px;
+}
+
+.data-reset-reason {
+  color: var(--t2);
+  font-size: 12.5px;
+}
+
+/* ResetDialog: the shared modal chrome (base.css's .menu-panel shadow/border) sized for a short
+   list of sentences and one typed field, never the toast shell (this is not a toast). */
+.reset-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Viewport units do not shrink under the root `zoom` the font scale applies (measured in Edge:
+   at 400px and scale 1.5 a `calc(100vw - 32px)` box rendered 552 device px and put its buttons
+   76px off-screen, unreachable because the box is fixed). Dividing by the scale is what makes
+   these clamps mean the window again, exactly as Composer.tsx divides its height budget. */
+  width: 420px;
+  max-width: calc((100vw - 32px) / var(--font-scale, 1));
+  max-height: calc((100vh - 32px) / var(--font-scale, 1));
+  overflow-y: auto;
+  background: var(--fill-popover);
+  border: 1px solid var(--b-pop);
+  border-radius: 8px;
+  box-shadow: 0 12px 32px var(--shadow);
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 45;
+}
+
+.reset-dialog ul {
+  margin: 8px 0;
+  padding-left: 20px;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.reset-dialog input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 6px;
+}
+
+.reset-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* Below 800px: tables lose their grid and become one stacked card per row, each cell
+   labelled by its own header text (`data-label`); pre/textarea blocks keep their own scrollbar
+   so a wide export never widens the page itself. */
+@media not all and (min-width: 800px) {
+  .data-table,
+  .data-table thead,
+  .data-table tbody,
+  .data-table tr,
+  .data-table th,
+  .data-table td {
+    display: block;
+    width: auto;
+  }
+
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table tr {
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .data-table td {
+    border-bottom: none;
+    padding: 3px 0;
+  }
+
+  .data-table td[data-label]::before {
+    content: attr(data-label) ": ";
+    color: var(--t2);
+  }
+
+  .data-export-content pre,
+  .data-import-textarea {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,153 @@
+/* Page-specific rules for WorkspacesPage and PolicyPanel. The shared
+   page/row/card chrome (`.settings-page`, `.settings-row`, `.settings-card` and friends) is
+   Settings.css's; this file never redeclares it. */
+
+/* Every reason span these pages attach to a disabled button uses `.sr-only` from `base.css`
+   — that rule already exists there, so this file never redeclares it. */
+
+.workspaces-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* The page reads as two breathing sections — the vault part and the workspaces part — each
+   a tight column of its own pieces, with real air between them and below the lead line. */
+.ws-page-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* The foot-of-page quiet Refresh (WorkspacesPage.tsx's `canRefresh`): right-aligned, under
+   whatever the Workspaces section's last line is. */
+.ws-page-refresh {
+  align-self: flex-end;
+}
+
+.workspace-root {
+  font-size: 12px;
+  color: var(--t2);
+  overflow-wrap: anywhere;
+  /* Lines up under the name, past WorkspaceList.css's 15px tick box and 8px head gap. */
+  margin-left: 23px;
+}
+
+/* The source label follows the layout label with a CSS-drawn separator,
+   never a literal character baked into either translated string. */
+.workspace-source::before {
+  content: " · ";
+}
+
+/* Markers read as a checklist: each item's ring fills in once its file is present, following the
+   same neutral/--or pattern as the workspace list's own ready pill
+   (Settings.css's .settings-pill[data-tone="ready"]), so the two "satisfied" signals on this
+   page agree. */
+.policy-markers {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px 16px;
+}
+
+.policy-markers li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.policy-markers li[data-present="false"] {
+  color: var(--t3);
+}
+
+.policy-marker-mark {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--b-strong);
+  border-radius: 50%;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--on-or);
+}
+
+.policy-markers li[data-present="true"] .policy-marker-mark {
+  border-color: var(--or);
+  background: var(--or);
+}
+
+.policy-instructions {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+}
+
+.policy-instruction {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.policy-instruction-head {
+  flex-basis: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.policy-targets {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.policy-targets button[aria-pressed="true"] {
+  border-color: var(--or);
+  background: var(--fill-hi);
+}
+
+@media (forced-colors: active) {
+  .policy-targets button[aria-pressed="true"] {
+    border-color: Highlight;
+  }
+}
+
+.policy-acknowledgements {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+/* A plain top rule, not a boxed, indented aside: the panel reads as the row's own continuation. */
+.policy-panel {
+  border-top: 1px solid var(--hair);
+}
+
+/* PolicyPanel also renders standalone in onboarding's Open form, outside `.settings-page`, where
+   Settings.css's own refusal rule (`.settings-page [aria-disabled="true"]`) cannot reach it. */
+.policy-panel [aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.policy-form {
+  margin: 8px 0 0;
+  padding: 0;
+  border: none;
+}
+
+.policy-form legend {
+  padding: 0;
+  font-size: 12px;
+  color: var(--t2);
+}

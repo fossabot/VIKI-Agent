@@ -1,0 +1,227 @@
+/* Static manuals share the field guide's tokens, icons and masthead (guide.css). This sheet adds
+   the manual layout: grouped navigation, a hero, an "On this page" rail on wide screens, and
+   scannable lists, callouts, tables and code. */
+.manual-page { --text: #dcdce2; --rail: 15.5rem; }
+
+/* ---------- Layout ---------- */
+.manual-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); max-width: 1600px; margin: auto; }
+
+/* Navigation */
+.manual-nav { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto; padding: 2.25rem 1rem 2rem 1.75rem; }
+.manual-nav-group + .manual-nav-group { margin-top: 1.5rem; }
+.manual-nav a { display: flex; align-items: center; gap: .7rem; min-height: 40px; margin-left: -.7rem; padding: .4rem .7rem; border-radius: 8px; color: var(--muted); font-size: .9rem; line-height: 1.35; text-decoration: none; transition: background-color .15s, color .15s; }
+.manual-nav a:hover { background: var(--surface-alt); color: var(--ink); }
+.manual-nav a .icon { width: 1rem; height: 1rem; opacity: .65; }
+.manual-nav a:hover .icon, .manual-nav a[aria-current="page"] .icon { opacity: 1; }
+.manual-nav a[aria-current="page"] { background: var(--surface-alt); color: var(--ink); font-weight: 600; box-shadow: inset 3px 0 var(--ink); }
+
+/* Content column */
+.manual-content { min-width: 0; padding: 2rem clamp(1.3rem, 4vw, 3.5rem) 3rem; background: var(--paper); }
+.manual-kicker { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .4rem 1.5rem; margin-bottom: 1.25rem; }
+.manual-content .manual-kicker > p { margin: 0; }
+.manual-facts { color: var(--faint); font-size: .85rem; }
+.manual-content article { min-width: 0; overflow-wrap: break-word; color: var(--text); line-height: 1.75; }
+.manual-content article > :first-child, .manual-content article > div > :first-child { margin-top: 0; }
+
+/* ---------- Hero ---------- */
+.manual-hero { position: relative; margin: 0 0 1.5rem; padding: clamp(1.4rem, 3vw, 2.25rem); overflow: hidden; border: 1px solid var(--card-line); border-radius: 18px; background: radial-gradient(ellipse 55% 90% at 100% 0, rgb(248 248 255 / 7%), transparent 70%), linear-gradient(160deg, var(--surface-alt), var(--paper) 70%); }
+.manual-icon { display: inline-grid; place-items: center; width: 3rem; height: 3rem; margin-bottom: 1rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.manual-icon .icon { width: 1.5rem; height: 1.5rem; }
+.manual-content h1 { margin: 0 0 1rem; color: var(--ink); font-size: clamp(2.1rem, 3.6vw, 3.2rem); line-height: 1.08; letter-spacing: -.045em; text-wrap: balance; }
+.manual-content .manual-hero > p { max-width: 68ch; color: var(--muted); }
+.manual-content .manual-hero > p:first-of-type { color: var(--text); font-size: 1.12rem; line-height: 1.65; }
+.manual-content .manual-hero > :last-child { margin-bottom: 0; }
+
+/* On this page */
+.manual-toc { margin: 0 0 2rem; border-color: var(--card-line); border-radius: 12px; background: var(--surface); }
+.manual-toc summary { padding: 1rem 1.25rem; font-size: .95rem; }
+.manual-content .manual-toc ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem .75rem; margin: 0; padding: 0 1rem 1rem; font-size: .88rem; list-style: none; }
+.manual-toc li { margin: 0; }
+.manual-toc a { display: flex; align-items: baseline; gap: .6rem; height: 100%; min-height: 40px; padding: .5rem .6rem; border-radius: 8px; color: var(--muted); text-decoration: none; }
+.manual-toc a:hover { background: var(--surface-alt); color: var(--ink); }
+.toc-number { flex: 0 0 auto; color: var(--faint); font: .7rem var(--mono); }
+
+/* "On this page" becomes a sticky right-hand rail when there is room for it. */
+@media (min-width: 1280px) {
+  .manual-content article > div:has(> .manual-toc) { display: grid; grid-template-columns: minmax(0, 1fr) var(--rail); align-items: start; column-gap: clamp(2rem, 3vw, 3.5rem); }
+  .manual-content article > div:has(> .manual-toc) > * { grid-column: 1; }
+  .manual-content article > div > .manual-toc { position: sticky; top: 1.5rem; grid-column: 2; grid-row: 1 / span 90; max-height: calc(100vh - 3rem); margin: 0; overflow-y: auto; }
+  .manual-toc::details-content { content-visibility: visible; }
+  .manual-toc > summary { pointer-events: none; padding-bottom: .5rem; color: var(--faint); font: 600 .72rem/1.5 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+  .manual-toc > summary::after { display: none; }
+  .manual-content .manual-toc ol { grid-template-columns: 1fr; gap: .05rem; padding: 0 .6rem .8rem; }
+  .manual-toc a { min-height: 0; padding: .4rem .55rem; font-size: .84rem; line-height: 1.4; }
+}
+
+/* ---------- Sections and headings ---------- */
+.manual-section { margin-top: 3.25rem; padding-top: 2.25rem; border-top: 1px solid var(--hair); }
+.manual-content .manual-section > :last-child { margin-bottom: 0; }
+.manual-content :is(.manual-hero, .manual-toc) + .manual-section { margin-top: 2rem; padding-top: 0; border-top: 0; }
+.manual-content :is(h2, h3, h4) { scroll-margin-top: 1rem; color: var(--ink); text-wrap: balance; }
+.manual-content h2 { margin: 0 0 1.1rem; font-size: clamp(1.45rem, 2.2vw, 1.85rem); line-height: 1.25; letter-spacing: -.03em; }
+.section-number { display: inline-grid; place-items: center; min-width: 2.4rem; height: 1.75rem; margin-right: .75rem; padding: 0 .5rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); font: 700 .64rem var(--display); letter-spacing: .06em; vertical-align: .3em; }
+.manual-content h3 { margin: 2.25rem 0 .75rem; font-size: 1.2rem; letter-spacing: -.02em; }
+.manual-content h3::before { content: ""; display: inline-block; width: .5rem; height: .5rem; margin-right: .65rem; border-radius: 2px; background: var(--faint); vertical-align: .15em; }
+.manual-content :is(h4, h5, h6) { margin: 1.6rem 0 .6rem; font-size: 1rem; }
+
+/* ---------- Text blocks ---------- */
+.manual-content :is(p, ul, ol, blockquote, pre, .table-scroll) { margin-block: 1rem; }
+.manual-content :is(.manual-hero, .manual-section) > :is(p, ul:not(.label-list), ol, blockquote, .manual-alert) { max-width: 74ch; }
+.manual-content strong { color: var(--ink); }
+.manual-content a { color: var(--ink); }
+.manual-content hr { margin: 2rem 0; border: 0; border-top: 1px solid var(--hair); }
+.manual-content img { display: block; max-width: 100%; height: auto; }
+.manual-content input[type="checkbox"] { margin-right: .5rem; accent-color: var(--ink); }
+
+/* Bullets */
+.manual-content ul { padding-left: 1.3rem; }
+.manual-content ul > li::marker { color: var(--faint); }
+.manual-content li { margin-block: .35rem; }
+.manual-content li > p { margin-block: .4rem; }
+.manual-content li > :is(ul, ol) { margin-block: .4rem; }
+
+/* Lists whose items open with a bold label: label / description rows. */
+.manual-content ul.label-list { display: grid; grid-template-columns: fit-content(15rem) minmax(0, 1fr); column-gap: 1.5rem; max-width: 96ch; margin-block: 1.1rem; padding: 0; border-top: 1px solid var(--hair); list-style: none; }
+.manual-content .label-list > li { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; margin: 0; padding: .7rem 0; border-bottom: 1px solid var(--hair); }
+.manual-content .label-term { color: var(--ink); font-weight: 650; }
+.manual-content .label-body > :first-child { margin-top: 0; }
+.manual-content .label-body > :last-child { margin-bottom: 0; }
+
+/* Lists whose items open with a Bot icon and a bold label: Bot cards in their Bots' colors.
+   A paragraph of only Bot icons: a row of faces. */
+.manual-content :is(.manual-hero, .manual-section) > ul.bot-roster { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: .75rem; max-width: 96ch; margin-block: 1.1rem 1.5rem; padding: 0; list-style: none; }
+.manual-content .bot-roster > li { position: relative; display: grid; grid-template-columns: 3.4rem minmax(0, 1fr); align-content: start; column-gap: 1rem; margin: 0; padding: 1rem 1.1rem; border: 1px solid var(--card-line); border-radius: var(--radius); background: radial-gradient(circle at 2.7rem 2.7rem, color-mix(in srgb, var(--seat, var(--ink)) 15%, transparent), transparent 8rem), var(--surface); }
+/* The colored top edge is the top border of an overlay shaped like the card, so it bends with the
+   card's rounded corners; the mask fades it out to the right. */
+.manual-content .bot-roster > li::before { content: ""; position: absolute; inset: -1px; border-top: 2px solid var(--seat, var(--ink)); border-radius: inherit; pointer-events: none; -webkit-mask-image: linear-gradient(90deg, #000, transparent 72%); mask-image: linear-gradient(90deg, #000, transparent 72%); }
+.manual-content img.bot-roster-face { grid-row: 1 / 3; width: 3.4rem; height: 3.4rem; border-radius: 25%; background: var(--surface-alt); box-shadow: 0 0 0 1px color-mix(in srgb, var(--seat, var(--ink)) 45%, transparent), 0 10px 24px -12px color-mix(in srgb, var(--seat, var(--ink)) 70%, transparent); }
+.manual-content .bot-roster .label-term { align-self: end; color: var(--seat, var(--ink)); font-size: 1.05rem; }
+.manual-content .bot-roster .label-body { font-size: .95rem; line-height: 1.55; }
+.manual-content :is(.manual-hero, .manual-section) > p.bot-strip { display: flex; flex-wrap: wrap; gap: .6rem; max-width: none; margin-block: 1.25rem; }
+.manual-content p.bot-strip img { width: 3.5rem; height: 3.5rem; border: 1px solid var(--card-line); border-radius: 25%; background: var(--surface-alt); transition: transform .2s; }
+.manual-content p.bot-strip img:hover { transform: translateY(-3px) rotate(-4deg); }
+
+/* Numbered lists read as steps. */
+.manual-content :is(.manual-hero, .manual-section) ol:not(.context-review-loop) { padding-left: 0; list-style: none; }
+.manual-content :is(.manual-hero, .manual-section) ol:not(.context-review-loop) > li { position: relative; min-height: 1.8rem; margin-block: .6rem; padding-left: 2.6rem; }
+.manual-content :is(.manual-hero, .manual-section) ol:not(.context-review-loop) > li::before { content: counter(list-item); position: absolute; top: .1rem; left: 0; display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border: 1px solid var(--line); border-radius: 50%; background: var(--surface-alt); color: var(--ink); font: 700 .75rem/1 var(--mono); }
+
+/* Callouts from GitHub alert syntax, and plain quotes. */
+.manual-alert { --c: var(--blue); margin-block: 1.25rem; padding: .85rem 1.1rem 1rem; border: 1px solid color-mix(in srgb, var(--c) 30%, transparent); border-left: 3px solid var(--c); border-radius: 10px; background: color-mix(in srgb, var(--c) 7%, var(--surface)); }
+.alert-tip { --c: var(--emerald); }
+.alert-important { --c: var(--violet); }
+.alert-warning { --c: var(--orange); }
+.alert-caution { --c: var(--rose); }
+.manual-content .manual-alert > * { margin-block: .45rem 0; }
+.manual-content .manual-alert > .alert-title { display: flex; align-items: center; gap: .5rem; margin: 0; color: var(--c); font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.alert-title .icon { width: 1rem; height: 1rem; }
+.manual-content blockquote { margin-inline: 0; padding: .2rem 1.25rem; border: 1px solid var(--card-line); border-left: 3px solid var(--ink); border-radius: 10px; background: var(--surface-alt); color: var(--muted); }
+
+/* Code */
+.manual-content :is(p, li, td, th, dd, .label-body) code { padding: .1rem .35rem; border: 1px solid var(--hair); border-radius: 5px; background: var(--surface-alt); color: #f0f0f5; }
+.manual-content pre { position: relative; max-width: 100%; padding: 2.75rem 1.2rem 1.1rem; overflow-x: auto; border: 1px solid var(--card-line); border-radius: 12px; background: linear-gradient(var(--hair), var(--hair)) 0 2.1rem / 100% 1px no-repeat, linear-gradient(var(--surface), var(--surface)) 0 0 / 100% 2.1rem no-repeat, #070707; color: var(--ink); font-size: .86rem; line-height: 1.75; white-space: pre; }
+.manual-content pre::before { content: ""; position: absolute; top: .75rem; left: 1rem; width: .6rem; height: .6rem; border-radius: 50%; background: var(--rose); box-shadow: 1rem 0 var(--orange), 2rem 0 var(--emerald); }
+.manual-content pre code { padding: 0; border: 0; background: none; color: inherit; overflow-wrap: normal; }
+
+/* Tables */
+.manual-content .table-scroll { max-width: 100%; margin-block: 1.5rem; border: 1px solid var(--card-line); border-radius: 12px; }
+.manual-content table { background: var(--surface); font-size: .92rem; line-height: 1.6; }
+.manual-content th, .manual-content td { padding: .8rem 1rem; }
+.manual-content thead { background: var(--surface-alt); }
+.manual-content thead th { color: var(--ink); font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.manual-content tbody th { width: auto; color: var(--ink); }
+.manual-content td { color: var(--text); }
+.manual-content tbody td:first-child { color: var(--ink); font-weight: 600; }
+.manual-content tbody tr:nth-child(even) { background: color-mix(in srgb, var(--surface-alt) 60%, transparent); }
+.manual-content td > .badge:only-child { margin-block: .1rem; }
+
+/* ---------- Review loop, directory and diagrams ---------- */
+.manual-content .context-review-loop { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: none; padding: 0; counter-reset: review-step; list-style: none; }
+.context-review-loop li { margin: 0; padding: 1rem; border: 1px solid var(--card-line); border-top: 3px solid var(--ink); border-radius: 10px; background: var(--surface-alt); counter-increment: review-step; }
+.context-review-loop li::before { content: counter(review-step, decimal-leading-zero); display: block; margin-bottom: .6rem; color: var(--muted); font: .75rem var(--mono); }
+.manual-content .context-review-loop p { margin: 0; }
+.manual-content .manual-directory { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; padding: 0; list-style: none; }
+.manual-directory li { margin: 0; }
+.manual-directory a { display: block; height: 100%; padding: 1.1rem; border: 1px solid var(--card-line); border-radius: 10px; background: var(--surface); color: var(--ink); text-decoration: none; }
+.manual-directory a:hover { border-color: var(--ink); text-decoration: underline; }
+.manual-content .manual-diagram { min-width: 0; max-width: 100%; margin: 1.5rem 0; }
+.diagram-canvas { display: grid; place-items: center; min-width: 0; max-width: 100%; padding: clamp(.5rem, 1.5vw, 1.25rem); border: 1px solid var(--card-line); border-radius: 12px; background: var(--surface); }
+.manual-content .manual-diagram img { display: block; width: auto; min-width: 0; max-width: 100%; height: auto; max-height: 72svh; object-fit: contain; }
+.manual-diagram figcaption { margin-block: .8rem; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+.diagram-description { background: var(--surface-alt); }
+.diagram-description summary { font-size: .88rem; }
+.manual-content .diagram-description > ul { padding: 0 1.4rem .8rem 2.4rem; font-size: .9rem; }
+.manual-content .folder-cards { display: grid; gap: .7rem; margin: .8rem 0; padding: 0; list-style: none; }
+.folder-card { min-width: 0; margin: 0; padding: 1rem; border: 1px solid var(--card-line); border-radius: 10px; background: var(--surface); }
+.manual-content .folder-cards .folder-cards { margin-top: 1rem; padding-left: 1rem; border-left: 2px solid var(--line); }
+.manual-content .folder-name { display: inline-block; max-width: 100%; padding: .15rem .4rem; border-radius: 5px; background: var(--paper); color: var(--ink); font-size: .88rem; overflow-wrap: anywhere; }
+.manual-content .folder-description { margin: .6rem 0 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+
+/* ---------- Footer: previous / next ---------- */
+.manual-footer { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--hair); }
+.manual-pager { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.manual-pager a { display: grid; gap: .3rem; padding: 1rem 1.2rem; border: 1px solid var(--card-line); border-radius: 12px; background: var(--surface); color: var(--ink); text-decoration: none; transition: background-color .2s, border-color .2s; }
+.manual-pager a:hover { border-color: #555555; background: var(--surface-alt); }
+.manual-pager .pager-next { grid-column: 2; justify-items: end; text-align: right; }
+.pager-direction { color: var(--faint); font: 600 .72rem/1.5 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.pager-title { display: inline-flex; align-items: center; gap: .55rem; font-size: 1.05rem; font-weight: 600; }
+.manual-footer-links { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 1.25rem 0 0; color: var(--muted); font-size: .88rem; }
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 850px) {
+  .manual-layout { display: block; }
+  .manual-content { border-left: 0; padding-top: 1.5rem; }
+  .manual-nav { position: static; display: flex; gap: .5rem; max-height: none; padding: .75rem 1rem; overflow-x: auto; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+  .manual-nav-group { display: contents; }
+  .manual-nav .nav-label { display: none; }
+  .manual-nav a { flex: none; margin: 0; border: 1px solid var(--line); border-radius: 999px; white-space: nowrap; }
+  .manual-nav a[aria-current="page"] { box-shadow: none; border-color: var(--ink); }
+}
+@media (max-width: 640px) {
+  .manual-content .manual-toc ol { grid-template-columns: 1fr; }
+  .manual-content ul.label-list { grid-template-columns: minmax(0, 1fr); }
+  .manual-content .label-list > li { row-gap: .15rem; }
+  .manual-pager { grid-template-columns: 1fr; }
+  .manual-pager .pager-next { grid-column: auto; }
+  .manual-content .context-review-loop, .manual-content .manual-directory { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .manual-page .masthead { flex-wrap: wrap; }
+  .manual-page .header-link { white-space: normal; }
+  .manual-content h2 { font-size: 1.4rem; }
+  .manual-content pre { padding: 2.6rem .9rem .9rem; font-size: .78rem; }
+  .section-number { margin-right: .55rem; }
+  .folder-card { padding: .8rem; }
+  .manual-content .folder-cards .folder-cards { padding-left: .55rem; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  .manual-page { color-scheme: light; --paper: #ffffff; --surface: #ffffff; --surface-alt: #f2f2f2; --ink: #111111; --muted: #444444; --faint: #555555; --text: #111111; --line: #cccccc; --hair: #dddddd; --card-line: #cccccc; --green: #111111; --navy: #ffffff; background: white; color: black; }
+  .manual-layout { display: block; }
+  .manual-nav, .manual-toc, .manual-footer, .manual-icon, .manual-facts { display: none; }
+  .manual-content { padding: 1rem 0; border: 0; background: white; }
+  .manual-content article > div { display: block; }
+  .manual-hero, .manual-section { padding: 0; border: 0; box-shadow: none; background: white; }
+  .manual-section { margin-top: 2rem; }
+  .manual-content .context-review-loop, .manual-content ul.label-list { display: block; }
+  .manual-content .label-list > li { display: block; }
+  .manual-content .label-term::after { content: ": "; }
+  .context-review-loop li, .manual-alert { margin-block: .5rem; break-inside: avoid; }
+  .manual-alert { background: white; }
+  .manual-content h1 { font-size: 26pt; }
+  .manual-content h2 { font-size: 18pt; }
+  .manual-content h3 { font-size: 13pt; }
+  .manual-content h1, .manual-content h2, .manual-content h3 { break-after: avoid; }
+  .manual-content pre { padding: 1rem; color: black; background: white; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 8pt; }
+  .manual-content pre::before { display: none; }
+  .manual-content pre code { overflow-wrap: anywhere; }
+  .diagram-canvas { overflow: visible; padding: 0; border: 0; background: white; }
+  .manual-content .manual-diagram img { width: 100%; min-width: 0; max-width: 100%; max-height: none; break-inside: avoid; }
+  .manual-content .diagram-description { display: none; }
+  .folder-card { break-inside: avoid; }
+  .manual-content .table-scroll { overflow: visible; border: 0; }
+  .manual-content table { min-width: 0; font-size: 8pt; table-layout: fixed; }
+  .manual-content th, .manual-content td { padding: .4rem; }
+  .manual-content :is(p, li, td, th, dd, .label-body) code { background: none; }
+}

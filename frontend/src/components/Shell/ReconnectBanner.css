@@ -1,0 +1,23 @@
+/* The reconnect banner, with sizes that follow the design 1:1. Its fill is the tokens.css role
+   token --fill-popover, the same panel fill StaleWindow.css uses, so each theme sets its own. */
+.banner {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 28px;
+  background: var(--fill-popover);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.banner-spin {
+  color: var(--or);
+}
+
+.banner-note {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--t3);
+}

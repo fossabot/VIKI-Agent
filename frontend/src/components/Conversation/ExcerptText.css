@@ -1,0 +1,37 @@
+.excerpt-cite {
+  margin: 6px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  text-align: left;
+}
+.excerpt-cite summary {
+  cursor: pointer;
+  color: var(--t2);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.excerpt-body {
+  margin: 6px 0;
+  max-height: 240px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  color: var(--t1);
+}
+.excerpt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.excerpt-digest {
+  color: var(--t3);
+}
+.excerpt-answer {
+  margin: 0;
+  font-size: 12px;
+  color: var(--t2);
+}

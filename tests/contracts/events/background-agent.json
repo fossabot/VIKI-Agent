@@ -1,0 +1,131 @@
+{
+  "fixture": "claude/background-agent.jsonl",
+  "vault": "%VAULT%",
+  "mode": "auto",
+  "note": "Background agent: the Agent tool_result at launch is async_launched, so the routing row stays open — the outer turn's own text ('launched.') and turn.done pass right through it. The subagent's own tool rows (a failing Bash, then a succeeding PowerShell) carry parent_id and arrive interleaved with and after that turn.done. Only the later task_notification closes the row, as completed. The continuation turn the CLI starts by itself then produces its own text ('daily.md') and turn.done, with no user.message (per protocol-notes.md, the driver emits turn.started for that, not the mapper).",
+  "events": [
+    {
+      "type": "subagent.started",
+      "data": {
+        "block_id": "toolu_012xUvT46mps38vDqYHH4MuW",
+        "agent": "Explore",
+        "model": "haiku",
+        "description": "Find daily note template",
+        "reason": ""
+      }
+    },
+    {
+      "type": "text.delta",
+      "data": {
+        "block_id": "msg_011CewpACLxTHSYWLPLiRodv:0",
+        "text": "launched."
+      }
+    },
+    {
+      "type": "text.done",
+      "data": {
+        "block_id": "msg_011CewpACLxTHSYWLPLiRodv:0",
+        "text": "launched."
+      }
+    },
+    {
+      "type": "turn.done",
+      "data": {
+        "status": "success",
+        "usage": {
+          "input_tokens": 4,
+          "output_tokens": 226,
+          "cache_read_tokens": 60569,
+          "cache_creation_tokens": 67213
+        },
+        "context_percent": null,
+        "duration_ms": 7039
+      }
+    },
+    {
+      "type": "tool.started",
+      "data": {
+        "block_id": "toolu_01GA6B3BYC1ZEkCC2bie5ATK",
+        "tool": "Bash",
+        "row": {
+          "head": "ls",
+          "rest": "-la \"%VAULT%\\_templates\\\"",
+          "tail": ""
+        },
+        "parent_id": "toolu_012xUvT46mps38vDqYHH4MuW"
+      }
+    },
+    {
+      "type": "tool.done",
+      "data": {
+        "block_id": "toolu_01GA6B3BYC1ZEkCC2bie5ATK",
+        "is_error": true,
+        "summary": "Exit code 2",
+        "preview": "Exit code 2\n/usr/bin/bash: eval: line 1: unexpected EOF while looking for matching `\"'",
+        "tail": "→ exit 2"
+      }
+    },
+    {
+      "type": "tool.started",
+      "data": {
+        "block_id": "toolu_016JqPkowMoJehowjgxBMRbE",
+        "tool": "PowerShell",
+        "row": {
+          "head": "Get-ChildItem",
+          "rest": "-Path \"%VAULT%\\_templates\\\" | Select-Object Name",
+          "tail": ""
+        },
+        "parent_id": "toolu_012xUvT46mps38vDqYHH4MuW"
+      }
+    },
+    {
+      "type": "tool.done",
+      "data": {
+        "block_id": "toolu_016JqPkowMoJehowjgxBMRbE",
+        "is_error": false,
+        "summary": "Name",
+        "preview": "Name\n----\narea.md\ndaily.md\nmoc.md\nnote.md\nperson.md\nproject.md\nsource.md\ntasks.md\nthinking.md\nweekly.md",
+        "tail": ""
+      }
+    },
+    {
+      "type": "subagent.done",
+      "data": {
+        "block_id": "toolu_012xUvT46mps38vDqYHH4MuW",
+        "status": "completed",
+        "tool_uses": 2,
+        "total_tokens": 18739,
+        "duration_ms": 9311,
+        "summary": "The template for daily notes is **daily.md**."
+      }
+    },
+    {
+      "type": "text.delta",
+      "data": {
+        "block_id": "msg_011CewpB256ziPc2EzLiPaTK:0",
+        "text": "daily.md"
+      }
+    },
+    {
+      "type": "text.done",
+      "data": {
+        "block_id": "msg_011CewpB256ziPc2EzLiPaTK:0",
+        "text": "daily.md"
+      }
+    },
+    {
+      "type": "turn.done",
+      "data": {
+        "status": "success",
+        "usage": {
+          "input_tokens": 2,
+          "output_tokens": 6,
+          "cache_read_tokens": 67213,
+          "cache_creation_tokens": 519
+        },
+        "context_percent": null,
+        "duration_ms": 2301
+      }
+    }
+  ]
+}

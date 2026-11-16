@@ -1,0 +1,108 @@
+/* Item card. One Decision item inside the launcher panel; sized entirely by its caller, so it
+   never grows wider than its container on its own:
+   `.dloop-item` can shrink inside a flex layout (`min-width: 0`, same reasoning as Cards.css's
+   `.card`), the `what`/`why` prose wraps a long unbroken word instead of overflowing
+   (`overflow-wrap: anywhere`, same as Cards.css's `.card-question`), and an evidence or action
+   chip whose text is not ours to size (a note title, the server's action `label`) truncates
+   rather than widening its row (`max-width: 100%` plus `overflow: hidden`, Cards.css's
+   `.card-head .chip` pattern — `.chip`/`.btn` stay `white-space: nowrap` at a fixed height, so
+   wrapping cannot help them and only truncation keeps the row's own width).
+
+   Prefix `dloop-item-`; `.dloop-*` elsewhere belongs to the Decision page (DecisionLoopPage.css)
+   and `dloop-chat-` to the launcher's own chat (LauncherChat.css) — different surfaces reusing
+   the same family of names. `.chip`, `.btn` and `.menu-panel`/`.mi` are base.css's shared
+   primitives, reused as-is; no colour is declared here, only tokens those rules already read. */
+
+.dloop-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.dloop-item-what {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.dloop-item-why {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.dloop-item-evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}
+
+.dloop-item-evidence-chip {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.dloop-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.dloop-item-action {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.dloop-item-feedback {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Positions the "⋯" dropdown; the toggle and its panel sit together so the outside-click and
+   focus-return logic (ItemCard.tsx) can treat this one box as "inside the menu". */
+.dloop-item-menu-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* z-index 5: the same small-floating-menu tier as the session row menu, header menu and app menu
+   (tokens.css's stacking-order comment) — a local dropdown over one card's own content, not a
+   page-level overlay. */
+.dloop-item-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 5;
+  margin-top: 4px;
+  min-width: 160px;
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+
+/* base.css's own comment on `.mi` leaves row hover/focus highlighting to each menu on purpose: a
+   shared `.mi:hover` would also light the current-selection row in menus that highlight by
+   selection rather than pointer position. RowMenu.css and NoteActions.css restate the same three
+   declarations for their own menus; this is this menu's copy. */
+.dloop-item-menu .mi:hover,
+.dloop-item-menu .mi:focus-visible {
+  background: var(--fill-hi);
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+  outline: none;
+}
+
+@media (forced-colors: active) {
+  .dloop-item-menu .mi:hover,
+  .dloop-item-menu .mi:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

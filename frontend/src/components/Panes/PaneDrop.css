@@ -1,0 +1,28 @@
+.pane-drop {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  border: 2px solid var(--or);
+  border-radius: 6px;
+  background: rgb(var(--or-rgb) / 0.18);
+}
+
+.pane-drop[data-zone="center"] {
+  inset: 8px;
+}
+
+.pane-drop[data-zone="left"] {
+  inset: 0 50% 0 0;
+}
+
+.pane-drop[data-zone="right"] {
+  inset: 0 0 0 50%;
+}
+
+.pane-drop[data-zone="top"] {
+  inset: 0 0 50% 0;
+}
+
+.pane-drop[data-zone="bottom"] {
+  inset: 50% 0 0 0;
+}

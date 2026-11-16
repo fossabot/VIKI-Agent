@@ -1,0 +1,186 @@
+.right-rail {
+  flex: none;
+  min-height: 0;
+  overflow: hidden;
+  width: 320px;
+  border-left: 1px solid var(--hair);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell-rail-content > .right-rail {
+  width: 100%;
+}
+
+.right-rail-details {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.right-rail-pinned {
+  flex: none;
+  min-height: 0;
+  max-height: 40%;
+  overflow-y: auto;
+}
+
+.rail-drawer .right-rail-pinned {
+  max-height: none;
+  overflow: visible;
+}
+
+.right-rail-summary {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.right-rail-footer {
+  flex: none;
+  min-width: 0;
+  padding-top: 12px;
+}
+
+.right-rail-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-height: 0;
+}
+
+.right-rail-workspace > [role="tablist"] {
+  flex: none;
+}
+
+.right-rail-panel {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.right-rail-panel[hidden] {
+  display: none;
+}
+
+.right-rail-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 2px 0 16px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.right-rail-id {
+  flex: 1;
+  min-width: 0;
+}
+
+.right-rail-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.right-rail-name .identity-name {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--t0);
+}
+
+.rail-section {
+  margin-top: 18px;
+}
+
+.rail-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.rail-section-count {
+  font-size: 12px;
+  color: var(--or);
+}
+
+.rail-section-count--dim {
+  color: var(--t2);
+}
+
+/* Routines' next-run label sits closer to Needs you than the default section gap. */
+.rail-section--routines {
+  margin-top: 16px;
+}
+
+.rail-section-body {
+  margin-top: 4px;
+}
+
+/* RoutinesRail rows. */
+.rt {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.rt .h {
+  flex: none;
+  width: 76px;
+  font-size: 12px;
+  color: var(--t2);
+  white-space: nowrap;
+}
+
+/* VaultTiles. */
+.tiles {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.tile {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  padding: 8px 10px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.tile:enabled {
+  cursor: pointer;
+}
+
+.tile-n {
+  font-size: 18px;
+  color: var(--t0);
+}
+
+.tile-l {
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--t3);
+}
+
+.tile-hot {
+  border-color: rgb(var(--or-rgb) / 0.45);
+  background: rgb(var(--or-rgb) / 0.06);
+}
+
+.tile-hot .tile-n {
+  color: var(--or-hi);
+}

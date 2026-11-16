@@ -1,0 +1,92 @@
+.dloop-data-records {
+  display: grid;
+  gap: 12px;
+}
+.dloop-data-records h3,
+.dloop-data-records p {
+  margin: 0;
+}
+.dloop-data-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.dloop-data-filter {
+  display: grid;
+  gap: 4px;
+  min-width: 140px;
+}
+.dloop-data-filter select {
+  color: var(--t0);
+  background: var(--fill-raised);
+  border: 1px solid var(--b-strong);
+  border-radius: 4px;
+  padding: 4px;
+}
+.dloop-data-list,
+.dloop-data-evidence {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dloop-data-list {
+  display: grid;
+  gap: 8px;
+}
+.dloop-data-list > li {
+  border: 1px solid var(--b-strong);
+  border-radius: 6px;
+  padding: 8px;
+}
+.dloop-data-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: start;
+}
+.dloop-data-row > div {
+  flex: 1;
+  min-width: 160px;
+}
+.dloop-data-row strong {
+  display: block;
+}
+.dloop-data-chip {
+  display: inline-block;
+  margin-inline-start: 8px;
+}
+.dloop-data-detail {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 0;
+}
+.dloop-data-detail > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.dloop-data-detail dt {
+  font-weight: 600;
+}
+.dloop-data-detail dd {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.dloop-data-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.dloop-data-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+@container (max-width: 400px) {
+  .dloop-data-filter {
+    width: 100%;
+  }
+}

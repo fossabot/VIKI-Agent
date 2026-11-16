@@ -1,0 +1,691 @@
+/* Settings.css holds the primitives every page uses; page sheets add page rules only.
+   Colours are tokens.css's; navigation follows its accessible orientation and rows their panel.
+
+   CLASS CONTRACT FOR PAGES RENDERED INSIDE THE PANEL, written down so the
+   pages that cannot import this file can still be held to it:
+
+     Class contract for pages rendered inside the panel (the Appearance page and the other
+     settings pages): the page root is
+     <section className="settings-page" aria-labelledby={headingId}>
+     containing <h2 className="settings-page-title">; rows use .settings-row (grid: label column
+     220 px, control column; stacks below 656 panel px), .settings-row-label, .settings-row-desc,
+     .settings-row-control, .settings-row-status; errors use .settings-error (role="alert");
+     chips use base.css .chip / .chip.dim.
+*/
+
+.settings-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.settings-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+/* The header's gap already spaces its rows, so the shared page-head margin would double it. */
+.settings-header > .page-head {
+  margin-bottom: 0;
+}
+
+/* The back row (App.tsx's renderBack): a button and, when back is unavailable, the reason why. */
+.settings-header > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.settings-back {
+  align-self: flex-start;
+}
+
+.settings-title:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 4px;
+}
+
+/* Search ---------------------------------------------------------------- */
+
+.settings-search {
+  width: 100%;
+}
+
+.settings-search-input {
+  width: 100%;
+  max-width: 420px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--b1);
+  border-radius: 5px;
+  background: var(--s0);
+  color: var(--t0);
+  font: inherit;
+  font-size: 13px;
+}
+
+.settings-search-count {
+  margin: 6px 0 0;
+  min-height: 16px;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.settings-search-count:empty {
+  display: none;
+}
+
+.settings-search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--s1);
+}
+
+.settings-search-group-title {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t1);
+}
+
+.settings-search-group ul {
+  margin: 0 0 8px;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--t2);
+}
+
+/* Nav and panel --------------------------------------------------------- */
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.settings-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.settings-tab {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  color: var(--t2);
+  cursor: pointer;
+}
+
+.settings-tab-label {
+  display: block;
+  font-weight: 500;
+}
+
+.settings-tab-hint {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--t3);
+}
+
+.settings-tab:hover {
+  background: var(--s1);
+}
+
+.settings-tab:focus-visible,
+.settings-search-input:focus-visible,
+.settings-select:focus-visible,
+.settings-text:focus-visible,
+.settings-switch:focus-visible,
+.settings-details > summary:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+.settings-tab-on {
+  background: var(--s1);
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+}
+
+.settings-panel {
+  container-type: inline-size;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.settings-panel:focus-visible {
+  outline: none;
+}
+
+.settings-state {
+  margin: 0;
+  font-size: 13px;
+  color: var(--t3);
+}
+
+/* Pages and rows -------------------------------------------------------- */
+
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--t1);
+}
+
+.settings-page-title {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+.settings-page-intro {
+  max-width: 65ch;
+  margin: 0 0 8px;
+  color: var(--t2);
+  line-height: 1.6;
+}
+
+.settings-details {
+  border-top: 1px solid var(--hair);
+  padding-top: 12px;
+}
+
+.settings-details > summary {
+  width: fit-content;
+  color: var(--t0);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.settings-details > :not(summary) {
+  margin-top: 12px;
+}
+
+.settings-page h3,
+.settings-card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+/* A card groups rows (or facts, or free text) that belong together; the panel can also hold
+   ungrouped rows directly. Padding is 12px block, 16px inline: a row has no inline padding of its
+   own and would otherwise sit flush against the border; the block padding clears the same space
+   above and below whatever else the card holds. */
+.settings-card {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--s0);
+}
+
+.settings-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* A row carries its own block spacing (a border plus 12px padding); anything else a card holds
+   does not, so it gets the same 12px as a block margin instead. */
+.settings-card > :not(.settings-row):not(.settings-card-head) {
+  margin: 12px 0;
+}
+
+.settings-row {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 8px 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--hair);
+}
+
+/* The card's own border already separates it from whatever is above, so its first row repeats no
+   hairline — whether that row is the card's first child or follows a .settings-card-head. */
+.settings-card > .settings-row:first-child,
+.settings-card > .settings-card-head + .settings-row {
+  border-top: none;
+}
+
+.settings-row-label {
+  min-width: 0;
+}
+
+.settings-row-label label,
+.settings-row-label > span {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--t0);
+}
+
+/* The back row's reason (lower in the cascade than the rule above only because it is more
+   specific than it, which biome's descending-specificity check wants kept in this order). */
+.settings-header > div:first-child > span {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.settings-row-desc {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--t3);
+}
+
+.settings-search-group > .settings-row-desc {
+  margin-bottom: 8px;
+}
+
+.settings-row-control {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* A bare button has no width of its own the way an input or select does (both already set their
+   own width), so the column's default stretch would otherwise fill it to the control width, e.g.
+   General's Setup card "Show first-run setup again" button. */
+.settings-row-control > .btn {
+  align-self: flex-start;
+}
+
+.settings-page .btn {
+  max-width: 100%;
+  min-height: 32px;
+  height: auto;
+  padding-block: 6px;
+  white-space: normal;
+}
+
+.settings-row-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.settings-row-saved {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.settings-row-meta {
+  margin: 0;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+/* The row's own Reset: a .btn.txt.sm shrunk further, so it reads as part of the row's status line
+   rather than another action competing with Apply/Save. */
+.btn.sm.settings-reset {
+  height: 24px;
+  font-size: 12px;
+}
+
+.settings-error {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--err);
+}
+
+.settings-select,
+.settings-text {
+  width: 100%;
+  min-width: 0;
+  height: 36px;
+  max-width: 420px;
+  padding: 0 8px;
+  border: 1px solid var(--b1);
+  border-radius: 5px;
+  background: var(--s0);
+  color: var(--t0);
+  font: inherit;
+  font-size: 13px;
+}
+
+.settings-switch {
+  appearance: none;
+  position: relative;
+  flex: none;
+  width: 36px;
+  height: 22px;
+  margin: 0;
+  border: 1px solid var(--b-strong);
+  border-radius: 999px;
+  background: var(--track);
+  cursor: pointer;
+}
+
+.settings-switch::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--t0);
+}
+
+.settings-switch:checked {
+  background: var(--or);
+  border-color: var(--or);
+}
+
+.settings-switch:checked::before {
+  background: var(--on-or);
+  transform: translateX(14px);
+}
+
+/* A labelled key/value list: wrapper divs are `display: contents` so their dt/dd
+   become the grid's own items, two per pair, auto-placed into the label and value columns. */
+.settings-facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  row-gap: 4px;
+  column-gap: 8px;
+}
+
+.settings-facts > div {
+  display: contents;
+}
+
+.settings-facts dt {
+  color: var(--t3);
+}
+
+.settings-facts dd {
+  margin: 0;
+  color: var(--t0);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.settings-facts dd ul,
+.settings-facts dd ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A status badge: a coloured dot plus a word. The dot is drawn with a border, not only a fill, so
+   it still reads under forced colours; `data-tone` changes its shape as well as its colour, so
+   the signal survives colour blindness too. Works on a <span> (a plain status) and a <button>
+   (one the user can act on). */
+.settings-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  padding: 0 8px;
+  border: 1px solid var(--b-strong);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--t1);
+}
+
+button.settings-pill {
+  cursor: pointer;
+}
+
+.settings-pill::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: var(--t3);
+}
+
+.settings-pill[data-tone="ready"] {
+  border-color: var(--or);
+}
+
+.settings-pill[data-tone="ready"]::before {
+  background: var(--or);
+}
+
+.settings-pill[data-tone="attention"] {
+  box-shadow: 0 0 0 2px var(--or) inset;
+}
+
+.settings-pill[data-tone="error"] {
+  border-color: var(--err);
+  color: var(--err);
+}
+
+.settings-pill[data-tone="error"]::before {
+  background: var(--err);
+  border-radius: 0;
+}
+
+/* One setup command (ProvidersPage): a method label, its `<code>`, and a Copy button in a row. */
+.providers-command {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.settings-card-head > .settings-actions {
+  margin-left: auto;
+}
+
+/* A page-level actions bar that follows a card (Appearance's Apply/Cancel/Restore) wants the same
+   12px a card keeps from the one before it; the sibling combinator leaves a bar that opens the
+   page instead (the Workspaces toolbar, right after the page's own h2) flush under it. */
+.settings-card ~ .settings-actions {
+  margin-top: 12px;
+}
+
+.settings-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+/* Refused controls stay focusable, so they are dimmed rather than disabled. A
+   pill is a status, not a control, so aria-disabled on one is never dimmed. */
+.settings-page [aria-disabled="true"]:not(.settings-pill) {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Read-only notice ------------------------------------------------------ */
+
+.settings-readonly {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--b2);
+  border-radius: 8px;
+  background: var(--s1);
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.settings-readonly p {
+  margin: 0;
+}
+
+.settings-readonly-guidance {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+/* Review panel ---------------------------------------------------------- */
+
+.settings-review {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  /* Viewport units do not shrink under the root `zoom` the font scale applies (measured in Edge:
+   at 400px and scale 1.5 a `calc(100vw - 32px)` box rendered 552 device px and put its buttons
+   76px off-screen, unreachable because the box is fixed). Dividing by the scale is what makes
+   these clamps mean the window again, exactly as Composer.tsx divides its height budget. */
+  width: 560px;
+  max-width: calc((100vw - 32px) / var(--font-scale, 1));
+  max-height: calc((100vh - 32px) / var(--font-scale, 1));
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid var(--b-pop);
+  border-radius: 8px;
+  background: var(--fill-popover);
+  box-shadow: 0 12px 32px var(--shadow);
+}
+
+.settings-review h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+.settings-review-reason {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.settings-review-rows {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.settings-review-rows li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  padding: 8px 0;
+  border-top: 1px solid var(--hair);
+}
+
+.settings-review-key {
+  flex: 1 0 100%;
+  font-size: 13px;
+  color: var(--t0);
+}
+
+.settings-review-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.settings-review-value {
+  overflow-wrap: anywhere;
+}
+
+.settings-review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* SettingsNav's root-scale-aware orientation is also the visual navigation layout. */
+.settings-grid:has(.settings-nav[aria-orientation="horizontal"]) {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.settings-nav[aria-orientation="horizontal"] {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.settings-nav[aria-orientation="horizontal"] .settings-tab {
+  width: auto;
+  max-width: 100%;
+  flex: none;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.settings-nav[aria-orientation="horizontal"] .settings-tab-hint {
+  display: none;
+}
+
+/* A two-column row needs 220px for the label, 16px for the gap and 420px for the control.
+   Stack below that panel width, including when a vertical nav occupies part of the view. */
+@container (width < 656px) {
+  .settings-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .settings-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The fixed review panel follows the viewport rather than the settings container. */
+@media not all and (min-width: 800px) {
+  .settings-review {
+    width: calc((100vw - 32px) / var(--font-scale, 1));
+  }
+
+  /* Hosts outside .settings-panel (Recovery, onboarding's Open form) have no container of their own, so this viewport rule keeps their below-800px collapse. */
+  .settings-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (forced-colors: active) {
+  .settings-switch {
+    appearance: auto;
+  }
+
+  .settings-switch::before {
+    display: none;
+  }
+
+  /* A border, not an outline: the outline channel stays free for the UA's own :focus-visible
+     ring, so a keyboard user tabbed onto the selected tab still sees focus move, not just the
+     selection mark that was already on screen. */
+  .settings-tab-on {
+    border-left: 2px solid Highlight;
+  }
+}

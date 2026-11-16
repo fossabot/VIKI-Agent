@@ -1,0 +1,100 @@
+/* The rail drawers. Absolute inside `.shell-body`, which Shell.css makes the
+   positioning host, so a drawer covers the conversation and the other rail but never the top bar
+   or the status bar — the same frame the docked rails live in.
+
+   z-index 45 on both the backdrop and the panel: above the session-limit toast (40, drawn inside
+   the conversation column) and below the search palette (50/51), which is the one surface that
+   may cover a drawer. `.conversation` sets `position: relative` with no z-index of its own, so it
+   opens no stacking context and the toast's 40 is compared against these 45s directly — see the
+   ladder in styles/tokens.css. */
+
+.rail-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+  z-index: 45;
+}
+
+.rail-drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* The panel itself scrolls, so the right rail's gates, routines and tiles stay reachable at
+     400x600 where they are taller than the window. */
+  overflow-y: auto;
+  background: var(--g0);
+  z-index: 45;
+  animation: rail-drawer-in 160ms ease-out;
+}
+
+/* 48px of the conversation stays visible beside the panel, so it always reads as a layer over
+   the window rather than as the window. */
+.rail-drawer--left {
+  left: 0;
+  width: min(300px, 100% - 48px);
+  border-right: 1px solid var(--hair);
+  --rail-drawer-from: -100%;
+}
+
+.rail-drawer--right {
+  right: 0;
+  width: min(340px, 100% - 48px);
+  border-left: 1px solid var(--hair);
+  --rail-drawer-from: 100%;
+}
+
+@keyframes rail-drawer-in {
+  from {
+    transform: translateX(var(--rail-drawer-from));
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-drawer {
+    animation: none;
+  }
+}
+
+.rail-drawer-head {
+  flex: none;
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 6px 0;
+}
+
+/* The ✕ sits on the panel's inner edge, the side the user's eye came from. */
+.rail-drawer--right .rail-drawer-head {
+  justify-content: flex-start;
+}
+
+.rail-drawer-close {
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* The rails keep their own contents and lose only the frame they had as columns of the shell:
+   their fixed widths and the hairline that separated them from the conversation (the panel draws
+   that border itself, on the edge that faces the conversation). */
+.rail-drawer .left-rail,
+.rail-drawer .right-rail {
+  width: 100%;
+  border: 0;
+}
+
+/* The left rail scrolls its own session list and keeps Agents at the foot, exactly as docked. */
+.rail-drawer .left-rail {
+  flex: 1;
+  min-height: 0;
+}
+
+/* The right rail has no inner scroller — it is short in the design and long in a real vault — so it
+   takes its natural height and the panel above scrolls it. */
+.rail-drawer .right-rail {
+  flex: none;
+}

@@ -1,0 +1,185 @@
+.decision-section {
+  min-width: 0;
+  color: var(--t1);
+  overflow-wrap: anywhere;
+}
+
+.decision-section p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.decision-section .decision-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.decision-section .decision-filters legend {
+  padding: 0 4px;
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.decision-section .decision-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  font-size: 12px;
+}
+
+.decision-section .decision-filters select {
+  width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  color: var(--t0);
+  font: inherit;
+}
+
+.decision-section .decisions-group-title {
+  font-size: 14px;
+}
+
+.decision-section .decision-group-count {
+  color: var(--t3);
+  font-size: 11px;
+}
+
+.decision-section .decision-group-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.decision-section .decision-history-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  color: var(--t1);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.decision-section .decision-history-toggle::before {
+  content: "+";
+}
+
+.decision-section .decision-history-toggle[aria-expanded="true"]::before {
+  content: "−";
+}
+
+.decision-section .decision-row {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+}
+
+.decision-section .decision-row-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.decision-section .decision-row-kind {
+  color: var(--t2);
+  font-size: 11px;
+}
+
+.decision-section .state-chip {
+  max-width: 100%;
+  line-height: 1.5;
+}
+
+.decision-section .decision-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.decision-section .decision-row-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.decision-section .decision-row-next {
+  color: var(--t1);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.decision-section .decision-row-context {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 8px;
+  color: var(--t3);
+  font-size: 11px;
+}
+
+.decision-section .decision-row-action-help {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--t2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.decision-section .decision-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.decision-section .decision-row-actions .btn,
+.decision-section .decisions-batch .btn {
+  max-width: 100%;
+  min-height: 34px;
+  white-space: normal;
+}
+
+.decision-section button:focus-visible,
+.decision-section select:focus-visible,
+.decision-section [data-approval-row]:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+@media (max-width: 420px) {
+  .decision-section .decision-filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (forced-colors: active) {
+  .decision-section button:focus-visible,
+  .decision-section select:focus-visible,
+  .decision-section [data-approval-row]:focus-visible {
+    outline-color: Highlight;
+  }
+}

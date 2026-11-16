@@ -1,0 +1,107 @@
+/* RunStop: the control, and its confirm/sending/sent/failed states, for stopping one run. */
+
+.run-stop {
+  flex: none;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--t3);
+  cursor: pointer;
+  padding: 0;
+}
+
+.run-stop:hover {
+  color: var(--err);
+}
+
+.run-stop-confirm,
+.run-stop-status,
+.run-stop-failed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* `.run-stop-confirm` is a <fieldset> (a11y: a real grouping element, not a div+role); this
+   strips the browser's default border, margin and padding so it reads as a plain inline group. */
+.run-stop-confirm {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.run-stop-ask,
+.run-stop-status,
+.run-stop-failed-text {
+  margin: 0;
+  font-size: 12px;
+}
+
+.run-stop-ask {
+  color: var(--t2);
+}
+
+.run-stop-status {
+  color: var(--t3);
+}
+
+.run-stop-failed-text {
+  color: var(--err);
+}
+
+.run-stop-send,
+.run-stop-keep,
+.run-stop-retry,
+.run-stop-dismiss {
+  flex: none;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.run-stop-send {
+  color: var(--err);
+}
+
+.run-stop-keep,
+.run-stop-dismiss {
+  color: var(--t3);
+}
+
+.run-stop-retry {
+  color: var(--or);
+}
+
+.run-stop-send:hover,
+.run-stop-retry:hover {
+  color: var(--or-hi);
+}
+
+.run-stop-keep:hover,
+.run-stop-dismiss:hover {
+  color: var(--t1);
+}
+
+.run-stop:focus-visible,
+.run-stop-send:focus-visible,
+.run-stop-keep:focus-visible,
+.run-stop-retry:focus-visible,
+.run-stop-dismiss:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 1px;
+}
+
+@media (forced-colors: active) {
+  .run-stop-send:focus-visible,
+  .run-stop-keep:focus-visible,
+  .run-stop-retry:focus-visible,
+  .run-stop-dismiss:focus-visible,
+  .run-stop:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}

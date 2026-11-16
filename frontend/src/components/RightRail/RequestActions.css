@@ -1,0 +1,53 @@
+/* RequestActions: inline Allow once / Deny controls for one open permission request, meant to
+   sit inside a run row (AgentRuns.tsx) rather than opening the full Cards.tsx treatment. The
+   buttons reuse styles/base.css's shared `.btn`/`.btn.go`/`.btn.alt`/`.btn.sm` primitives (base.css
+   is loaded once, app-wide, from main.tsx); this file only lays the row out and colors its own
+   text. */
+
+.request-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* The only place the command an inline Allow once authorises can be read to its end (a row's own
+   title is one clipped line), wherever the buttons are mounted: it wraps, keeps its own line
+   breaks (a second command on a new line must not read as arguments of the first), and scrolls
+   past six lines so the buttons stay in reach inside a rail slot that is itself capped.
+   DecisionText.tsx's line under it says so whenever part of the text is below that fold. */
+.request-actions-head {
+  max-height: 108px;
+  overflow-y: auto;
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--t1);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.request-actions-wait {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.request-actions-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Held for a moment after the buttons appear or move (useAnswerHold.ts): dimmed like a disabled
+   `.btn`, so a pointer press that is swallowed there is not a silent one. */
+.request-actions-buttons[data-settling] .btn {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.request-actions-note {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.request-actions-note[role="alert"] {
+  color: var(--err);
+}

@@ -1,0 +1,69 @@
+/* Read aloud: the reply's controls and notes. The buttons repeat the copy control's quiet
+   look (Copy.css) so the two read as one group in the reply's name row. */
+.read-aloud {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.read-aloud-btn {
+  flex: none;
+  height: 20px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--t3);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.read-aloud-btn:hover {
+  color: var(--t1);
+}
+
+.read-aloud-btn:focus-visible {
+  color: var(--t1);
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+.read-aloud-note {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--t2);
+}
+
+/* The first-use notice is a step the user must take before anything is spoken, so it reads as a
+   card with one clear action rather than a quiet line (a missed notice looked like a dead button). */
+.read-aloud-note[role="group"] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  max-width: 640px;
+  padding: 8px 10px;
+  border: 1px solid rgb(var(--or-rgb) / 0.45);
+  border-radius: 6px;
+  background: rgb(var(--or-rgb) / 0.08);
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.read-aloud-note[role="group"] > span {
+  flex: 1 1 100%;
+}
+
+.read-aloud-confirm {
+  background: var(--or);
+  color: var(--on-or);
+  font-weight: 600;
+}
+
+.read-aloud-confirm:hover,
+.read-aloud-confirm:focus-visible {
+  background: var(--or-hi);
+  color: var(--on-or);
+}

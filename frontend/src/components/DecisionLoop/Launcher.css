@@ -1,0 +1,181 @@
+/* Launcher: the floating circle that opens VIKI's panel.
+   Prefix `dloop-launcher`; z-index 30 (tokens.css's stacking-order comment: the panel sits above
+   it at 44/43). Its position (`right`/`bottom`) is an inline style from `useLauncherPosition`, so
+   this file only sets `position: fixed` and the box's own look; `touch-action: none` stops the
+   browser's own panning/zooming gestures from fighting the button's own Pointer Events drag, and
+   `user-select: none` stops a drag from also selecting page text.
+
+   Exactly one `dloop-launcher-look-*` class names the button's resting appearance — idle, list,
+   badge, question, nudge, alert, off, paused (Launcher.tsx's `resolveLook`) — and an optional
+   second, transient `dloop-launcher-cue-*` class plays the one-shot animation for a nudge pulse
+   or a list brighten (`-cue-pulse`/`-cue-brighten`), or, under reduced motion, the one shared
+   `-cue-fade` both become.
+
+   `dloop-launcher-working` is a separate, independent modifier (not a look): it overlays a
+   turning arc on top of idle, list, badge or question whenever a VIKI-started chat is running
+   (Launcher.tsx's `showsWorkingArc`). Its arc lives on its own `.dloop-launcher-arc` element,
+   never `.dloop-launcher-ring`, so its spin (`-cue-spin`) can never collide with the ring's own
+   `border-color`/`box-shadow` animation on the very same element — e.g. list's brighten and the
+   working arc can both be playing at once, each on its own element. Every child is decorative
+   (`pointer-events: none`): the button itself is always the element Pointer Events and clicks
+   land on, regardless of which child is visually underneath. */
+
+.dloop-launcher {
+  position: fixed;
+  z-index: 30;
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  background: var(--dloop-launcher-tile);
+  box-shadow:
+    0 0 0 1px var(--b1),
+    0 2px 10px var(--shadow);
+}
+
+.dloop-launcher[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+.dloop-launcher:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.dloop-launcher > * {
+  pointer-events: none;
+}
+
+/* The launcher's design: the mark fills the circle at 112%, so the tile's own white
+   margin falls outside it and the sphere spans the button edge to edge. Placed absolutely and
+   centred by the -6% offsets, then clipped to the button's own circle: `circle()` takes its
+   radius as a share of this 112% box, and 50% / 1.12 of it is the button's radius. */
+.dloop-launcher-mark {
+  position: absolute;
+  top: -6%;
+  left: -6%;
+  width: 112%;
+  height: 112%;
+  max-width: none;
+  clip-path: circle(calc(50% / 1.12));
+}
+
+/* `transition` is armed here, on the base rule, rather than only on the reduced-motion `-cue-fade`
+   modifier below: the very first toggle still eases instead of snapping, and it eases back out
+   again too, once Launcher.tsx removes that class. Full motion never triggers it (nothing else
+   here changes `border-color` outside a `@keyframes` animation, which this does not slow). */
+/* Just outside the mark's edge, as in the design: over the filled mark a ring would vanish. */
+.dloop-launcher-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  transition: border-color 2s var(--motion-ease);
+}
+
+.dloop-launcher-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  padding: 0 6px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  line-height: 1;
+  background: var(--or);
+  color: var(--on-or);
+}
+
+/* list: a faint ring, brighter for 6 s once per glow increase. */
+
+.dloop-launcher-look-list .dloop-launcher-ring {
+  border-color: rgb(var(--or-rgb) / 0.3);
+}
+
+.dloop-launcher-cue-brighten .dloop-launcher-ring {
+  animation: dloop-launcher-brighten 6s var(--motion-ease) 1;
+}
+
+@keyframes dloop-launcher-brighten {
+  from {
+    border-color: rgb(var(--or-rgb) / 0.3);
+  }
+  to {
+    border-color: rgb(var(--or-rgb) / 0.9);
+  }
+}
+
+/* badge, and nudge at rest (see Launcher.tsx's module doc): the item count, no ring motion. */
+
+/* question: a static "?" in the same badge, no ring motion. */
+
+/* nudge: the pulse itself, only while it is actually playing. */
+
+.dloop-launcher-cue-pulse .dloop-launcher-ring {
+  animation: dloop-launcher-pulse 700ms var(--motion-ease) 1;
+}
+
+@keyframes dloop-launcher-pulse {
+  from {
+    box-shadow: 0 0 0 0 rgb(var(--or-rgb) / 0.5);
+  }
+  to {
+    box-shadow: 0 0 0 16px rgb(var(--or-rgb) / 0);
+  }
+}
+
+/* working: a turning arc layered over idle/list/badge/question, for as long as a chat is running
+   (not time-limited); its own element, so it never shares a property with whatever the look's
+   own ring is doing. Reduced motion renders it (still a partial ring) without `-cue-spin`, so it
+   never spins — "a still partial ring", not a fade (module doc). */
+
+.dloop-launcher-arc {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: rgb(var(--or-rgb) / 0.9);
+}
+
+.dloop-launcher-cue-spin .dloop-launcher-arc {
+  animation: dloop-launcher-spin 12s linear infinite;
+}
+
+@keyframes dloop-launcher-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* alert: a solid ring until the panel opens (the next fetched view is what actually clears it). */
+
+.dloop-launcher-look-alert .dloop-launcher-ring {
+  border-color: var(--or);
+}
+
+/* off, paused: dimmed, but still a plain button that opens the panel. */
+
+.dloop-launcher-look-off,
+.dloop-launcher-look-paused {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+
+/* Reduced motion: every cue is the same plain fade, never a loop or a pulse — the `transition`
+   that makes this one fade (rather than snap) lives on the base `.dloop-launcher-ring` rule
+   above. */
+
+.dloop-launcher-cue-fade .dloop-launcher-ring {
+  border-color: rgb(var(--or-rgb) / 0.85);
+}

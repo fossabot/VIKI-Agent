@@ -1,0 +1,12 @@
+.workbench-tree .file-tree-row {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  align-items: start;
+  gap: 6px;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.workbench-tree .file-tree-row > .ico {
+  margin-top: 2px;
+}

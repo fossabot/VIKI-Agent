@@ -1,0 +1,58 @@
+.memory-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.memory-panel-item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--fill-hi);
+}
+
+.memory-panel-claim,
+.memory-panel-ref,
+.memory-panel-text {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.memory-panel-meta,
+.memory-panel-why {
+  color: var(--t2);
+  overflow-wrap: anywhere;
+}
+
+.memory-panel-compose textarea,
+.memory-panel-dialog textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.memory-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  background: var(--scrim);
+}
+
+.memory-panel-dialog {
+  width: min(480px, 90vw);
+  max-height: 80vh;
+  overflow: auto;
+  padding: 16px;
+  box-sizing: border-box;
+  background: var(--fill-raised);
+  color: var(--t0);
+  border: 1px solid var(--fill-hi);
+  border-radius: 8px;
+}
+
+.memory-panel-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}

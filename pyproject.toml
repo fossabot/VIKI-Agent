@@ -1,0 +1,118 @@
+[project]
+name = "viki-agent"
+version = "0.1.0"
+description = "Local chat UI for VIKI that drives the unmodified Claude Code CLI on the owner's subscription."
+readme = "README.md"
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE"]
+requires-python = ">=3.14"
+dependencies = [
+    "claude-agent-sdk==0.2.159",
+    "cryptography==50.0.1",
+    "pillow==13.0.0",
+    "pywhispercpp==1.5.1",
+    "starlette",
+    "tzdata==2026.3",
+    "uvicorn",
+    "websockets",
+]
+
+[project.scripts]
+viki-agent = "viki_agent.__main__:main"
+
+[project.gui-scripts]
+viki-agent-app = "viki_agent.__main__:main"
+
+[dependency-groups]
+dev = [
+    "httpx",
+    "pyright",
+    "pytest",
+    "pytest-asyncio",
+    "pytest-xdist",
+    "ruff",
+]
+# Build-only: scripts/compile.py compiles the app with it (ADR-054); never a runtime import.
+build = ["nuitka==4.2.2"]
+
+[build-system]
+requires = ["uv_build>=0.11,<0.12"]
+build-backend = "uv_build"
+
+[tool.uv]
+# Supply-chain age gate: nothing published after this instant resolves. Some packages have their own
+# later window, each closing the day after the one release it admits: claude-agent-sdk 0.2.159,
+# nuitka 4.2.2 (build group only), and the first release fixing each open security advisory:
+# pillow 13.0.0, certifi 2026.10.18, pyjwt 2.15.0, urllib3 2.8.0, opentelemetry-api 1.45.2 and
+# mcp 2.2.0, with the mcp-types 2.2.0 that it pins.
+exclude-newer = "2026-09-04T00:00:00Z"
+no-build-package = ["pywhispercpp", "numpy"]
+
+[tool.uv.exclude-newer-package]
+claude-agent-sdk = "2026-09-24T00:00:00Z"
+nuitka = "2026-09-23T00:00:00Z"
+pillow = "2026-10-17T00:00:00Z"
+certifi = "2026-10-19T00:00:00Z"
+pyjwt = "2026-09-24T00:00:00Z"
+urllib3 = "2026-09-16T00:00:00Z"
+opentelemetry-api = "2026-10-30T00:00:00Z"
+mcp = "2026-09-08T00:00:00Z"
+mcp-types = "2026-09-08T00:00:00Z"
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "TID251", "PLW1514"]
+# PLW1514 (open/read_text without an explicit encoding) is a preview rule; enable only it.
+preview = true
+explicit-preview-rules = true
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+"claude_agent_sdk._internal".msg = "Public SDK API only (M0a gate)."
+"subprocess".msg = "Spawn through viki_agent.winproc.spawn() / run()."
+"asyncio.create_subprocess_exec".msg = "Spawn through viki_agent.winproc.spawn()."
+"asyncio.create_subprocess_shell".msg = "Spawn through viki_agent.winproc.spawn()."
+"os.system".msg = "Spawn through viki_agent.winproc."
+"os.popen".msg = "Spawn through viki_agent.winproc."
+"os.startfile".msg = "Open through viki_agent.winproc.open_external()."
+"multiprocessing".msg = "Spawn through viki_agent.winproc."
+"webbrowser".msg = "Open through viki_agent.winproc.open_external()."
+"urllib.request".msg = "VIKI downloads nothing; only scripts/voice_fetch.py fetches pinned files (ADR-035)."
+"http.client".msg = "VIKI downloads nothing; only scripts/voice_fetch.py fetches pinned files (ADR-035)."
+"requests".msg = "VIKI downloads nothing; only scripts/voice_fetch.py fetches pinned files (ADR-035)."
+"urllib3".msg = "VIKI downloads nothing; only scripts/voice_fetch.py fetches pinned files (ADR-035)."
+"pywhispercpp".msg = "The speech engine is imported only in voice_worker.py (ADR-035)."
+"numpy".msg = "The speech engine is imported only in voice_worker.py (ADR-035)."
+
+[tool.ruff.lint.isort]
+known-first-party = ["viki_agent"]
+known-local-folder = ["replay"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/viki_agent/winproc.py" = ["TID251"]
+"tests/fake_claude.py" = ["TID251"]  # it plays claude.exe, including starting grandchildren
+"scripts/*" = ["TID251"]  # dev tooling runs linters and npm; the app never imports it
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = ["tests"]
+markers = [
+    "live: spawns the real claude CLI (opt-in: -m live)",
+    "vault: reads the real vault (opt-in: -m vault)",
+    "keychain: touches the real OS keychain or Secret Service (opt-in: -m keychain)",
+]
+addopts = "-m 'not live and not vault and not keychain'"
+# A test still running after 10 minutes dumps every thread's stack and exits its process; an
+# xdist worker is reported crashed and replaced. The slowest test takes 155 s under 24 workers.
+faulthandler_timeout = 600
+faulthandler_exit_on_timeout = true
+
+[tool.pyright]
+include = ["src", "tests", "scripts"]
+extraPaths = ["tests", "scripts"]
+pythonVersion = "3.14"
+typeCheckingMode = "standard"

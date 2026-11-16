@@ -1,0 +1,104 @@
+.connector-selection {
+  display: grid;
+  gap: 12px;
+  color: var(--t0);
+  min-width: 0;
+}
+
+.connector-selection h2,
+.connector-selection h3,
+.connector-selection p {
+  margin: 0;
+}
+
+.connector-selection p,
+.connector-selection-source span,
+.connector-selection-row small {
+  color: var(--t2);
+  line-height: 1.5;
+}
+
+.connector-selection-heading,
+.connector-selection-picker,
+.connector-selection-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.connector-selection-heading > div {
+  flex: 1 1 20rem;
+}
+
+.connector-selection-heading h2 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.connector-selection select,
+.connector-selection button {
+  max-width: 100%;
+  font: inherit;
+  color: var(--t0);
+  background: var(--g2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.connector-selection select {
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+
+.connector-selection button {
+  white-space: normal;
+  cursor: pointer;
+}
+
+.connector-selection :disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.connector-selection :focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+.connector-selection fieldset,
+.connector-selection-review {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.connector-selection-source,
+.connector-selection-row span,
+.connector-selection-review {
+  display: grid;
+  gap: 8px;
+}
+
+.connector-selection code,
+.connector-selection-row span,
+.connector-selection-review p {
+  overflow-wrap: anywhere;
+}
+
+.connector-selection-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.connector-selection-row input {
+  accent-color: var(--or);
+}
+
+.connector-selection [role="alert"] {
+  color: var(--err);
+}

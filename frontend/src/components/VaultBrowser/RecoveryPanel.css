@@ -1,0 +1,42 @@
+.recovery-panel {
+  display: grid;
+  gap: 6px;
+  color: var(--t1);
+}
+
+.recovery-panel ul {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recovery-panel li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--s0);
+  padding: 6px 10px;
+}
+
+.recovery-ref {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.recovery-meta {
+  color: var(--t3);
+}
+
+.recovery-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--err);
+}

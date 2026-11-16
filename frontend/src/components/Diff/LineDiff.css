@@ -1,0 +1,29 @@
+/* The local name keeps `green` out of a `color` property, where the token test would read it as
+   a named colour (tokens.unit.test.ts; the same trick as Workbench/CodeViews.css's --diff-add).
+   Diff colours mirror Workbench/CodeViews.css's `.code-diff` convention (add = green,
+   del = `--err`, same = a dimmer text tone). */
+.line-diff {
+  --diff-add: var(--accent-green);
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--s0);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre;
+}
+
+.line-diff-add {
+  color: var(--diff-add);
+}
+
+.line-diff-del {
+  color: var(--err);
+}
+
+.line-diff-same {
+  color: var(--t2);
+}

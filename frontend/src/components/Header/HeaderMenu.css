@@ -1,0 +1,72 @@
+/* The header's `⋯` and its one-row panel. Both shared primitives come from styles/base.css and
+   are worn as-is: `.mi`, the row, and `.menu-panel`, the dropdown chrome all four
+   menus share. Only this menu's own things are below — the `⋯` button, where the panel floats,
+   how wide it is, its row highlight, and how a disabled row reads.
+
+   The wrap is the positioned ancestor, not `.conversation-header`: the header is a flex row
+   whose other children would be pushed by a relatively-positioned sibling that grew. It carries
+   no `margin-left: auto` of its own — this menu sits as a child inside HeaderTrail's row
+   (HeaderTrail.css), which owns the row's one auto margin. */
+.header-menu-wrap {
+  position: relative;
+  flex: none;
+}
+
+.header-menu-button {
+  padding: 0 4px;
+  background: none;
+  border: none;
+  color: var(--t2);
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.header-menu-button:hover,
+.header-menu-button:focus-visible {
+  color: var(--t0);
+  outline: none;
+}
+
+.header-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 232px;
+  padding: 4px 0;
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+/* The same highlight RowMenu.css gives its rows, restated rather than shared: base.css's
+   `.menu-panel` note keeps row highlighting with each component, because a `.mi:hover` there
+   would light a second row in the slash menu and the model chip, which highlight by keyboard
+   position and by current selection. `:not(:disabled)` is load-bearing — the disabled row
+   below is the "finish another session first" refusal, and lighting it on hover would offer
+   the user a row that does nothing. */
+.header-menu .mi:hover:not(:disabled),
+.header-menu .mi:focus-visible:not(:disabled) {
+  background: var(--fill-hi);
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+  outline: none;
+}
+
+/* A disabled row still has to be readable: this is the refusal, and the tooltip beside it is
+   the only place the user learns which session to finish first. */
+.header-menu .mi:disabled {
+  color: var(--t3);
+  cursor: default;
+}
+
+@media (forced-colors: active) {
+  .header-menu .mi:hover:not(:disabled),
+  .header-menu .mi:focus-visible:not(:disabled) {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  .header-menu-button:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}

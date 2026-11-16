@@ -1,0 +1,11 @@
+{
+  "private_patterns": [
+    "(^|[._-])env($|[._-])",
+    "(^|[._-])credentials?($|[._-])",
+    "^(?:state\\.json|sealing-key-id|id_rsa|id_dsa|id_ecdsa|id_ed25519|\\.git|\\.aws|\\.ssh)$",
+    "\\.(?:db|sqlite|sqlite3)(?:[-.]|$)",
+    "\\.(?:pem|key|p8|p12|pfx|jks|keystore|log|map)$"
+  ],
+  "certificate_limit": 2097152,
+  "private_directories": ["logs", "sessions", "recovery", ".claude", ".codex"]
+}

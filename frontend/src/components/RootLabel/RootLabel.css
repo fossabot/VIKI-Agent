@@ -1,0 +1,12 @@
+.root-label {
+  display: inline-block;
+  min-width: 0;
+  max-width: 14ch;
+  margin-left: 6px;
+  overflow: hidden;
+  color: var(--t3);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}

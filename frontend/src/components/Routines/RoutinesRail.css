@@ -1,0 +1,66 @@
+/* The rail's routine rows reuse `.rt` and `.h` from RightRail.css; these rules reset the open
+   and run-now buttons and shorten a long name. */
+.routines-rail-open,
+.routines-rail-run,
+.routines-rail-all {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.routines-rail-open {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.routines-rail-run {
+  flex: none;
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.routines-rail-run:hover:not(:disabled) {
+  color: var(--t1);
+}
+
+.routines-rail-run:disabled {
+  cursor: default;
+}
+
+.routines-rail-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.routines-rail-row .chip {
+  flex: none;
+}
+
+.routines-rail-all {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.routines-rail-all:hover {
+  color: var(--t1);
+}
+
+.routines-rail-note {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--t2);
+}

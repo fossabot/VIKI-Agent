@@ -1,0 +1,44 @@
+.instruction-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.instruction-editor-box {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 240px;
+  padding: 8px 12px;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--s0);
+  color: var(--t0);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.instruction-editor-box:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+.instruction-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.instruction-editor-disk,
+.instruction-editor-hidden {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Beside the draft these are for comparing, so they stay shorter than a file shown alone. */
+.instruction-editor .instruction-files-text {
+  max-height: min(40vh, 320px);
+}

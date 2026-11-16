@@ -1,0 +1,28 @@
+.instruction-files-path {
+  overflow-wrap: anywhere;
+}
+
+.instruction-files-body {
+  min-width: 0;
+}
+
+.instruction-files-text {
+  max-width: 100%;
+  max-height: min(60vh, 480px);
+  overflow: auto;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--s0);
+  color: var(--t1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.instruction-files-text:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}

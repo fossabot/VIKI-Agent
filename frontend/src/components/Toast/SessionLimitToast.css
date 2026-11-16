@@ -1,0 +1,124 @@
+/* The session-limit toast, with sizes that follow the design 1:1. The panel fill and its
+   border are tokens.css role tokens, --fill-toast and --b-strong, so each theme sets its own;
+   Composer.css's pill takes its border from the same --b-strong.
+
+   Shell's sticky `.conversation-overlay` keeps the card anchored to the conversation pane
+   while its content scrolls. The roomy inset follows the design, measured from the pane's
+   right edge rather than the window edge. The height bound keeps the card inside that pane
+   and lets its own content scroll. The short-pane query reduces the bottom inset. z-index 40
+   clears ordinary content and the composer while staying under SearchPalette's modal layer (50/51). */
+.toast {
+  position: absolute;
+  right: 24px;
+  bottom: 96px;
+  width: 380px;
+  max-width: calc(100% - 48px);
+  max-height: calc(100cqh - 112px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: var(--fill-toast);
+  border: 1px solid var(--b-strong);
+  border-radius: 10px;
+  box-shadow: 0 14px 36px var(--shadow-toast);
+  padding: 14px 16px;
+  z-index: 40;
+}
+
+.toast-dismiss {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: var(--t3);
+  cursor: pointer;
+}
+
+.toast-dismiss:hover {
+  color: var(--t1);
+}
+
+.toast-title {
+  padding-right: 22px; /* clears .toast-dismiss */
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--t0);
+}
+
+.toast-sub {
+  margin-top: 3px;
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.toast-rows {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.toast-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+/* The design's two row-dot variants: ringed (idle/unknown) by default, filled while writing —
+   the same filled-vs-ringed pair LeftRail's rows draw (rowState.css) for the same reason. */
+.toast-row-dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--or);
+  box-sizing: border-box;
+}
+
+.toast-row-dot-writing {
+  background: var(--or);
+  border: none;
+}
+
+.toast-row-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toast-row-close {
+  flex: none;
+  height: 28px;
+}
+
+/* S (below 800px): the column IS the window, so a 380px card with a 24px inset would
+   stand within 4px of the left edge at 400. It spans the column instead, on the same 16px
+   gutter the conversation and the composer slot use, and sits just clear of the pill. */
+@media not all and (min-width: 800px) {
+  .toast {
+    left: 16px;
+    right: 16px;
+    width: auto;
+    max-width: calc(100% - 32px);
+    bottom: 88px;
+  }
+}
+
+/* Short panes use smaller top and bottom clearances to leave more room for scrollable content. */
+@container conversation (max-height: 360px) {
+  .toast {
+    bottom: 8px;
+    max-height: calc(100cqh - 16px);
+    overflow-y: auto;
+  }
+}

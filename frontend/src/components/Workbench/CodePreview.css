@@ -1,0 +1,76 @@
+.code-preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  color: var(--t1);
+}
+
+.code-preview-heading,
+.code-preview-actions,
+.code-preview-modes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
+.code-preview-heading {
+  flex: none;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.code-preview-heading h2 {
+  min-width: 0;
+  font-size: var(--code-font-size, 13px);
+  overflow-wrap: anywhere;
+}
+
+.code-preview-content {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  padding: 12px 16px;
+}
+
+.code-preview-modes {
+  margin-bottom: 8px;
+}
+
+.code-preview-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.code-preview-edit[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.code-preview-unsaved {
+  margin-top: 0;
+}
+
+.code-preview [aria-pressed="true"] {
+  color: var(--or);
+}
+
+.code-preview .code-file-head > span:first-child {
+  overflow-wrap: anywhere;
+}
+
+.code-preview[data-wrap] .code-line {
+  min-width: 0;
+}
+
+.code-preview[data-wrap] .code-text,
+.code-preview[data-wrap] .code-diff pre {
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

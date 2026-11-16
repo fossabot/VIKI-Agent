@@ -1,0 +1,188 @@
+/* The MCP servers dialog (Composer's MCP button, before the model chip). Sizing matches
+   RetryReview.css's fixed panel (same top/width/max-height/border/radius/padding/z-index); the
+   filter box and Refresh button stay put while the server list scrolls beneath them, the split
+   SearchPalette.css keeps between its own input and its hit list. Buttons reuse base.css's .btn;
+   the switch reuses Settings.css's own tiny recipe (a native checkbox, role="switch",
+   accent-color) under a file-local class, since that file's class is not loaded wherever this
+   dialog mounts. */
+
+.mcp-servers-dialog {
+  position: fixed;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 160px);
+  display: flex;
+  flex-direction: column;
+  background: var(--g1);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 51;
+}
+
+.mcp-servers-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 8px;
+}
+
+.mcp-servers-dialog-head h2 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--t0);
+}
+
+/* The close button's own glyph (RailDrawer.css's identical rule for the same ✕ convention). */
+.mcp-servers-close {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.mcp-servers-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mcp-servers-filter {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  color: var(--t0);
+  font: inherit;
+  font-size: 13px;
+}
+
+.mcp-servers-filter:focus {
+  outline: none;
+  border-color: var(--or);
+}
+
+.mcp-servers-list {
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.mcp-servers-group {
+  margin: 12px 0 0;
+}
+
+.mcp-servers-group h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t3);
+}
+
+.mcp-servers-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mcp-server-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.mcp-server-name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.mcp-server-status {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.mcp-server-status[data-status="connected"] {
+  color: var(--t1);
+}
+
+.mcp-server-status[data-status="failed"],
+.mcp-server-status[data-status="needs-auth"] {
+  color: var(--err);
+}
+
+.mcp-server-switch {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--or);
+}
+
+.mcp-server-managed {
+  flex: none;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.mcp-server-note,
+.mcp-server-error {
+  flex-basis: 100%;
+  margin: 2px 0 0;
+  font-size: 12px;
+}
+
+.mcp-server-note {
+  color: var(--t3);
+}
+
+.mcp-server-error {
+  color: var(--err);
+}
+
+.mcp-servers-note {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+@media not all and (min-width: 800px) {
+  .mcp-servers-dialog {
+    width: 100%;
+  }
+}
+
+/* With position-area support the dialog reads as the MCP button's own popup instead of
+   a centered modal — its right edge lands on the composer's, opening upward rather than over the
+   pill. `position-area: top span-left` is the area whose inline-end edge sits on the anchor's
+   inline-end edge while the box grows upward and leftward. `inset: auto` and `transform: none`
+   undo the fixed fallback's own centering so these anchor-relative insets take over instead.
+   max-height leaves 16px of room above the composer at the height measured in Edge 155;
+   .mcp-servers-list already scrolls within whatever height that leaves. The fixed rule
+   above stays as the fallback where position-area isn't supported. */
+@supports (position-area: top) {
+  .mcp-servers-dialog {
+    position-anchor: --composer;
+    position-area: top span-left;
+    inset: auto;
+    transform: none;
+    margin-bottom: 6px;
+    width: min(480px, calc(100% - 32px));
+    max-height: calc(100% - 22px);
+  }
+}

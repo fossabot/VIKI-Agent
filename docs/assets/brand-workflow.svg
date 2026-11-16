@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="660" viewBox="0 0 1440 660" role="img" aria-labelledby="title desc">
+  <title id="title">VIKI Agent: from priorities to reviewed work</title>
+  <desc id="desc">Supported opportunities, context and history feed Decision. Model answers and local evaluation inform attention, timing and eligible work. Claude Code carries out work within current grants and Claude Code's permission prompts. Feedback can adjust bounded local decision parameters. Proactivity requires enabled and unpaused settings and an open app window.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="none" stroke="#b0b0bc" stroke-width="1.5"/></marker></defs>
+  <rect width="1440" height="660" rx="20" fill="#0b0b0b"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="72" y="77" fill="#b0b0bc" font-size="18" letter-spacing="3">VIKI AGENT / THE WORKFLOW</text>
+    <text x="72" y="143" fill="#f8f8ff" font-size="43" letter-spacing="-1.2">Proactive coding, with your control.</text>
+    <text x="72" y="188" fill="#b0b0bc" font-size="23">Notice opportunities. Decide when to help. Work within your grants.</text>
+    <g stroke="#3a3a42" fill="#141414"><rect x="72" y="246" width="288" height="203" rx="10"/><rect x="408" y="246" width="288" height="203" rx="10"/><rect x="744" y="246" width="288" height="203" rx="10"/><rect x="1080" y="246" width="288" height="203" rx="10" fill="#141414" stroke="#3a3a42"/></g>
+    <g stroke="#b0b0bc" stroke-width="2" marker-end="url(#arrow)"><path d="M372 348h22"/><path d="M708 348h22"/><path d="M1044 348h22"/></g>
+    <g fill="#b0b0bc" font-size="17" letter-spacing="1.3"><text x="96" y="286">01 / NOTICE</text><text x="432" y="286">02 / DECIDE</text><text x="768" y="286">03 / WORK</text><text x="1104" y="286" fill="#b0b0bc">04 / LEARN</text></g>
+    <g fill="#f8f8ff" font-size="27"><text x="96" y="336">Context &amp; history</text><text x="432" y="336">Decision</text><text x="768" y="336">Claude Code</text><text x="1104" y="336" fill="#f8f8ff">Local learning</text></g>
+    <g fill="#b0b0bc" font-size="21"><text x="96" y="379">Supported opportunities</text><text x="96" y="410">and recent responses.</text><text x="432" y="379">Model answers and</text><text x="432" y="410">local evaluation.</text><text x="768" y="379">Eligible work within</text><text x="768" y="410">grants and permissions.</text><text x="1104" y="379" fill="#b0b0bc">Feedback adjusts</text><text x="1104" y="410" fill="#b0b0bc">bounded local values.</text></g>
+    <path d="M72 492H1368" stroke="#b0b0bc"/>
+    <text x="72" y="535" fill="#f8f8ff" font-size="23">Your controls</text>
+    <text x="296" y="535" fill="#b0b0bc" font-size="22">Durable session state · permission cards · recovery · review controls</text>
+    <text x="72" y="591" fill="#b0b0bc" font-size="19">Enabled and unpaused, with an open window; grants, limits and Claude Code's permission prompts apply.</text>
+  </g>
+</svg>

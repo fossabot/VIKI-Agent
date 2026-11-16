@@ -1,0 +1,62 @@
+/* BetweenChats: a top-level rail fold, so it carries the same border/spacing `.rail-agents`
+   (AgentsSection.css) uses to separate itself from its neighbour above. `.between-chats-row`
+   and its two lines follow NeedsYou.css's `.need`/`.need-title` row exactly. */
+.between-chats {
+  border-top: 1px solid var(--hair);
+  padding-top: 10px;
+}
+
+.between-chats > summary {
+  cursor: pointer;
+  margin: 0 8px 4px;
+}
+
+.between-chats-caption {
+  margin: 0 8px 6px;
+  font-size: 11.5px;
+  color: var(--t3);
+}
+
+.between-chats-note {
+  margin: 0 8px;
+  font-size: 12.5px;
+  color: var(--t3);
+}
+
+.between-chats-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.between-chats-row {
+  display: block;
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  border-bottom: 1px solid var(--hair-header);
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.between-chats-row:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+.between-chats-line {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.between-chats-line + .between-chats-line {
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--t3);
+}

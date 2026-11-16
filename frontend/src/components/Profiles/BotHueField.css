@@ -1,0 +1,99 @@
+.bot-hue-field {
+  margin: 12px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.bot-hue-field > legend {
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t1);
+}
+
+.bot-hue-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.bot-hue-choice {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 58px;
+  padding: 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--t1);
+  cursor: pointer;
+}
+
+.bot-hue-choice input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.bot-hue-choice:has(input:checked) {
+  border-color: var(--bot-hue);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--bot-hue) 35%, transparent);
+}
+
+.bot-hue-choice:has(input:focus-visible) {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.bot-hue-avatar,
+.bot-hue-avatar .bot-icon {
+  display: block;
+  width: 36px;
+  height: 36px;
+}
+
+.bot-hue-choice-name {
+  font-size: 12px;
+}
+
+.bot-hue-choice:has(input:checked) .bot-hue-choice-name {
+  font-weight: 700;
+}
+
+.bot-hue-selected-check {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--bot-hue);
+  color: var(--on-or);
+}
+
+.bot-hue-saved,
+.bot-hue-failed {
+  min-height: 18px;
+  margin: 4px 0 0;
+  font-size: 12px;
+}
+
+.bot-hue-saved {
+  color: var(--t2);
+}
+
+.bot-hue-failed {
+  color: var(--err);
+}
+
+@media (forced-colors: active) {
+  .bot-hue-choice:has(input:checked) {
+    border-color: Highlight;
+  }
+}

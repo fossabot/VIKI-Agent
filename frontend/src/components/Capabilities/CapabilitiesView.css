@@ -1,0 +1,67 @@
+.capabilities-view {
+  min-width: 0;
+  color: var(--t1);
+  padding: clamp(16px, 3vw, 40px);
+}
+.capabilities-eyebrow {
+  display: block;
+  margin: 0 0 8px;
+  color: var(--orhi);
+  font: 11px var(--font-mono);
+  letter-spacing: 0.12em;
+}
+.capabilities-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+.capabilities-tabs button {
+  flex: 1 1 auto;
+  padding: 12px 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--t2);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.capabilities-tabs button[aria-selected="true"] {
+  color: var(--t0);
+  border-bottom-color: var(--or);
+  background: var(--s0);
+}
+.capabilities-tabs button:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: -3px;
+}
+.capabilities-view [role="tabpanel"][hidden] {
+  display: none;
+}
+.capabilities-observed {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.capabilities-observed h2 {
+  font-size: 18px;
+  margin: 0 0 16px;
+  color: var(--t0);
+}
+.capabilities-view :is(select, input[type="search"]) {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--s0);
+  color: var(--t0);
+  font: inherit;
+}
+.capabilities-view :is(h1, h2, p) {
+  overflow-wrap: anywhere;
+}
+@media (forced-colors: active) {
+  .capabilities-tabs button[aria-selected="true"] {
+    border-bottom-color: Highlight;
+  }
+}

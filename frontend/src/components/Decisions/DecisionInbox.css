@@ -1,0 +1,289 @@
+.decision-inbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.decision-inbox {
+  width: 420px;
+  max-width: 100%;
+  height: 100%;
+  background: var(--g1);
+  border-left: 1px solid var(--line);
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.decision-inbox-panel {
+  width: 520px;
+}
+
+@media not all and (min-width: 800px) {
+  .decision-inbox {
+    width: 100%;
+  }
+}
+
+.decision-inbox-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.decision-inbox-title {
+  margin: 0;
+  font-size: 16px;
+  color: var(--t0);
+}
+
+.decision-inbox-note {
+  margin: 8px 0 16px;
+  font-size: 12.5px;
+  color: var(--t3);
+}
+
+.decision-inbox-keys {
+  flex: none;
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+/* The ephemeral line a keyboard action that cannot proceed posts to: empty most of
+   the time, so it takes no visual weight, but always mounted so its one `role="status"` keeps
+   announcing each new line rather than being created fresh every time. */
+.decision-inbox-status {
+  flex: none;
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  color: var(--t2);
+}
+
+.decision-inbox-empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--t3);
+}
+
+.decision-inbox-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.decision-inbox-row {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--g2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.decision-row-session {
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.decision-row-meta {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.decision-row-action {
+  font-size: 13px;
+  color: var(--t0);
+  overflow-wrap: anywhere;
+}
+
+.decision-row-resource {
+  font-size: 12.5px;
+  color: var(--t2);
+  overflow-wrap: break-word;
+}
+
+.decision-row-revision {
+  font-size: 11px;
+  color: var(--t3);
+}
+
+.decision-row-answer {
+  margin-top: 4px;
+}
+
+.decision-row-open {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
+/* The roving keyboard focus: a row sits at tabIndex={-1}, outside the Tab order, so
+   without its own ring j/k would move focus with nothing to show for it on screen — the same
+   reason ModelChip.css keeps this exact 1px var(--or) ring. */
+[data-approval-row]:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  [data-approval-row]:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+
+.decisions {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.decisions-notice {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--t2);
+}
+
+.decisions-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.decisions-group-title {
+  margin: 0;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.decision-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: var(--g2);
+}
+
+.decision-row-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.decision-row-title {
+  font-size: 13px;
+  color: var(--t0);
+  overflow-wrap: anywhere;
+}
+
+.decision-row-item-id,
+.decision-row-source {
+  font-size: 11px;
+  color: var(--t3);
+  overflow-wrap: anywhere;
+}
+
+.state-chip {
+  font-size: 11px;
+  color: var(--t2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+
+.decisions-batch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.decision-inbox-details {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.decision-inbox > .decision-inbox-rows {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.decision-inbox > .decision-inbox-note {
+  flex: none;
+  max-height: 25%;
+  overflow-y: auto;
+}
+
+.decision-inbox > .decisions-batch {
+  flex: none;
+}
+
+.decision-inbox-panel > .decision-inbox-head {
+  gap: 16px;
+}
+
+.decision-inbox-panel > .decision-inbox-head > .decision-inbox-title {
+  font-size: 18px;
+}
+
+.decision-inbox-panel > .decision-inbox-intro {
+  flex: none;
+  margin: 8px 0;
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.decision-inbox-panel > .decision-inbox-shortcuts {
+  flex: none;
+}
+
+.decision-inbox-details > .decision-inbox-section-title {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: var(--t1);
+}
+
+.decision-inbox-row[data-approval-row] {
+  gap: 6px;
+}
+
+.decision-inbox-row[data-approval-row] > .decision-row-kind {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--t2);
+}
+
+.decision-inbox-row[data-approval-row] > .decision-row-session,
+.decision-inbox-row[data-approval-row] > .decision-row-meta,
+.decision-inbox-row[data-approval-row] > .decision-row-resource {
+  overflow-wrap: anywhere;
+}
+
+.decision-inbox-row[data-approval-row] > .decision-row-consequence {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.decision-inbox-panel > .decision-undo-bar {
+  position: static;
+  flex: none;
+  width: auto;
+  max-width: none;
+  max-height: 35%;
+  margin-top: 12px;
+  overflow-y: auto;
+}

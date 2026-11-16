@@ -1,0 +1,217 @@
+/**
+ * AgentRuns: the right rail's run list. `.lbl` is base.css's shared section-label utility, reused
+ * here exactly as SessionList.tsx's "Other (N)" toggle already does — this file adds no copy of
+ * it.
+ */
+.agent-runs {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.run-group {
+  margin-top: 14px;
+}
+
+.run-group:first-child {
+  margin-top: 0;
+}
+
+.run-group + .run-group {
+  padding-top: 12px;
+  border-top: 1px solid var(--hair);
+}
+
+.run-group-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 8px 4px;
+}
+
+.run-mark {
+  flex: none;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--or);
+  cursor: pointer;
+  min-height: 28px;
+  padding: 4px 0;
+}
+
+.run-mark:hover {
+  color: var(--or-hi);
+}
+
+.run-mark:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+.run-done {
+  margin-top: 14px;
+}
+
+.run-done > summary {
+  cursor: pointer;
+  margin: 0 8px;
+  min-height: 28px;
+}
+
+.runs-empty {
+  margin: 8px;
+  font-size: 12.5px;
+  color: var(--t3);
+}
+
+.run {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.run:last-child {
+  border-bottom: none;
+}
+
+.run:focus-within,
+.run:hover {
+  background: var(--g2);
+}
+
+/* The run's own face-and-text area: a <button> when Peek can open it, else a plain <div> (no
+   SubagentsApi — there is nothing Peek could read, so this never becomes a control). */
+.run-open {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1 1 160px;
+  min-width: 0;
+  text-align: left;
+}
+
+button.run-open {
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+button.run-open:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+.run-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Keep the task readable on narrow rails; the two-line cap leaves room for its actions. */
+.run-line {
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--t2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.run-line:first-child {
+  color: var(--t1);
+  font-weight: 500;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.run-line:nth-child(2) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-size: 11.5px;
+}
+
+.run-line:last-child {
+  color: var(--t3);
+}
+
+.run-need .run-body {
+  padding-top: 1px;
+}
+
+.run > .run-body {
+  flex: 1 1 160px;
+}
+
+.run > .run-stop-confirm,
+.run > .run-stop-status,
+.run > .run-stop-failed {
+  flex: 1 1 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Jump: a quiet, right-aligned text button; it brightens on hover or focus. */
+.run-jump {
+  flex: none;
+  margin-left: auto;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--t3);
+  cursor: pointer;
+  min-height: 28px;
+  padding: 4px 6px;
+}
+
+.run-jump:hover {
+  color: var(--t1);
+}
+
+.run-jump:focus-visible {
+  color: var(--t1);
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+/* Peek stands in for the whole runs list and needs the rail's usual 40% cap relaxed: its own
+   transcript lines run much longer than a run row's three. No vh: Electron's frameless window
+   makes that unit answer the OS display, not this pane (AgentsSection.css's 40% has the same
+   constraint). */
+.rail-agents:has(.run-peek) {
+  max-height: 70%;
+}
+
+.run > .run-stop {
+  min-height: 28px;
+}
+
+.agent-runs button:focus-visible,
+.run-done > summary:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  .agent-runs button:focus-visible,
+  .run-done > summary:focus-visible {
+    outline-color: Highlight;
+  }
+}

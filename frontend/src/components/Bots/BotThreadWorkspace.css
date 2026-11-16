@@ -1,0 +1,306 @@
+.bot-thread-workspace {
+  padding: clamp(16px, 3vw, 32px);
+  color: var(--t1);
+}
+.bot-thread-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+  padding-bottom: 16px;
+}
+.bot-thread-workspace-row {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+}
+.bot-thread-tabs > button {
+  flex: 0 0 auto;
+}
+.bot-thread-workspace-row > button.btn {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 5px;
+  row-gap: 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 260px;
+  height: auto;
+  min-height: 32px;
+  padding: 4px 14px;
+  text-align: left;
+  white-space: normal;
+}
+.bot-thread-row-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bot-thread-row-meta {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  align-items: baseline;
+}
+.bot-thread-list-faces {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+.bot-thread-list-face {
+  display: inline-flex;
+  margin-left: -5px;
+}
+.bot-thread-list-face:first-child {
+  margin-left: 0;
+}
+.bot-thread-list-more,
+.bot-thread-row-time,
+.bot-thread-row-needs {
+  color: var(--t2);
+  font-size: 11px;
+}
+.bot-thread-row-needs {
+  flex: 0 0 auto;
+}
+.bot-thread-tabs [aria-current="page"] {
+  border-color: var(--or);
+}
+.bot-thread-phase {
+  color: var(--t2);
+  font-size: 11px;
+}
+.bot-thread-phase,
+.bot-thread-row-time {
+  white-space: nowrap;
+}
+.bot-thread-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  align-items: start;
+  gap: 24px;
+}
+.bot-thread-layout-folded {
+  grid-template-columns: minmax(0, 1fr);
+}
+.bot-thread-main {
+  min-width: 0;
+}
+.bot-thread-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.bot-thread-toolbar h2 {
+  flex: 1 1 180px;
+  margin: 0;
+  color: var(--t0);
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+.bot-thread-toolbar-separator {
+  width: 1px;
+  height: 20px;
+  background: var(--line);
+}
+.bot-thread-remove-blocked {
+  margin: 8px 0 0;
+  color: var(--t2);
+  font-size: 12px;
+}
+.bot-thread-remove-confirm {
+  scroll-margin-top: 64px;
+  margin-top: 12px;
+}
+.bot-thread-remove-dialog > p:first-child {
+  white-space: pre-line;
+}
+.bot-thread-remove-dialog > p:first-child::first-line {
+  font-weight: 600;
+}
+.bot-thread-empty {
+  padding: 64px 16px;
+  text-align: center;
+  color: var(--t2);
+}
+.bot-thread-log {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  max-height: 56vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.bot-thread-entry {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.bot-thread-entry-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--t3);
+}
+.bot-thread-user-text {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--s0);
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+.bot-thread-handoff {
+  margin: 16px 0 0;
+  padding-left: 48px;
+  color: var(--t2);
+  font-size: 12px;
+}
+.bot-thread-steer-wait {
+  color: var(--t2);
+}
+.bot-thread-reply .reply-name,
+.bot-thread-composer .composer-activity-name,
+.bot-thread-pending-name {
+  color: var(--bot-hue);
+}
+.bot-thread-pending {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.bot-thread-notice,
+.bot-thread-window-note {
+  color: var(--t2);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.bot-thread-notice {
+  padding: 12px;
+  border-left: 2px solid var(--or);
+  background: var(--s0);
+}
+.bot-thread-members {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--s0);
+}
+.bot-thread-members[hidden] {
+  display: none;
+}
+.bot-thread-members h2 {
+  margin: 0;
+  font-size: 14px;
+}
+.bot-thread-members > p {
+  color: var(--t2);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.bot-thread-member-list {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+}
+.bot-thread-member {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.bot-thread-member[data-enabled="true"] {
+  border-color: var(--t2);
+  background: var(--s1);
+}
+.bot-thread-member > span:not(.bot-face) {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 4px;
+  overflow-wrap: anywhere;
+}
+.bot-thread-member strong {
+  font-size: 13px;
+}
+.bot-thread-member small {
+  color: var(--t2);
+  font-size: 11px;
+}
+.bot-thread-member input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--or);
+}
+.bot-thread-questions {
+  padding: 16px 0;
+}
+.bot-thread-workspace :is(button, textarea, select, input):focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+@media (max-width: 900px) {
+  .bot-thread-workspace-row {
+    width: 100%;
+  }
+  .bot-thread-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .bot-thread-members {
+    grid-row: 1;
+  }
+  .bot-thread-member-list {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+}
+@media (forced-colors: active) {
+  .bot-thread-tabs [aria-current="page"],
+  .bot-thread-member[data-enabled="true"] {
+    border-color: Highlight;
+  }
+  .bot-thread-workspace :is(button, textarea, select, input):focus-visible {
+    outline-color: Highlight;
+  }
+}
+.bot-thread-result {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--s0);
+  overflow-wrap: anywhere;
+}
+.bot-thread-result summary {
+  cursor: pointer;
+  color: var(--t0);
+}
+.bot-thread-result dt {
+  margin-top: 8px;
+  font-weight: 600;
+}
+.bot-thread-result dd {
+  margin-left: 0;
+  color: var(--t2);
+}
+.bot-thread-result ul {
+  margin: 4px 0;
+  padding-left: 16px;
+}

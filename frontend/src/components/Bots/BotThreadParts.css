@@ -1,0 +1,106 @@
+/* BotThreadParts.tsx. `data-bot-hue` resolves `--bot-hue` through tokens.css's own
+   `[data-bot-hue="…"]` rules (the same ones BotHueField's swatches and BotIcon's LEDs use), so
+   no hue-to-colour mapping repeats here. */
+
+.bot-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.bot-tag-name {
+  color: var(--bot-hue);
+  font-weight: 600;
+}
+
+.bot-thread-list-faces {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.bot-thread-list-face {
+  display: inline-flex;
+}
+
+.bot-thread-list-more {
+  color: var(--t2);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.bot-thread-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bot-thread-strip-face {
+  display: inline-flex;
+}
+
+/* Running: the avatar glows in the Bot's hue and pulses. Idle: it dims to grayscale. Either way
+   BotFace's own needs-you dot sits outside `.avatar` (a sibling span), so it is never filtered or
+   dimmed by either rule. */
+.bot-thread-strip-face[data-lit="true"] .avatar {
+  animation: bot-thread-strip-pulse 2.4s ease-in-out infinite;
+  box-shadow:
+    0 0 0 2px var(--bot-hue),
+    0 0 14px color-mix(in srgb, var(--bot-hue) 55%, transparent);
+}
+
+.bot-thread-strip-face[data-lit="false"] .avatar {
+  filter: grayscale(1) brightness(0.62);
+  opacity: 0.8;
+}
+
+@keyframes bot-thread-strip-pulse {
+  50% {
+    box-shadow:
+      0 0 0 2px var(--bot-hue),
+      0 0 20px color-mix(in srgb, var(--bot-hue) 75%, transparent);
+  }
+}
+
+.bot-recipient {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.bot-recipient select {
+  min-width: 0;
+  max-width: 160px;
+  height: 24px;
+  padding: 0 4px;
+  border: 1px solid var(--b1);
+  border-radius: 5px;
+  background: var(--s0);
+  color: var(--t0);
+  font: inherit;
+  font-size: 12px;
+}
+
+.bot-recipient select:disabled {
+  opacity: 0.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bot-thread-strip-face[data-lit="true"] .avatar {
+    animation: none;
+  }
+}
+
+html[data-motion="reduce"] .bot-thread-strip-face[data-lit="true"] .avatar {
+  animation: none;
+}
+
+@media (forced-colors: active) {
+  .bot-thread-strip-face[data-lit="true"] .avatar {
+    outline: 2px solid Highlight;
+  }
+}

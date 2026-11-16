@@ -1,0 +1,42 @@
+{
+  "version": "0.1.3357",
+  "source_commit": "8544d5fdb51bea24dece530e7272210de3e0f519",
+  "assets": {
+    "win32/x64": {
+      "name": "magpie-cli-windows-amd64.exe",
+      "size": 74378240,
+      "sha256": "be2ec10921df558b4bd85cd9ee9c353d640cee1bb7699b2ba494f91449ab65cb"
+    },
+    "darwin/arm64": {
+      "name": "magpie-cli-darwin-arm64",
+      "size": 69315186,
+      "sha256": "99a19a5baf3117b3a66b73a024ccb2cd3c4c1268866ac3b987f9cca35eb9d3d9"
+    },
+    "linux/x64": {
+      "name": "magpie-cli-linux-amd64",
+      "size": 73560226,
+      "sha256": "a706225e8f9d412121547a4f51af794493250b1a0b5397aa73aef836b1bde193"
+    },
+    "linux/arm64": {
+      "name": "magpie-cli-linux-arm64",
+      "size": 67829922,
+      "sha256": "24dcf7e777ba7f6c3b4b0cfb65e021f4daccc5661522c49c6c4db7715ef028e9"
+    }
+  },
+  "notices": {
+    "LICENSE": "79d2c8444715d4bc453ec4f8a0aaf2051a4c1ee5ac08f5bd2e5848aef87c7572",
+    "THIRD_PARTY_NOTICES": "7367c36421134228559c2d1dd8305da757dd08bacc5d620cd36b65b355dcb7e3"
+  },
+  "dependency_notices": {
+    "win32/x64": "189294f8ffd2841511f5606f9674b72f5a5cae58dcd2678289a399ffb5493657",
+    "darwin/arm64": "f68c6e2f9f36864d394b9266438ea1630b6b36f4a3db227975be8ebd302efb33",
+    "linux/arm64": "1196bc7690e29a68c78564d4bb144f5a34cc1250ffe84d8cef19da8c05eea821",
+    "linux/x64": "1196bc7690e29a68c78564d4bb144f5a34cc1250ffe84d8cef19da8c05eea821"
+  },
+  "sbom_sha256": {
+    "win32/x64": "3a75c7adfee02e7559cc6b92e9d4dd88f0bbfe53330774ebc1b33b85ea846e88",
+    "darwin/arm64": "13f2d8e72089f2de357ee8cc67d50b0e5986a67338e4ed5e81fcc47fa3776d49",
+    "linux/arm64": "d94c6b7d63cc68b07f0810031422ca74d97e15ec1c59d042df43c7f01b0fec97",
+    "linux/x64": "04d0a48c309033c5a8ac888c3f897ca8158f2df476ca2b9164385b643d4ceb4e"
+  }
+}

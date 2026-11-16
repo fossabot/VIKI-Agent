@@ -1,0 +1,72 @@
+/* The status bar's context meter trigger and its popover.
+   `.context-meter` restates `.statusbar-context`'s flex row (StatusBar.css) on the button
+   that carries it, so the trigger reads as plain status-bar text; the track and fill
+   (`.statusbar-context-track` / `.statusbar-context-fill`) are styled in StatusBar.css.
+   `.context-popover` wears `.menu-panel` (styles/base.css) for its chrome and adds its own fixed
+   position: it is the same kind of dismissible, toggle-anchored panel as the session row menu,
+   the header menu and the app menu (tokens.css's stacking-order note — tier 5), just anchored to
+   a status-bar icon near the screen edge instead of tucked under a local toggle, hence `fixed`
+   rather than `absolute`. The action button reuses `.btn.alt.sm` (base.css) rather than inventing
+   a footer-button style of its own. */
+.context-meter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.context-meter:hover {
+  color: var(--t0);
+}
+
+.context-meter:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 2px;
+}
+
+.context-popover {
+  position: fixed;
+  right: 16px;
+  bottom: 32px;
+  width: min(320px, calc(100vw - 32px));
+  box-sizing: border-box;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--t1);
+  z-index: 5;
+}
+
+.context-popover p {
+  margin: 0;
+}
+
+.context-popover-meta {
+  color: var(--t3);
+}
+
+.context-popover-swatch {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+.context-popover .btn {
+  align-self: flex-start;
+}
+
+@media (forced-colors: active) {
+  .context-popover-swatch {
+    outline: 1px solid CanvasText;
+  }
+}

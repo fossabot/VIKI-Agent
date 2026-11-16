@@ -1,0 +1,90 @@
+.agents-view-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.agents-view-tabs > [role="tab"] {
+  padding: 8px 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--t2);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.agents-view-tabs > [role="tab"]:hover {
+  background: var(--s1);
+  color: var(--t0);
+}
+
+.agents-view-tabs > [aria-selected="true"] {
+  border-bottom-color: var(--or);
+  color: var(--t0);
+  font-weight: 600;
+}
+
+.agents-view-tabs > [role="tab"]:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.native-assets,
+.tools-inventory,
+.mcp-servers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--t1);
+}
+
+.native-asset,
+.tools-server,
+.mcp-server {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--s0);
+  padding: 10px 12px;
+}
+
+.tools-status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.tools-status[data-status="connected"] {
+  color: var(--t1);
+}
+
+.tools-status[data-status="failed"],
+.tools-status[data-status="needs-auth"] {
+  color: var(--err);
+}
+
+.mcp-field-error {
+  color: var(--err);
+}
+
+.mcp-preview {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--s1);
+  padding: 8px 10px;
+}
+
+.mcp-preview pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  color: var(--t0);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.mcp-preview code {
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,103 @@
+{
+  "fixture": "claude/subagent-explore.jsonl",
+  "vault": "%VAULT%",
+  "mode": "auto",
+  "note": "Main-thread Agent → routing row; the subagent's own tool calls carry parent_id; task_notification ends the subagent, and the Agent tool_result that follows adds nothing; the subagent's user prompt frame is silent.",
+  "events": [
+    {
+      "type": "subagent.started",
+      "data": {
+        "block_id": "toolu_01EJUhkg1QTgpxCcDvaAeprg",
+        "agent": "Explore",
+        "model": "haiku",
+        "description": "Find daily note template",
+        "reason": ""
+      }
+    },
+    {
+      "type": "tool.started",
+      "data": {
+        "block_id": "toolu_01T2pLtxsTenbuvK6GBSmUvk",
+        "tool": "Bash",
+        "row": {
+          "head": "ls",
+          "rest": "\"%VAULT%\\_templates\\\"",
+          "tail": ""
+        },
+        "parent_id": "toolu_01EJUhkg1QTgpxCcDvaAeprg"
+      }
+    },
+    {
+      "type": "tool.done",
+      "data": {
+        "block_id": "toolu_01T2pLtxsTenbuvK6GBSmUvk",
+        "is_error": true,
+        "summary": "Exit code 2",
+        "preview": "Exit code 2\n/usr/bin/bash: eval: line 1: unexpected EOF while looking for matching `\"'",
+        "tail": "→ exit 2"
+      }
+    },
+    {
+      "type": "tool.started",
+      "data": {
+        "block_id": "toolu_01UWeDuaVyyqP9QZfMSVjw1d",
+        "tool": "PowerShell",
+        "row": {
+          "head": "Get-ChildItem",
+          "rest": "\"%VAULT%\\_templates\\\" | Select-Object Name",
+          "tail": ""
+        },
+        "parent_id": "toolu_01EJUhkg1QTgpxCcDvaAeprg"
+      }
+    },
+    {
+      "type": "tool.done",
+      "data": {
+        "block_id": "toolu_01UWeDuaVyyqP9QZfMSVjw1d",
+        "is_error": false,
+        "summary": "Name",
+        "preview": "Name\n----\narea.md\ndaily.md\nmoc.md\nnote.md\nperson.md\nproject.md\nsource.md\ntasks.md\nthinking.md\nweekly.md",
+        "tail": ""
+      }
+    },
+    {
+      "type": "subagent.done",
+      "data": {
+        "block_id": "toolu_01EJUhkg1QTgpxCcDvaAeprg",
+        "status": "completed",
+        "tool_uses": 2,
+        "total_tokens": 19744,
+        "duration_ms": 9380,
+        "summary": "daily.md"
+      }
+    },
+    {
+      "type": "text.delta",
+      "data": {
+        "block_id": "msg_011CewLWjZxgbFk34UyKRfuL:0",
+        "text": "daily.md"
+      }
+    },
+    {
+      "type": "text.done",
+      "data": {
+        "block_id": "msg_011CewLWjZxgbFk34UyKRfuL:0",
+        "text": "daily.md"
+      }
+    },
+    {
+      "type": "turn.done",
+      "data": {
+        "status": "success",
+        "usage": {
+          "input_tokens": 4,
+          "output_tokens": 206,
+          "cache_read_tokens": 77512,
+          "cache_creation_tokens": 19673
+        },
+        "context_percent": null,
+        "duration_ms": 15914
+      }
+    }
+  ]
+}

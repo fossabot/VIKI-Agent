@@ -1,0 +1,48 @@
+.routine-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--b1);
+  border-radius: 8px;
+  background: var(--s0);
+}
+
+.routine-detail h2,
+.routine-detail > p {
+  margin: 0;
+}
+
+.routine-detail h2 {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.routine-detail-purpose {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--t1);
+}
+
+.routine-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+
+.routine-detail-run {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.routine-detail-run h3,
+.routine-detail-run p {
+  margin: 0;
+}

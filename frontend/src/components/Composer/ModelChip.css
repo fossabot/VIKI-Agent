@@ -1,0 +1,229 @@
+/* The model/effort chip and its dropdown, from the design. The chip's own text is the
+   design's plain `<span>` (12.5px, var(--t2)); it is a real `<button>` here only because it has
+   to be one to be a Radix trigger and to carry a native `disabled` state, so its own chrome is
+   reset to invisible with `all: unset`.
+
+   The dropdown's row/label classnames (`.mi`, `.lbl`, `.d`) match SlashMenu's, because the
+   design draws its model rows with the *same* rules it draws command rows with — but they are
+   scoped here under `.chip-menu` rather than left bare, both so this file doesn't depend on
+   SlashMenu.css happening to load first and so the model menu's own numbers (its "Model" label
+   sits at 6px top padding, not the command menu's 10px) can differ from SlashMenu's without
+   one file's rule winning by load order. Every colour is a tokens.css token; the design's
+   in-between values are role tokens (--fill-hi, --or-rgb). */
+
+.model-chip {
+  all: unset;
+  display: inline-block;
+  min-width: 0;
+  max-width: min(220px, 40vw);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  font-size: 12.5px;
+  color: var(--t2);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.model-chip[data-disabled] {
+  /* No color change here: the design keeps the chip at full var(--t2) weight while a reply
+     runs — disabled only refuses the click and drops the pointer cursor. */
+  cursor: default;
+}
+
+/* `all: unset` above resets outline-style to `none` in the author origin, which beats the UA's
+   own `:focus-visible` ring by origin precedence — so without this rule, tabbing to the
+   one control that decides which model runs and at what effort would change nothing on screen.
+   The ring is Copy.css's, the same 1px var(--or) that file keeps for the same reason. */
+.model-chip:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 2px;
+}
+
+.chip-menu {
+  /* Match the slash menu above the composer resize handle and transcript jump button. */
+  z-index: 6;
+  width: min(330px, calc(100vw - 24px));
+  max-height: min(var(--radix-dropdown-menu-content-available-height), calc(100dvh - 24px));
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  padding: 6px 0 10px 0;
+}
+
+.chip-menu .lbl {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t3);
+  padding: 6px 12px 4px 12px;
+}
+
+.chip-menu .mi {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 12px;
+  color: var(--t1);
+  cursor: pointer;
+  outline: none;
+  /* Radix's Item is a <div>, not a button, so no UA chrome to reset — unlike SlashMenu's rows. */
+}
+
+.chip-check {
+  flex: none;
+  width: 14px;
+  color: var(--or);
+  /* No own font-size, and none needed: the row carries the shared `.mi` class, whose 13px comes
+     from styles/base.css. That holds even though Radix portals this menu to document.body — the
+     class travels with the element, not with its position in the tree. Do not add a font-size
+     here without checking base.css first: the row's size comes from `.mi` there. */
+}
+
+.chip-model-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chip-model-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  line-height: 17px;
+}
+
+.chip-menu .mi.on {
+  background: var(--fill-hi); /* the selected row's fill (.mi.on) */
+  box-shadow: inset 2px 0 0 var(--or);
+}
+
+.chip-menu .mi.on .chip-model-label {
+  color: var(--t0);
+}
+
+/* The row the user is on. `outline: none` above removes the ring Radix's own focus call would
+   otherwise draw, so without this rule arrowing through the models would move focus with
+   nothing moving on screen. Keyed off Radix's attribute rather than `:focus-visible`, for the
+   reason RowMenu.css documents: Radix moves focus itself (arrow keys and pointermove alike),
+   which `:focus-visible` need not match — so a `:focus-visible` rule would leave the menu dead
+   under the mouse. Deliberately NOT `.mi.on`'s full treatment: the inset orange bar stays the
+   mark of the model actually in effect, because a highlight carrying it too would light two
+   rows identically and leave the user unable to tell which one Enter commits — the collision
+   that base.css's `.menu-panel` note avoids by keeping row highlighting with each component. */
+.chip-menu .mi[data-highlighted] {
+  background: var(--fill-hi); /* the same highlight fill .mi.on wears */
+  color: var(--t0);
+}
+
+.chip-menu .d.chip-model-desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11.5px;
+  line-height: 15px;
+  color: var(--t3);
+}
+
+.chip-effort-lbl {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--hair);
+  margin-top: 6px;
+  padding: 12px 12px 6px 12px;
+}
+
+.chip-effort-note {
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--font-sans);
+}
+
+.chip-effort-row {
+  display: flex;
+  gap: 4px;
+  padding: 0 12px;
+}
+
+.chip-effort {
+  flex: 1;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12.5px;
+  border-radius: 4px;
+  color: var(--t2);
+  cursor: pointer;
+  outline: none;
+}
+
+.chip-effort.on {
+  background: rgb(var(--or-rgb) / 0.14); /* var(--or) wash at the design's alpha */
+  color: var(--or-hi);
+  box-shadow: inset 0 0 0 1px rgb(var(--or-rgb) / 0.55);
+}
+
+/* The segment the user is on, for the same reason as the model rows above and keyed the same
+   way. An outline rather than an inset ring on purpose: `.on` already owns the inset channel, so
+   a focused segment reads as focused whether or not it is also the one in effect, and neither
+   state has to be restated in terms of the other. 2px of the row's 4px gap, so it never touches
+   the segment beside it. */
+.chip-effort[data-highlighted] {
+  outline: 1px solid var(--or);
+  outline-offset: 2px;
+}
+
+/* S (below 800px): the chip is the one control in the pill whose width is another
+   program's to decide — the label comes from the CLI — so it truncates at 110px and the rest of
+   the row keeps its space. Visual only: the button's text node is still the whole label, so its
+   accessible name and the menu it opens are unchanged. */
+@media not all and (min-width: 800px) {
+  .model-chip {
+    display: inline-block;
+    max-width: 110px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+  }
+}
+
+@media (forced-colors: active) {
+  .chip-menu .mi.on {
+    outline: 2px dashed Highlight;
+    outline-offset: -2px;
+  }
+
+  .chip-menu .mi[data-highlighted] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  /* A border, not an outline: the outline channel stays free for `.chip-effort[data-highlighted]`
+     above, so arrowing onto the effort in effect still shows its own highlight ring, not just the
+     selection mark that was already on screen. */
+  .chip-effort.on {
+    border: 2px solid Highlight;
+  }
+}
+
+/* .chip-note: the pick's own pending/applied/failed state (modelChoice.ts), a sibling of the
+   chip rather than part of its own label — the design keeps the label itself reading whatever
+   is actually running. Same size as the chip's own text; dim like a passing reminder (var(--t2),
+   .composer-blocked's own tone) except "failed", which gets .composer-refusal's var(--or-hi) —
+   the one state the user has to notice rather than let pass. */
+.chip-note {
+  font-size: 12.5px;
+  color: var(--t2);
+  max-width: min(320px, 40vw);
+  overflow-wrap: anywhere;
+}
+
+.chip-note[data-kind="failed"] {
+  color: var(--or-hi);
+}

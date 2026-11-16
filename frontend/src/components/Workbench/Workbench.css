@@ -1,0 +1,232 @@
+.workbench {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  color: var(--t1);
+}
+
+.workbench > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.workbench-nav,
+.workbench-pane {
+  overflow: auto;
+  max-height: 70vh;
+}
+
+.workbench-nav {
+  grid-column: 1;
+}
+
+.workbench-pane {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--s0);
+  padding: 10px 12px;
+}
+
+.workbench-file-tabs {
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  overflow-x: auto;
+  padding: 0 0 8px;
+}
+
+.workbench-file-tab {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.workbench-file-select {
+  max-width: min(36ch, 60vw);
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+.workbench-file-select[aria-pressed="true"],
+.workbench-file-tab[data-unsaved] {
+  color: var(--or);
+}
+
+.workbench-file-dirty {
+  padding: 0 4px;
+  font-size: 0.8em;
+}
+
+.workbench-file-close[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.workbench-folder,
+.workbench-tabs,
+.workbench-toggle,
+.workbench-unsaved-refs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.workbench-folder select {
+  max-width: 100%;
+}
+
+.workbench-session-folders {
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.workbench-session-folders p {
+  margin: 4px 0;
+}
+
+.workbench-session-folders ul {
+  display: grid;
+  gap: 8px;
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.workbench-session-folders label {
+  display: flex;
+  align-items: start;
+  gap: 8px;
+}
+
+.workbench-session-folders code {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.terminal-launcher label {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.terminal-launcher select {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.workbench-unsaved {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.workbench-unsaved-refs button {
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+/* A refused Edit stays focusable, so it is dimmed rather than disabled. */
+.workbench-toggle [aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.workbench-tabs [role="tab"][aria-selected="true"],
+.workbench-toggle [aria-pressed="true"] {
+  color: var(--or);
+}
+
+.workbench-tree,
+.workbench-quickopen,
+.workbench-changes {
+  overflow-wrap: anywhere;
+}
+
+.workbench-tree ul,
+.workbench-quickopen ul,
+.workbench-changes ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 12px;
+}
+
+.workbench-tree button,
+.workbench-quickopen button,
+.workbench-changes button {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 2px 0;
+  text-align: left;
+}
+
+.workbench-tree [aria-current="true"],
+.workbench-changes [aria-current="true"] {
+  color: var(--or);
+}
+
+.workbench-quickopen input {
+  max-width: 100%;
+}
+
+@media (min-width: 800px) {
+  .workbench {
+    grid-template-columns: var(--workbench-nav-width, minmax(240px, 1fr)) minmax(0, 2fr);
+  }
+
+  .workbench-pane {
+    grid-column: 2;
+  }
+}
+
+@media not all and (min-width: 800px) {
+  .workbench-pane {
+    grid-column: 1;
+  }
+
+  .workbench:not([data-open]) .workbench-pane {
+    display: none;
+  }
+}
+
+/* Review, Checks, Terminal and Previews need the whole width: the nav spans both columns and the pane gives way at any width. */
+.workbench[data-wide] .workbench-nav {
+  grid-column: 1 / -1;
+}
+
+.workbench[data-wide] .workbench-pane {
+  display: none;
+}
+
+.workbench-resize-controls {
+  position: absolute;
+  width: 0;
+  pointer-events: none;
+}
+.workbench-resize-controls > * {
+  pointer-events: auto;
+}
+.workbench-resize-controls > .resize-handle {
+  left: 0;
+}
+.workbench-split-reset {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 2;
+  white-space: nowrap;
+}
+.workbench[data-split] > .workbench-pane {
+  padding-bottom: 50px;
+}

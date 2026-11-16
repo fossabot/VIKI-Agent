@@ -1,0 +1,61 @@
+.note-actions {
+  position: relative;
+  display: inline-block;
+}
+
+.note-actions-menu {
+  position: absolute;
+  z-index: 20;
+  min-width: 160px;
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+
+.note-actions-menu .mi:hover,
+.note-actions-menu .mi:focus-visible {
+  background: var(--fill-hi);
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+  outline: none;
+}
+
+.note-actions-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  background: var(--scrim);
+}
+
+.note-actions-dialog {
+  width: min(480px, 90vw);
+  max-height: 80vh;
+  overflow: auto;
+  padding: 16px;
+  box-sizing: border-box;
+  background: var(--fill-raised);
+  color: var(--t0);
+  border: 1px solid var(--fill-hi);
+  border-radius: 8px;
+}
+
+.note-actions-ref,
+.note-actions-plan li {
+  overflow-wrap: anywhere;
+}
+
+.note-actions-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+@media (forced-colors: active) {
+  .note-actions-menu .mi:hover,
+  .note-actions-menu .mi:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

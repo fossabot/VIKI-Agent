@@ -1,0 +1,175 @@
+/* The loading kit's own rules. Each animated class names the pick it is and
+   the token that is its one-place switch:
+     .spinner: the growing arc, switched by --spinner-lap / --spinner-lap-reduced.
+     .skel: the Primer-style mask sweep, switched by --skeleton-sweep.
+     .loading / .reveal-late / .spinner-late: the delayed reveal, switched by --loading-delay
+       (when it starts) and --motion-fast (how long the fade itself takes).
+   The skeleton's mask uses "black" and color-mix(), never a literal hex/rgb colour: a CSS mask
+   image is applied by its alpha channel alone (the colour channels are discarded), so any
+   opaque keyword fades the mask the same way a literal black would — styles/tokens.unit.test.ts
+   bans colour literals outside tokens.css, and this file has no colour token of its own to
+   spend on a mask that does not render any colour anyway. */
+
+.spinner {
+  display: inline-flex;
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.spinner svg {
+  --lap: var(--spinner-lap);
+  width: 100%;
+  height: 100%;
+  animation: spinner-turn var(--lap) linear infinite;
+}
+
+.spinner-track {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  opacity: 0.22;
+}
+
+.spinner-arc {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1 40;
+  animation: spinner-dash var(--lap) var(--motion-ease) infinite;
+}
+
+@keyframes spinner-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-dash {
+  0% {
+    stroke-dasharray: 1 40;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 22 40;
+    stroke-dashoffset: -6;
+  }
+  100% {
+    stroke-dasharray: 1 40;
+    stroke-dashoffset: -37;
+  }
+}
+
+.check-mark {
+  display: block;
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.check-mark path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.loading,
+.reveal-late,
+.spinner-late {
+  animation: loading-reveal var(--motion-fast) var(--motion-ease-out) var(--loading-delay) both;
+}
+
+@keyframes loading-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.busy-spinner {
+  margin-right: 6px;
+}
+
+/* Primer's mask shimmer, 2s wide (--skeleton-sweep). The gradient's two stops are alpha 1
+   and alpha 0.65 of the same (arbitrary) colour; only the alpha channel reaches the mask. */
+.skel {
+  display: block;
+  background: var(--fill-raised);
+  border-radius: 3px;
+  -webkit-mask-image: linear-gradient(
+    75deg,
+    black 30%,
+    color-mix(in srgb, black 65%, transparent) 80%
+  );
+  mask-image: linear-gradient(75deg, black 30%, color-mix(in srgb, black 65%, transparent) 80%);
+  -webkit-mask-size: 200%;
+  mask-size: 200%;
+  animation: skel-sweep var(--skeleton-sweep) ease infinite;
+}
+
+@keyframes skel-sweep {
+  from {
+    -webkit-mask-position: 200%;
+    mask-position: 200%;
+  }
+  to {
+    -webkit-mask-position: 0%;
+    mask-position: 0%;
+  }
+}
+
+/* The OS's forced-colours mode drops background-image/mask-driven fills, which would leave the
+   skeleton invisible; an outline in the system's own text colour keeps its shape visible. */
+@media (forced-colors: active) {
+  .skel {
+    outline: 1px solid CanvasText;
+  }
+}
+
+/* Reduced motion, both triggers (OS-level and the app's own Settings › Appearance): the spinner
+   never stops, only slows; the skeleton's sweep goes fully static instead; the delayed reveals
+   keep their delay but animate in 1ms, so nothing before --loading-delay still flashes. */
+@media (prefers-reduced-motion: reduce) {
+  .spinner svg {
+    --lap: var(--spinner-lap-reduced);
+  }
+
+  .loading,
+  .reveal-late,
+  .spinner-late {
+    animation-duration: 1ms;
+  }
+
+  .skel {
+    animation: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+html[data-motion="reduce"] .spinner svg {
+  --lap: var(--spinner-lap-reduced);
+}
+
+html[data-motion="reduce"] .loading,
+html[data-motion="reduce"] .reveal-late,
+html[data-motion="reduce"] .spinner-late {
+  animation-duration: 1ms;
+}
+
+html[data-motion="reduce"] .skel {
+  animation: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+}

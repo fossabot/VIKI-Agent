@@ -1,0 +1,36 @@
+.pane-split {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.pane-split[data-dir="row"] {
+  flex-direction: row;
+}
+
+.pane-split[data-dir="column"] {
+  flex-direction: column;
+}
+
+.pane-cell {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.pane-sash {
+  position: relative;
+  flex: none;
+  background: var(--hair);
+}
+
+.pane-sash[data-dir="row"] {
+  width: 1px;
+  align-self: stretch;
+}
+
+.pane-sash[data-dir="column"] {
+  height: 1px;
+  align-self: stretch;
+}

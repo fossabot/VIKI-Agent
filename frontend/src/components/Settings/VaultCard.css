@@ -1,0 +1,27 @@
+/* VaultCard: everything but the folder icon is shared chrome already — `.settings-card`,
+   `.settings-card-head`, `.settings-pill`, `.chip`/`.chip.dim`, `.mono`/`.workspace-root`,
+   `.settings-actions`, `.btn` and `.ico` come from base.css, Settings.css and Pages.css. */
+.ws-vault-icon {
+  flex: none;
+  color: var(--t2);
+}
+
+/* The heading reads as a small section label (base.css's `.lbl`), not Settings.css's bold 14px
+   `.settings-page h3`: that rule (one class + the element) is more specific than a bare `.lbl`
+   (one class only), so font-size/weight/color must be restated here, scoped with two classes to
+   win. */
+.ws-vault > h3.lbl {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--t3);
+}
+
+/* VaultCard renders inside WorkspacesPage's `section.ws-page-section`
+   (Pages.css: column flex, gap 10px, margin-top 24px). The card's own margin-top (Settings.css's
+   `.settings-card`, 12px) would stack under that 24px instead of being absorbed by it, giving
+   ~36px above the card instead of ~24px. Reset it here, scoped to VaultCard's own instance (the
+   `.settings-card` class stays on the element; only this component's copy loses the margin). */
+.ws-vault > .settings-card {
+  margin-top: 0;
+}

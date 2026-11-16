@@ -1,0 +1,99 @@
+.attachment-picker {
+  position: relative;
+  display: inline-flex;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.attachment-picker-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.attachment-picker-button,
+.attachment-item-action {
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--g2);
+  color: var(--t1);
+  cursor: pointer;
+  font: inherit;
+}
+
+.attachment-picker-button {
+  width: 32px;
+  height: 32px;
+}
+
+.attachment-strip {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 7px;
+}
+
+.attachment-item {
+  min-width: 0;
+  max-width: min(360px, 100%);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  color: var(--t1);
+  font-size: 12px;
+}
+
+.attachment-item-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+.attachment-item-metadata {
+  flex-basis: 100%;
+  color: var(--t2);
+  font-size: 11px;
+}
+.attachment-item-metadata time {
+  display: block;
+}
+.attachment-destination,
+.attachment-limits {
+  color: var(--t2);
+  font-size: 11px;
+  margin: 6px 0;
+}
+.attachment-thumb,
+.attachment-thumb-placeholder {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 3px;
+  object-fit: cover;
+  background: var(--g3);
+}
+.attachment-item-status {
+  color: var(--t3);
+}
+.attachment-item-error {
+  color: var(--or-hi);
+}
+.attachment-item-action {
+  padding: 1px 5px;
+  font-size: 11px;
+}
+.attachment-drop-active {
+  outline: 1px dashed var(--or);
+  outline-offset: 3px;
+}

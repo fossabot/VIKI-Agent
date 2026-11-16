@@ -1,0 +1,72 @@
+name: Bug report
+description: Report a crash, incorrect result, or other problem with VIKI Agent.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues before opening a new report. For installation or configuration
+        questions, choose Setup or installation help. For a suspected security vulnerability,
+        follow SECURITY.md before sharing details.
+
+        Remove tokens, API keys, private paths, notes and conversation content from anything
+        you share. Use sample files for reproduction; do not attach a vault or app database.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Give the smallest example that triggers the problem, using sample data.
+      placeholder: |
+        1. Open ...
+        2. Select ...
+        3. The app shows ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: VIKI Agent version or commit
+      description: If the app cannot start, give the installer filename or source commit.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system and version
+      placeholder: Windows 11, macOS on Apple silicon, or Linux distribution and version
+    validations:
+      required: true
+  - type: dropdown
+    id: installation
+    attributes:
+      label: How do you run VIKI Agent?
+      options:
+        - Desktop installer
+        - Source checkout with the desktop window
+        - Source checkout with a browser app window
+        - Other or unsure
+    validations:
+      required: true
+  - type: textarea
+    id: model-route
+    attributes:
+      label: Model connection, if relevant
+      description: |
+        Say whether you use Claude Code sign-in (Claude plan, API key or cloud provider), a Magpie model or a direct model connection.
+        Include the Claude Code version if known. Omit keys, private endpoint URLs and account details.
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Relevant error or diagnostics excerpt
+      description: |
+        Optional. Use Export diagnostics if the app opens, then inspect the file before sharing
+        a relevant excerpt. Redaction may miss private information. Screenshots need the same review.
+      render: text

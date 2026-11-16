@@ -1,0 +1,46 @@
+{
+  "transcript": "transcripts/bash-hook-block.jsonl",
+  "vault": "%VAULT%",
+  "mode": "auto",
+  "note": "History path: the typed prompt becomes user.message; no deltas, no hook badge, no turn.done (transcripts keep neither).",
+  "events": [
+    {
+      "type": "user.message",
+      "data": {
+        "text": "Run exactly this Bash command once and report what happened: echo probe >> no-such-dir/settings.json",
+        "command": "",
+        "at": "2026-09-11T08:28:21.023Z"
+      }
+    },
+    {
+      "type": "tool.started",
+      "data": {
+        "block_id": "toolu_01KeRHSjScanMLQF6XeZWoJh",
+        "tool": "Bash",
+        "row": {
+          "head": "echo",
+          "rest": "probe >> no-such-dir/settings.json",
+          "tail": ""
+        },
+        "parent_id": ""
+      }
+    },
+    {
+      "type": "tool.done",
+      "data": {
+        "block_id": "toolu_01KeRHSjScanMLQF6XeZWoJh",
+        "is_error": true,
+        "summary": "PreToolUse:Bash hook error: [powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PROJECT_DIR}/.claude/hooks/e…",
+        "preview": "PreToolUse:Bash hook error: [powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PROJECT_DIR}/.claude/hooks/example-guard.ps1\"]: Example guard: this command would write, move or delete a protected path (CLAUDE.md, .claude/settings.json, .claude/hooks/, .viki/). Only the owner edits these: read them freely, propose edits in /retro.",
+        "tail": ""
+      }
+    },
+    {
+      "type": "text.done",
+      "data": {
+        "block_id": "msg_011CewLUQf7iG1KgFzdjGyeV:0",
+        "text": "The command was blocked before execution — the example guard hook (`.claude/hooks/example-guard.ps1`) intercepted it because the target path `no-such-dir/settings.json` matches the protected pattern for `.claude/settings.json`. Hook message: \"Example guard: this command would write, move or delete a protected path (CLAUDE.md, .claude/settings.json, .claude/hooks/, .viki/). Only the owner edits these: read them freely, propose edits in /retro.\"\n\nNo file was created or modified."
+      }
+    }
+  ]
+}

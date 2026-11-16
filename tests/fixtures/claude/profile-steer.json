@@ -1,0 +1,116 @@
+{
+  "scenario": "38",
+  "native_version": "2.1.281",
+  "platform": "win32",
+  "pass": true,
+  "fold_pass": true,
+  "stop_pass": true,
+  "fold": {
+    "lifecycle": [
+      {
+        "state": "queued",
+        "index": 26
+      },
+      {
+        "state": "started",
+        "index": 32
+      },
+      {
+        "state": "completed",
+        "index": 56
+      }
+    ],
+    "results": [
+      {
+        "subtype": "success",
+        "index": 57
+      }
+    ],
+    "inits": [
+      6
+    ],
+    "canary_at": 49,
+    "asked": [],
+    "steer_entries": [
+      {
+        "type": "queue-operation",
+        "keys": [
+          "content",
+          "operation",
+          "sessionId",
+          "timestamp",
+          "type"
+        ],
+        "isMeta": null,
+        "attachment_type": null,
+        "commandMode": null,
+        "origin_present": false
+      },
+      {
+        "type": "attachment",
+        "keys": [
+          "attachment",
+          "cwd",
+          "entrypoint",
+          "gitBranch",
+          "isSidechain",
+          "parentUuid",
+          "rendered",
+          "sessionId",
+          "timestamp",
+          "type",
+          "userType",
+          "uuid",
+          "version"
+        ],
+        "isMeta": null,
+        "attachment_type": "queued_command",
+        "commandMode": "prompt",
+        "origin_present": false
+      },
+      {
+        "type": "queue-operation",
+        "keys": [
+          "content",
+          "operation",
+          "reason",
+          "sessionId",
+          "timestamp",
+          "type"
+        ],
+        "isMeta": null,
+        "attachment_type": null,
+        "commandMode": null,
+        "origin_present": false
+      }
+    ]
+  },
+  "stop": {
+    "lifecycle": [
+      {
+        "state": "queued",
+        "index": 25
+      },
+      {
+        "state": "started",
+        "index": 31
+      }
+    ],
+    "results": [
+      {
+        "subtype": "error_during_execution",
+        "index": 30
+      },
+      {
+        "subtype": "success",
+        "index": 59
+      }
+    ],
+    "inits": [
+      4,
+      35
+    ],
+    "canary_at": 52,
+    "asked": []
+  }
+}

@@ -1,0 +1,16 @@
+.keep-in-vault {
+  flex-basis: 100%;
+  display: grid;
+  gap: 4px;
+  padding: 6px;
+  min-width: 0;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--g2);
+  color: var(--t1);
+}
+
+.keep-in-vault p {
+  margin: 0;
+}

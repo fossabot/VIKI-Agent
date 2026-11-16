@@ -1,0 +1,89 @@
+.llm-fields {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+}
+.llm-field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.llm-default {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+:is(.llm-field, .llm-default) .input {
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  padding: 8px;
+  background: var(--g2);
+  color: var(--t0);
+  font: inherit;
+}
+.llm-connection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  padding-block: 12px;
+  overflow-wrap: anywhere;
+}
+.llm-key-update {
+  display: grid;
+  gap: 8px;
+  flex-basis: 100%;
+  min-width: 0;
+}
+
+.llm-current,
+.llm-choice,
+.llm-magpie-picker,
+.llm-advanced {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hair);
+}
+
+.llm-current {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+}
+
+.llm-current > .mono {
+  overflow-wrap: anywhere;
+}
+
+.llm-choice h4 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.llm-choice > .settings-details {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.llm-advanced > summary,
+.llm-gateway-key > summary {
+  width: fit-content;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.llm-advanced > summary:focus-visible,
+.llm-gateway-key > summary:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+.llm-gateway-key > .llm-field {
+  margin-top: 12px;
+}

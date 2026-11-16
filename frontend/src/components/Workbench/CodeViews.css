@@ -1,0 +1,100 @@
+/* File and diff views: the .md-code monospace block, with a gutter that is not copied. */
+.code-file,
+.code-diff {
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: var(--code-font-size, 13px);
+  line-height: 1.5;
+  color: var(--t1);
+}
+
+.code-file-head,
+.code-file-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.code-reason {
+  color: var(--t2);
+}
+
+.code-lines,
+.code-diff {
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--s0);
+  overflow-x: auto;
+}
+
+.code-lines:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: -2px;
+}
+
+.code-line {
+  display: flex;
+  min-width: max-content;
+  width: 100%;
+  cursor: pointer;
+}
+
+.code-line-selected {
+  background: var(--b2);
+}
+
+.code-gutter {
+  flex: none;
+  min-width: 4ch;
+  padding: 0 10px 0 8px;
+  text-align: right;
+  color: var(--t3);
+  user-select: none;
+}
+
+.code-text {
+  white-space: pre;
+}
+
+/* Wrapped lines fit the view, so the rows shrink instead of scrolling sideways. */
+.workbench[data-wrap] .code-line {
+  min-width: 0;
+}
+
+.workbench[data-wrap] .code-text {
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.code-diff pre {
+  margin: 0;
+  padding: 0 12px;
+  min-width: max-content;
+  font-family: inherit;
+}
+
+/* The local names keep `blue` and `green` out of a colour property, where the token test would
+   read them as named colours. */
+.code-diff {
+  --diff-add: var(--accent-green);
+  --diff-hunk: var(--accent-blue);
+}
+
+.code-diff .diff-add {
+  color: var(--diff-add);
+}
+
+.code-diff .diff-del {
+  color: var(--err);
+}
+
+.code-diff .diff-hunk {
+  color: var(--diff-hunk);
+}
+
+.code-diff .diff-meta {
+  color: var(--t3);
+}

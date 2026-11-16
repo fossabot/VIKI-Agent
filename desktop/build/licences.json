@@ -1,0 +1,189 @@
+{
+  "allowed": [
+    "0BSD",
+    "Apache-2.0",
+    "BlueOak-1.0.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "CC0-1.0",
+    "ISC",
+    "MIT",
+    "MIT-0",
+    "MIT-CMU",
+    "OFL-1.1",
+    "PSF-2.0",
+    "Python-2.0",
+    "Zlib"
+  ],
+  "texts": {
+    "gpl-3.0": {
+      "file": "notices/gpl-3.0.txt",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "source": "https://www.gnu.org/licenses/gpl-3.0.txt"
+    },
+    "lgpl-2.1": {
+      "file": "notices/lgpl-2.1.txt",
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95",
+      "source": "https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt"
+    },
+    "mpl-2.0": {
+      "file": "notices/mpl-2.0.txt",
+      "sha256": "3f3d9e0024b1921b067d6f7f88deb4a60cbe7a78e76c64e3f1d7fc3b779b9d04",
+      "source": "https://www.mozilla.org/media/MPL/2.0/index.txt"
+    },
+    "gcc-runtime-exception-3.1": {
+      "file": "notices/gcc-runtime-exception-3.1.txt",
+      "sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+      "source": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-8.5.0/COPYING.RUNTIME"
+    },
+    "cpython-3.14.7-incorporated": {
+      "file": "notices/cpython-3.14.7-incorporated.txt",
+      "sha256": "9e2305976f393da0116d56274e53591ee608762ffd502fd29fd10c3ff21c5c65",
+      "source": "https://raw.githubusercontent.com/python/cpython/v3.14.7/Doc/license.rst"
+    },
+    "cpython-3.14.4-incorporated": {
+      "file": "notices/cpython-3.14.4-incorporated.txt",
+      "sha256": "10786818efccbce61d0540cc253fa9b256f18cda42e173c8439750545570bd8b",
+      "source": "https://raw.githubusercontent.com/python/cpython/v3.14.4/Doc/license.rst"
+    },
+    "bzip2-1.0.8": {
+      "file": "notices/bzip2-1.0.8.txt",
+      "sha256": "1f38bbc7caacafd65169276d759c0d88c991b753b643ce35d0e45ea1971dd441",
+      "source": "https://github.com/astral-sh/python-build-standalone/releases/download/20260414/cpython-3.14.4%2B20260414-x86_64-unknown-linux-gnu-pgo%2Blto-full.tar.zst#python/licenses/LICENSE.bzip2.txt"
+    },
+    "libedit-20240808-3.1": {
+      "file": "notices/libedit-20240808-3.1.txt",
+      "sha256": "29cea33c32bbc9785142386377915612a2fa786482c46843383384aded2e09b1",
+      "source": "https://github.com/astral-sh/python-build-standalone/releases/download/20260414/cpython-3.14.4%2B20260414-x86_64-unknown-linux-gnu-pgo%2Blto-full.tar.zst#python/licenses/LICENSE.libedit.txt"
+    },
+    "ncurses-6.5": {
+      "file": "notices/ncurses-6.5.txt",
+      "sha256": "87a4c4442337b8968ef956031c406b74f9cb7149b7ba87311bdaba534816201c",
+      "source": "https://github.com/astral-sh/python-build-standalone/releases/download/20260414/cpython-3.14.4%2B20260414-x86_64-unknown-linux-gnu-pgo%2Blto-full.tar.zst#python/licenses/LICENSE.ncurses.txt"
+    },
+    "libuuid-1.0.3": {
+      "file": "notices/libuuid-1.0.3.txt",
+      "sha256": "122ee1f7e258f2c3c0e538a75c037684f420454bf3850ddc74ce750bbf5fe86b",
+      "source": "https://github.com/astral-sh/python-build-standalone/releases/download/20260414/cpython-3.14.4%2B20260414-x86_64-unknown-linux-gnu-pgo%2Blto-full.tar.zst#python/licenses/LICENSE.libuuid.txt"
+    },
+    "zstd-1.5.7": {
+      "file": "notices/zstd-1.5.7.txt",
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8",
+      "source": "https://raw.githubusercontent.com/facebook/zstd/v1.5.7/LICENSE"
+    }
+  },
+  "components": {
+    "pypi:certifi@2026.10.18": {
+      "licence": "MPL-2.0",
+      "texts": ["mpl-2.0"],
+      "note": "certifi 2026.10.18, MPL-2.0, compiled into the server binary (imported by pywhispercpp/utils.py). Its dist-info ships only the MPL Exhibit A stub, not the full text, supplied above. PyPI: https://pypi.org/project/certifi/2026.10.18/"
+    },
+    "pypi:tqdm@4.70.0": {
+      "licence": "MPL-2.0 AND MIT",
+      "texts": ["mpl-2.0"],
+      "note": "tqdm 4.70.0, MPL-2.0 AND MIT, compiled into the server binary (imported by pywhispercpp/utils.py). Its dist-info ships only the MPL Exhibit A stub, not the full text, supplied above. PyPI: https://pypi.org/project/tqdm/4.70.0/"
+    },
+    "pypi:colorama@0.4.6": {
+      "licence": "BSD-3-Clause",
+      "platforms": ["win32"],
+      "note": "colorama 0.4.6; its PyPI classifier reads only 'License :: OSI Approved :: BSD License', but its own LICENSE.txt is BSD-3-Clause. PyPI: https://pypi.org/project/colorama/0.4.6/"
+    },
+    "pypi:pywin32@312": {
+      "licence": "PSF-2.0",
+      "platforms": ["win32"],
+      "note": "pywin32 312; its License metadata field reads 'PSF' and its classifier 'Python Software Foundation License'. Its files include adodbapi's LGPL-2.1-or-later licence, but mcp imports only win32api, win32con, win32job and pywintypes, never adodbapi. PyPI: https://pypi.org/project/pywin32/312/"
+    },
+    "pypi:numpy@2.5.2": {
+      "note": "numpy 2.5.2 (BSD-3-Clause). Its Linux wheel bundles libgfortran (GPL-3.0-or-later WITH GCC-exception-3.1) and libquadmath (LGPL-2.1-or-later), both texts in numpy's own LICENSE.txt; Windows ships an OpenBLAS DLL plus msvcp140 (see extra:microsoft-vc-runtime); macOS 14 arm64 bundles neither. PyPI: https://pypi.org/project/numpy/2.5.2/"
+    },
+    "pypi:pillow@13.0.0": {
+      "texts": ["lgpl-2.1"],
+      "note": "Pillow 13.0.0 (MIT-CMU). Most bundled-library licence texts are in Pillow's own LICENSE; its SBOM (pillow-13.0.0.cdx.json) lists FriBiDi (LGPL-2.1-or-later) as an optional library that PIL._imagingft's fribidi-shim (MIT-CMU) loads at runtime, with no text shipped, supplied above. PyPI: https://pypi.org/project/pillow/13.0.0/"
+    },
+    "pypi:pywhispercpp@1.5.1": {
+      "note": "pywhispercpp 1.5.1. Bundles whisper.cpp 1.8.5 and ggml 0.13.1 (see extra:whisper.cpp), msvcp140 and vcomp140 on Windows (see extra:microsoft-vc-runtime), and libgomp 8.5.0 on Linux per its auditwheel SBOM (see extra:libgomp). PyPI: https://pypi.org/project/pywhispercpp/1.5.1/"
+    },
+    "pypi:claude-agent-sdk@0.2.159": {
+      "note": "claude-agent-sdk 0.2.159. src/viki_agent/catalog.py ports code from claude-agent-sdk 0.2.152, Copyright (c) 2025 Anthropic, PBC. PyPI: https://pypi.org/project/claude-agent-sdk/0.2.159/"
+    },
+    "pypi:nuitka@4.2.2": {
+      "licence": "AGPL-3.0 with the Nuitka Runtime Library Exception 1.0",
+      "note": "Nuitka 4.2.2; its PyPI metadata reads 'License: GNU Affero General Public License v3'. Its LICENSE-RUNTIME.txt is the Nuitka Runtime Library Exception 1.0, which lets a compiled program ship under its own terms; both ship from Nuitka's own files, alongside NOTICE.txt. PyPI: https://pypi.org/project/Nuitka/4.2.2/"
+    },
+    "python:cpython@3.14.7": {
+      "platforms": ["win32"],
+      "texts": ["cpython-3.14.7-incorporated"],
+      "note": "CPython 3.14.7 (PSF-2.0, uv-managed build 20260807). LICENSE.txt covers PSF history, bzip2, zstd, Tcl/Tk and the Microsoft Distributable Code conditions (redistributors must bind end users to terms protecting it). Doc/license.rst's 'Licenses and Acknowledgements for Incorporated Software' (OpenSSL, expat, libffi, zlib, libmpdec, mimalloc and others) is not installed, so it is supplied above. SQLite (public domain) and xz (0BSD) need no notice. Source: https://raw.githubusercontent.com/python/cpython/v3.14.7/Doc/license.rst"
+    },
+    "python:cpython@3.14.4": {
+      "platforms": ["linux"],
+      "texts": [
+        "cpython-3.14.4-incorporated",
+        "bzip2-1.0.8",
+        "libedit-20240808-3.1",
+        "ncurses-6.5",
+        "libuuid-1.0.3",
+        "zstd-1.5.7"
+      ],
+      "note": "CPython 3.14.4 (PSF-2.0), python-build-standalone 20260414, the build uv 0.11.11 installs on Linux for .python-version 3.14. Its LICENSE.txt is the plain CPython licence. libpython3.14.so.1.0 statically links OpenSSL 3.5, expat, libffi, zlib and mpdecimal, which Doc/license.rst's 'Licenses and Acknowledgements for Incorporated Software' covers (supplied above), and bzip2 1.0.8, libedit 20240808-3.1, ncurses 6.5, libuuid 1.0.3 and zstd 1.5.7, whose texts are supplied above (zstd's from upstream, since the build ships none). SQLite 3.50.4 (public domain) and xz 5.8.1 (0BSD) need no notice. Berkeley DB 6.0.19 (Sleepycat) and Tcl/Tk 9.0.3 link only into the _dbm and _tkinter modules, which the compiled server does not include. Source: https://github.com/astral-sh/python-build-standalone/releases/tag/20260414"
+    },
+    "npm:lazy-val@1.0.5": {
+      "mit": "Copyright (c) Vladimir Krivosheev",
+      "note": "lazy-val 1.0.5, an electron-builder dependency; ships no licence file. Author: Vladimir Krivosheev. npm: https://www.npmjs.com/package/lazy-val/v/1.0.5"
+    },
+    "npm:react-remove-scroll-bar@2.3.8": {
+      "mit": "Copyright (c) Anton Korzunov",
+      "note": "react-remove-scroll-bar 2.3.8, a frontend UI dependency; ships no licence file. Author: Anton Korzunov. npm: https://www.npmjs.com/package/react-remove-scroll-bar/v/2.3.8"
+    },
+    "extra:electron@44.9.3": {
+      "licence": "MIT (Electron); FFmpeg under LGPL-2.1-or-later; Chromium and other components under the licences in LICENSES.chromium.html",
+      "note": "Electron 44.9.3 bundles FFmpeg as its own ffmpeg.dll under LGPL-2.1-or-later; the full text ships separately in Electron's own LICENSES.chromium.html (780 entries) and LICENSE.electron.txt, named in this file's header. Source: https://github.com/electron/electron/releases/tag/v44.9.3"
+    },
+    "extra:whisper.cpp@1.8.5": {
+      "licence": "MIT",
+      "mit": "Copyright (c) 2023-2026 The ggml authors",
+      "note": "whisper.cpp 1.8.5 and ggml 0.13.1, bundled by pywhispercpp 1.5.1; MIT, text not shipped by the wheel. Source: https://github.com/ggml-org/whisper.cpp/releases/tag/v1.8.5"
+    },
+    "extra:libgomp@8.5.0": {
+      "licence": "GPL-3.0-or-later WITH GCC-exception-3.1",
+      "platforms": ["linux"],
+      "texts": ["gpl-3.0", "gcc-runtime-exception-3.1"],
+      "note": "libgomp 8.5.0, bundled by pywhispercpp's Linux wheel per its auditwheel SBOM; text not shipped, supplied above. Source: https://ftp.gnu.org/gnu/gcc/gcc-8.5.0/"
+    },
+    "extra:microsoft-vc-runtime": {
+      "licence": "Microsoft Visual C++ Redistributable (proprietary)",
+      "platforms": ["win32"],
+      "files": ["msvcp140.dll", "vcomp140.dll"],
+      "note": "Microsoft Visual C++ Runtime DLLs (msvcp140.dll, vcomp140.dll), bundled on Windows by pywhispercpp and numpy. Source: https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist"
+    },
+    "extra:vite@8.2.4": {
+      "licence": "MIT",
+      "mit": "Copyright (c) 2019-present, VoidZero Inc. and Vite contributors",
+      "note": "Vite 8.2.4's modulepreload polyfill ships inside the frontend bundle; build.license covers JS chunks only and misses it (fonts arrive by CSS @import too, same gap). Source: https://github.com/vitejs/vite/releases/tag/v8.2.4"
+    },
+    "extra:electron-builder@26.17.0": {
+      "licence": "MIT",
+      "mit": "Copyright (c) 2015 Loopline Systems",
+      "note": "electron-builder 26.17.0's .deb postinstall/postremove scripts, MIT. Source: https://github.com/electron-userland/electron-builder/releases/tag/electron-builder@26.17.0"
+    },
+    "extra:nsis@3.0.4.1": {
+      "licence": "zlib/libpng (NSIS); LGPL-2.1-or-later (StdUtils, nsis7z); unknown (UAC, nsProcess, WinShell, SpiderBanner)",
+      "platforms": ["win32"],
+      "texts": ["lgpl-2.1"],
+      "note": "NSIS, via electron-builder 26.17.0's nsis-resources-3.4.1.7z payload, ships no licence files for its plug-ins: StdUtils and nsis7z (LGPL-2.1-or-later, text above; nsis7z 'follows 7-Zip source code license' per nsis.sourceforge.io), UAC, nsProcess, WinShell and SpiderBanner (licence unknown). NSIS itself is zlib/libpng; its bundled bzip2 and LZMA modules carry their own terms. Source: https://nsis.sourceforge.io/Download"
+    },
+    "extra:libraries-dev@0.3.1": {
+      "licence": "MIT",
+      "repo_texts": ["frontend/public/licenses/libraries-dev.txt"],
+      "note": "frontend/public/licenses/libraries-dev.txt: VIKI Agent's activity orb and message box glow adapt Libraries.dev thinking-orbs 0.3.1 and border-beam 1.3.0 (Copyright (c) 2026 Jakub Antalik). Source: https://github.com/Jakubantalik/Libraries.dev"
+    },
+    "extra:syncopate": {
+      "licence": "Apache-2.0",
+      "repo_texts": ["frontend/public/licenses/syncopate.txt"],
+      "note": "The VIKI AGENT tile lettering is drawn from the letterforms of the Syncopate Bold typeface, Apache-2.0 (frontend/public/licenses/syncopate.txt). The app ships no font file of it."
+    },
+    "extra:messaging-logos": {
+      "note": "Mattermost and Discord logos (docs/messaging-logos.md) are trademarks of their respective owners, not open-source code; artwork, colors, backgrounds and proportions are unchanged, used under each provider's brand guidelines."
+    }
+  }
+}

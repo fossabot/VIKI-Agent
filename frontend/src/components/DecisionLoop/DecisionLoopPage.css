@@ -1,0 +1,508 @@
+/* Shared layout for the Decision page and its rows. This is the one page-wide stylesheet the
+   rows and the page itself all build on top of, under the `dloop-` prefix (`.decision-*`
+   belongs to the Approvals dialog, a different surface).
+   The row, its disclosure heading and the switch port Messaging's own look
+   (MessagingView.css's `.messaging-bot`/`.messaging-disclosure`/`.messaging-toggle`) under the
+   new prefix rather than importing it, so this page can diverge from Messaging later without
+   disturbing it. The field row and button row port MessagingConfigForm.css's
+   `.messaging-config-field`/`.messaging-config-actions`; the confirm line ports
+   VaultBrowser/RecoveryPanel.css's `.recovery-confirm`. */
+
+.dloop-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 860px;
+  padding: clamp(16px, 3vw, 40px);
+  color: var(--t1);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  min-width: 0;
+  container-type: inline-size;
+}
+
+.dloop-group {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  margin-top: 16px;
+}
+
+.dloop-group-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+/* A group title's step number: decoration only (aria-hidden), the same badge as the How VIKI
+   works steps. */
+.dloop-step-no {
+  display: inline-flex;
+  flex: 0 0 20px;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--b-strong);
+  border-radius: 50%;
+  background: var(--fill-pill);
+  color: var(--t1);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* A titled block inside a row's body (What VIKI watches' three switch groups, What VIKI may do's
+   two grant groups). */
+.dloop-subgroup {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.dloop-subhead,
+.dloop-row-body h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+/* A term and its meaning, side by side (the Listed/Badge/Nudge/Alert and Off/Ask first/Allowed
+   keys). */
+.dloop-legend {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 16px;
+  margin: 0;
+}
+
+.dloop-legend dt {
+  margin: 0;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+.dloop-legend dd {
+  margin: 0;
+  color: var(--t2);
+}
+
+/* One row: a disclosure heading, a status chip, an optional trailing control, and a body kept
+   mounted and only ever hidden by the `hidden` attribute (DecisionRow.tsx). */
+.dloop-row {
+  min-width: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--s0);
+}
+
+.dloop-row-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.dloop-row-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+.dloop-row-description {
+  margin: 4px 0 0 26px;
+  max-width: 65ch;
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.dloop-disclosure {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 4px 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dloop-disclosure .ico {
+  color: var(--t2);
+  transform: rotate(-90deg);
+}
+
+.dloop-disclosure[aria-expanded="true"] .ico {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dloop-disclosure .ico {
+    transition: transform 0.15s ease;
+  }
+}
+
+.dloop-status {
+  gap: 6px;
+  height: auto;
+  max-width: 100%;
+  padding: 2px 8px;
+  border: 1px solid var(--b-strong);
+  border-radius: 999px;
+  background: var(--fill-pill);
+  color: var(--t2);
+  font-size: 11px;
+  white-space: normal;
+}
+
+.dloop-row-body {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.dloop-row-body:not([hidden]) {
+  display: grid;
+  gap: 16px;
+}
+
+.dloop-row-body > p,
+.dloop-row-body > h3 {
+  margin: 0;
+}
+
+.dloop-row-body h3 {
+  font-size: 14px;
+  color: var(--t0);
+}
+
+.dloop-row-heading .btn:focus-visible,
+.dloop-disclosure:focus-visible,
+.dloop-switch:focus-visible,
+.dloop-choice-option input:focus-visible,
+.dloop-button-row button:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+/* The on/off switch: a 32x18 track with a round knob drawn by its own `::after`, matching
+   MessagingView.css's `.messaging-toggle`. The button carries no chrome of its own — its track
+   and the "On"/"Off" word are the whole control. */
+.dloop-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--t0);
+  font: inherit;
+  cursor: pointer;
+}
+
+.dloop-switch[aria-disabled="true"] {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.dloop-switch-track {
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--g2);
+  border: 1px solid var(--line);
+}
+
+.dloop-switch-track::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--t0);
+}
+
+.dloop-switch-state {
+  min-width: 3ch;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dloop-switch-track,
+  .dloop-switch-track::after {
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      transform 0.15s ease;
+  }
+}
+
+html[data-motion="reduce"] .dloop-disclosure .ico,
+html[data-motion="reduce"] .dloop-switch-track,
+html[data-motion="reduce"] .dloop-switch-track::after {
+  transition: none;
+}
+
+.dloop-switch[aria-checked="true"] .dloop-switch-track {
+  background: var(--or);
+  border-color: var(--or);
+}
+
+.dloop-switch[aria-checked="true"] .dloop-switch-track::after {
+  background: var(--on-or);
+  transform: translateX(14px);
+}
+
+@media (forced-colors: active) {
+  .dloop-switch-track {
+    border-color: ButtonText;
+  }
+}
+
+/* A label paired with a `Switch` outside a row's own heading (the watch row's six items, and
+   the reach row's Alerts and in-context switches): the label on the left, the switch on the
+   right, each pair its own line. */
+.dloop-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+/* The radio group (Choice): a fieldset reset to a vertical stack of selectable rows, each a
+   label wrapping a native radio input so arrow keys move between them the way they do for any
+   native radio group. */
+.dloop-choice {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.dloop-choice-legend {
+  padding: 0;
+  margin-bottom: 4px;
+  color: var(--t0);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dloop-choice-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dloop-choice-option:has(input:checked) {
+  border-color: var(--or);
+  background: var(--fill-hi);
+}
+
+.dloop-choice-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dloop-choice-label {
+  color: var(--t0);
+}
+
+.dloop-choice-desc {
+  color: var(--t2);
+  font-size: 12px;
+}
+
+/* A muted hint line under a label or heading, matching MessagingConfigForm.css's
+   `.messaging-config-hint`. */
+.dloop-hint {
+  margin: 0;
+  color: var(--t2);
+  font-size: 12px;
+}
+
+/* A role="alert" error line (a failed save or action) — same shape as `.dloop-hint` above, but
+   in the error tone rather than the muted one, so a save failure reads as a failure. */
+.dloop-error {
+  margin: 0;
+  color: var(--err);
+  font-size: 12px;
+}
+
+/* A field row: a label, its input or select, and an optional `.dloop-hint` under the label
+   (MessagingConfigForm.css's `.messaging-config-field`). */
+.dloop-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dloop-field label {
+  color: var(--t0);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dloop-field input,
+.dloop-field select {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--g1);
+  color: var(--t0);
+  font: inherit;
+  min-width: 0;
+}
+
+.dloop-field input::placeholder {
+  color: var(--t3);
+}
+
+/* A small row of buttons, such as a form's footer actions (MessagingConfigForm.css's
+   `.messaging-config-actions`). */
+.dloop-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.dloop-page .btn {
+  max-width: 100%;
+  min-height: 32px;
+  height: auto;
+  padding-block: 6px;
+  white-space: normal;
+}
+
+/* A destructive confirmation line: the exact count plus its action, in the error tone
+   (VaultBrowser/RecoveryPanel.css's `.recovery-confirm`). */
+.dloop-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--err);
+}
+
+/* The Learning row's "Show all numbers" table (LearningParts.tsx's `AllNumbers`), porting
+   Data.css's own `.data-table` recipe under this page's prefix for the same reason as the header
+   comment above: this page can diverge from Data later without disturbing it. */
+.dloop-numbers {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dloop-numbers th,
+.dloop-numbers td {
+  padding: 6px 10px 6px 0;
+  border-bottom: 1px solid var(--hair);
+  text-align: left;
+  vertical-align: top;
+}
+
+.dloop-numbers th {
+  color: var(--t2);
+  font-weight: 500;
+}
+
+.dloop-details {
+  min-width: 0;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.dloop-details > summary {
+  color: var(--t0);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dloop-details > summary:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+.dloop-details > :not(summary) {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.dloop-feedback-guide {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g1);
+}
+
+.dloop-feedback-guide h3 {
+  margin: 0 0 12px;
+}
+
+.dloop-feedback-guide dl {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.dloop-feedback-guide dt {
+  font-weight: 600;
+  color: var(--t0);
+}
+
+.dloop-feedback-guide dd {
+  margin: 2px 0 0;
+  color: var(--t2);
+}
+
+@container (width < 480px) {
+  .dloop-row-name {
+    flex-basis: 100%;
+  }
+
+  .dloop-row-description {
+    margin-left: 0;
+  }
+
+  .dloop-choice {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dloop-legend {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dloop-numbers th,
+  .dloop-numbers td {
+    padding-right: 4px;
+    overflow-wrap: anywhere;
+  }
+}

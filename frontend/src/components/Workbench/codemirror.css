@@ -1,0 +1,78 @@
+/* Both readers use the installed grammar's classes. The code-only palette is in tokens.css;
+   the editor theme in codemirror.ts supplies the rest of its chrome. */
+
+:is(.cm-editor, .code-syntax) .tok-keyword {
+  color: var(--code-keyword);
+}
+
+:is(.cm-editor, .code-syntax) .tok-string,
+:is(.cm-editor, .code-syntax) .tok-string2,
+:is(.cm-editor, .code-syntax) .tok-inserted {
+  color: var(--code-string);
+}
+
+:is(.cm-editor, .code-syntax) .tok-number,
+:is(.cm-editor, .code-syntax) .tok-atom,
+:is(.cm-editor, .code-syntax) .tok-bool,
+:is(.cm-editor, .code-syntax) .tok-literal {
+  color: var(--code-number);
+}
+
+:is(.cm-editor, .code-syntax) .tok-typeName,
+:is(.cm-editor, .code-syntax) .tok-className,
+:is(.cm-editor, .code-syntax) .tok-namespace,
+:is(.cm-editor, .code-syntax) .tok-propertyName,
+:is(.cm-editor, .code-syntax) .tok-link,
+:is(.cm-editor, .code-syntax) .tok-url {
+  color: var(--code-type);
+}
+
+:is(.cm-editor, .code-syntax) .tok-variableName,
+:is(.cm-editor, .code-syntax) .tok-variableName2 {
+  color: var(--code-variable);
+}
+
+/* Function tags supplement variable/property tags, so this override follows both. */
+:is(.cm-editor, .code-syntax) .tok-function {
+  color: var(--code-function);
+}
+
+:is(.cm-editor, .code-syntax) .tok-meta,
+:is(.cm-editor, .code-syntax) .tok-labelName,
+:is(.cm-editor, .code-syntax) .tok-macroName {
+  color: var(--code-meta);
+}
+
+:is(.cm-editor, .code-syntax) .tok-invalid,
+:is(.cm-editor, .code-syntax) .tok-deleted {
+  color: var(--code-invalid);
+}
+
+:is(.cm-editor, .code-syntax) .tok-comment {
+  color: var(--code-comment);
+  font-style: italic;
+}
+
+:is(.cm-editor, .code-syntax) .tok-heading,
+:is(.cm-editor, .code-syntax) .tok-strong {
+  font-weight: 700;
+}
+
+:is(.cm-editor, .code-syntax) .tok-emphasis {
+  font-style: italic;
+}
+
+:is(.cm-editor, .code-syntax) .tok-link,
+:is(.cm-editor, .code-syntax) .tok-url {
+  text-decoration: underline;
+}
+
+.code-syntax .code-line-selected {
+  background: var(--code-selection);
+  box-shadow: inset 2px 0 0 var(--or);
+}
+
+:is(.cm-editor, .code-syntax) ::selection {
+  color: var(--t0);
+  background: var(--code-selection);
+}

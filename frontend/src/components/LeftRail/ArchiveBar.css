@@ -1,0 +1,43 @@
+/* ArchiveBar. `.archive-chip` is a real toggle button, not the static badge
+   base.css's `.chip` / `.chip.dim` draws — so it keeps its own
+   class — but borrows that pairing's proven sizing and both of its colours (orange "on", grey
+   "off") rather than inventing new ones. `.archive-note` is quiet like LeftRail.css's
+   `.sess-note`, the rail's other no-fill aside. */
+.archive-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.archive-chip {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 3px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--t2);
+  background: transparent;
+  border: 1px solid var(--b-strong);
+}
+
+.archive-chip[aria-pressed="true"] {
+  color: var(--or-hi);
+  background: rgb(var(--or-rgb) / 0.1);
+  border-color: rgb(var(--or-rgb) / 0.45);
+}
+
+.archive-chip:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+.archive-note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--t3);
+}

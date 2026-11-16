@@ -1,0 +1,179 @@
+.bot-memory-dialog-backdrop {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: var(--scrim);
+}
+
+.bot-memory-dialog {
+  width: min(900px, 100%);
+  max-height: min(760px, 90vh);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--g1);
+  color: var(--t1);
+  box-shadow: 0 16px 50px var(--shadow);
+}
+
+.bot-memory-dialog-head,
+.bot-memory-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bot-memory-dialog-head h2,
+.bot-memory-dialog-head p {
+  margin: 0;
+}
+
+.bot-memory-dialog-head p,
+.bot-memory-selected-ref,
+.bot-memory-files code {
+  color: var(--t3);
+  overflow-wrap: anywhere;
+}
+
+.bot-memory-dialog-body {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.5fr);
+  gap: 16px;
+}
+
+.bot-memory-files,
+.bot-memory-reader {
+  min-width: 0;
+  max-height: 56vh;
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.bot-memory-files ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bot-memory-files li {
+  display: grid;
+  gap: 2px;
+}
+
+/* .btn fixes a 44px height; a title, a wrapped exact ref and a details line need more. */
+.bot-memory-files li > button.btn {
+  display: grid;
+  width: 100%;
+  height: auto;
+  min-height: 44px;
+  padding-block: 8px;
+  justify-items: start;
+  text-align: left;
+  white-space: normal;
+}
+
+.bot-memory-files li > button.btn[aria-pressed="true"] {
+  background: var(--g2);
+}
+
+.bot-memory-files small {
+  padding-inline: 8px;
+  color: var(--t3);
+}
+
+.bot-memory-reader article > h3 {
+  margin: 8px 0 14px;
+}
+
+.bot-memory-reader p[role="status"],
+.bot-memory-reader p[role="alert"] {
+  color: var(--t3);
+}
+
+.bot-memory-selected-ref {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.8em;
+}
+
+/* The file's own leading --- block, kept as written. */
+.bot-memory-frontmatter {
+  margin: 0 0 12px;
+  padding: 8px 10px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.bot-memory-editor {
+  display: grid;
+  gap: 8px;
+}
+
+.bot-memory-editor textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 16em;
+  padding: 8px 10px;
+  resize: vertical;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--t1);
+  background: var(--g0);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.bot-memory-editor p {
+  margin: 0;
+}
+
+.bot-memory-editor .bot-memory-dialog-actions {
+  justify-content: flex-start;
+}
+
+.bot-memory-dialog > .bots-note {
+  margin: 0;
+}
+
+@media not all and (min-width: 800px) {
+  .bot-memory-dialog-backdrop {
+    padding: 8px;
+  }
+
+  .bot-memory-dialog {
+    max-height: 96vh;
+    padding: 12px;
+  }
+
+  .bot-memory-dialog-body {
+    grid-template-columns: minmax(0, 1fr);
+    overflow: auto;
+  }
+
+  .bot-memory-files,
+  .bot-memory-reader {
+    max-height: 34vh;
+  }
+}
+
+.bot-memory-dialog > .confirm-dialog {
+  flex: none;
+}

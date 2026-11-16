@@ -1,0 +1,85 @@
+/* The chevron beside the round voice button, and the menu it opens. Tokens only, so
+   dark and light follow. The panel's chrome (background, border, radius, shadow) is the shared
+   `.menu-panel` (base.css); rows reuse `.mi`/`.mi.on` the same way ModelChip's menu does. */
+
+.voice-menu-trigger {
+  all: unset;
+  box-sizing: border-box;
+  width: 20px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--t2);
+  cursor: pointer;
+}
+
+.voice-menu-trigger:hover {
+  color: var(--t1);
+}
+
+.voice-menu-trigger:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 2px;
+}
+
+/* S (below 800px): the composer row drops the chevron along with the ghost voice
+   button, the same budget ModelChip.css keeps for the model chip. */
+@media not all and (min-width: 800px) {
+  .voice-menu-trigger {
+    display: none;
+  }
+}
+
+.voice-menu {
+  min-width: 220px;
+  box-sizing: border-box;
+  padding: 6px 0;
+}
+
+.voice-menu .mi {
+  outline: none; /* Radix's Item is a <div>: no UA chrome to reset, but a focused one still
+                    draws the default ring unless this is set — see ModelChip.css. */
+}
+
+.voice-menu .mi[data-highlighted] {
+  background: var(--fill-hi);
+  color: var(--t0);
+}
+
+.voice-menu .mi[data-disabled] {
+  color: var(--t3);
+  cursor: default;
+}
+
+.voice-menu-status {
+  margin: 0;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.voice-menu-check {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.voice-menu-sep {
+  height: 1px;
+  margin: 4px 0;
+  border: none;
+  background: var(--b-pop);
+}
+
+@media (forced-colors: active) {
+  .voice-menu .mi.on {
+    outline: 2px dashed Highlight;
+    outline-offset: -2px;
+  }
+
+  .voice-menu .mi[data-highlighted] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

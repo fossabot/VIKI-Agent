@@ -1,0 +1,43 @@
+{
+  "scenario": "37",
+  "native_version": "2.1.281",
+  "platform": "win32",
+  "observations": [
+    {
+      "owner": 0,
+      "resume": false,
+      "own_canary": true,
+      "other_canary": false,
+      "project_instructions": true,
+      "tools": [],
+      "success": true
+    },
+    {
+      "owner": 1,
+      "resume": false,
+      "own_canary": true,
+      "other_canary": false,
+      "project_instructions": true,
+      "tools": [],
+      "success": true
+    },
+    {
+      "owner": 0,
+      "resume": false,
+      "own_canary": true,
+      "other_canary": false,
+      "project_instructions": true,
+      "tools": [],
+      "success": true
+    },
+    {
+      "owner": 0,
+      "resume": true,
+      "own_canary": true,
+      "other_canary": false,
+      "project_instructions": true,
+      "tools": [],
+      "success": true
+    }
+  ]
+}

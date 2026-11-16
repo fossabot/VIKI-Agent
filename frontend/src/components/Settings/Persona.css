@@ -1,0 +1,48 @@
+/* Page-specific rules for PersonaPage. The shared page/row chrome (`.settings-page`,
+   `.settings-row` and friends) is Settings.css's; this file only adds what that contract does
+   not cover: the Proactivity radio pair, the Do/Don't textareas and the edited-body preview. */
+
+.persona-radios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.persona-radios label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--t0);
+}
+
+.persona-textarea {
+  min-height: 96px;
+  max-width: 420px;
+  padding: 8px;
+  border: 1px solid var(--b1);
+  border-radius: 5px;
+  background: var(--s0);
+  color: var(--t0);
+  font: inherit;
+  font-size: 13px;
+  resize: vertical;
+}
+
+.persona-edited-body {
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--s0);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--t1);
+}
+
+@media not all and (min-width: 800px) {
+  .persona-textarea {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,153 @@
+.statusbar {
+  flex: none;
+  /* border-box; see the note on .topbar in TopBar.css — 26px + the 1px hairline. */
+  height: 27px;
+  border-top: 1px solid var(--hair);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+  font-size: 11.5px;
+  color: var(--t3);
+}
+
+.statusbar-context {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusbar-context-track {
+  width: 64px;
+  height: 3px;
+  background: var(--track);
+  border-radius: 2px;
+  display: flex;
+}
+
+.statusbar-context-fill {
+  height: 3px;
+  background: var(--or);
+  border-radius: 2px;
+}
+
+.statusbar-limit {
+  margin-left: auto;
+}
+
+.statusbar-limit + .statusbar-context {
+  margin-left: 0;
+}
+
+.statusbar-limit[data-status="allowed_warning"] {
+  color: var(--or);
+}
+
+.statusbar-limit[data-status="rejected"] {
+  color: var(--err);
+}
+
+/* The git chip — a disclosure button plus its popover, styled like
+   `.context-meter`/`.context-popover` (ContextMeter.css) so every
+   status-bar disclosure shares one look. */
+.statusbar-git {
+  display: flex;
+  min-width: 0;
+}
+
+.git-chip {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 3px;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.git-chip:hover {
+  color: var(--t0);
+  background: var(--fill-hi);
+}
+
+.git-chip:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 2px;
+}
+
+.git-chip span:not(.git-dot) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.git-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--or);
+  flex: none;
+}
+
+/* Same fixed, toggle-anchored panel as `.context-popover` (ContextMeter.css), at the opposite
+   edge: the git chip sits at the status bar's left end, not its right. */
+.git-popover {
+  position: fixed;
+  left: 16px;
+  bottom: 32px;
+  width: min(320px, calc(100vw - 32px));
+  box-sizing: border-box;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--t1);
+  z-index: 5;
+}
+
+.git-popover dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 8px;
+}
+
+.git-popover dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.git-popover ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+/* S (below 800px). Every field stays — the counts, the last commit, a notice, the CLI
+   version and the context bar are all short, and dropping one would be the app deciding which
+   truth the user may have. They wrap instead, so the bar grows by a line rather than clipping,
+   and its 27px stays the minimum rather than the height. */
+@media not all and (min-width: 800px) {
+  .statusbar {
+    height: auto;
+    min-height: 27px;
+    flex-wrap: wrap;
+    row-gap: 0;
+    padding: 3px 12px;
+  }
+
+  .statusbar > span {
+    white-space: nowrap;
+  }
+}

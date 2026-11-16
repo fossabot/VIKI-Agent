@@ -1,0 +1,98 @@
+.avatar-editor {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 120px);
+  overflow-y: auto;
+  background: var(--g1);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 51;
+}
+
+.avatar-editor #avatar-editor-title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: var(--t0);
+}
+
+.avatar-editor label {
+  display: block;
+  margin: 8px 0 4px;
+  color: var(--t1);
+}
+
+.avatar-editor-preview {
+  position: relative;
+  margin-top: 8px;
+  background: var(--s1);
+  border: 1px solid var(--line);
+  /* base.css puts every element in border-box, which would pull this box's 1px border inside
+     its 256x256 inline size, leaving a 254x254 content area — 2px smaller than the 256x256
+     canvas and the crop overlay geometry (AvatarEditor.tsx's PREVIEW_BOX math), both sized in
+     that content-pixel space. content-box keeps the 256 as content and puts the border outside
+     it, so the canvas and the overlay's crop math both fit exactly, at every crop position. */
+  box-sizing: content-box;
+  /* Still not hidden: the crop frame's own border now always fits, but its :focus-visible
+     outline is offset outward from that border on purpose (so it doesn't merge into it) and so
+     always sits partly outside this box when the crop is flush with an edge. Nothing else can
+     spill now that the canvas fits its box exactly, so this only ever reveals that outline. */
+  overflow: visible;
+}
+
+.avatar-editor-preview canvas {
+  display: block;
+}
+
+.avatar-editor-crop-overlay {
+  position: absolute;
+  box-sizing: border-box;
+  border: 2px solid var(--or);
+  cursor: move;
+  touch-action: none;
+}
+
+.avatar-editor-crop-overlay:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.avatar-editor-crop-readout {
+  margin: 8px 0;
+  color: var(--t1);
+  font-size: 13px;
+}
+
+.avatar-editor-controls {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.avatar-editor-samples {
+  display: flex;
+  gap: 8px;
+}
+
+.avatar-editor-sample {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.avatar-editor-sample canvas {
+  background: var(--s1);
+  border: 1px solid var(--line);
+}
+
+.avatar-editor button {
+  margin-top: 8px;
+  margin-right: 8px;
+}

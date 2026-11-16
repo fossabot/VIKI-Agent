@@ -1,0 +1,151 @@
+/* Hands-free conversation and its voice control: the round voice toggle beside the
+   composer's Send button, its tooltip, the first-use notice (ReadAloud.css's own note card,
+   reused) and the status strip above the composer, which also shows the one-line notice the loop
+   leaves behind when Enter is refused or the mode exits mid-loop.
+
+   - .hands-free-voice   the toggle's host: inline-flex, relative (so .hands-free-tip can anchor to
+                       it); data-primary mirrors Composer's own `primary` flag, and the S rule
+                       below hides this control only when that flag is false, the same rule
+                       Composer.css's own S block gives the plus mark and the mic glyph.
+   - .hands-free-toggle   a 32px ghost circle, sized and coloured as .voice-mic, with a transparent
+                       1px border so the pressed state (var(--err), like .voice-mic) has somewhere
+                       to land without the circle resizing. `.composer-submit` added when primary
+                       makes it Send's own 36px --or disc instead: two classes outrank
+                       `.composer-submit` alone on specificity, so this circle's own transparent
+                       border survives whichever of Composer.css or this file a page happens to
+                       load last, and pressed there turns the disc transparent rather than --or.
+   - .hands-free-tip   the toggle's own tooltip: hidden until the button is hovered or
+                       focus-visible, absolute above the control, right-aligned, one line.
+   - .hands-free-notice   the same card ReadAloud.css gives its first-use notice; its Cancel is
+                       `.hands-free-notice-cancel`, styled rather than a bare UA button.
+   - .hands-free-strip    one line, same geometry as .voice-strip, above the composer; when the
+                       mode is off and a notice is set, this is also where that notice shows.
+   - .hands-free-interrupt, .hands-free-end, .hands-free-notice-cancel
+                       the strip's quiet buttons and the notice's Cancel share one look. */
+
+.hands-free-voice {
+  display: inline-flex;
+  position: relative;
+}
+
+.hands-free-toggle {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--t2);
+  cursor: pointer;
+}
+
+.hands-free-toggle:hover {
+  color: var(--t1);
+}
+
+.hands-free-toggle.composer-submit {
+  width: 36px;
+  height: 36px;
+  border: 1px solid transparent;
+  background: var(--or);
+  color: var(--on-or);
+}
+
+.hands-free-toggle[aria-pressed="true"] {
+  border-color: var(--err);
+  color: var(--err);
+}
+
+.hands-free-toggle.composer-submit[aria-pressed="true"] {
+  background: transparent;
+}
+
+.hands-free-tip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--t0);
+  color: var(--g0);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+.hands-free-toggle:hover + .hands-free-tip,
+.hands-free-toggle:focus-visible + .hands-free-tip {
+  display: block;
+}
+
+.hands-free-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  max-width: 640px;
+  margin-bottom: 6px;
+  padding: 8px 10px;
+  border: 1px solid rgb(var(--or-rgb) / 0.45);
+  border-radius: 6px;
+  background: rgb(var(--or-rgb) / 0.08);
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.hands-free-notice > span {
+  flex: 1 1 100%;
+}
+
+.hands-free-notice-confirm {
+  background: var(--or);
+  color: var(--on-or);
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.hands-free-strip {
+  max-width: 760px;
+  margin: 0 auto 6px;
+  font-size: 12.5px;
+  color: var(--t2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.hands-free-interrupt,
+.hands-free-end,
+.hands-free-notice-cancel {
+  flex: none;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: inherit;
+  color: var(--t2);
+  cursor: pointer;
+  padding: 0;
+}
+
+.hands-free-interrupt:hover,
+.hands-free-end:hover,
+.hands-free-notice-cancel:hover {
+  color: var(--t1);
+}
+
+/* S (below 800px): only the non-primary (ghost) control goes, the same rule Composer.css
+   gives the plus mark and the mic glyph — a control standing in Send's own place never hides. */
+@media not all and (min-width: 800px) {
+  .hands-free-voice[data-primary="false"] {
+    display: none;
+  }
+}

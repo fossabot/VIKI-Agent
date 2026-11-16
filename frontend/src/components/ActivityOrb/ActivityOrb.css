@@ -1,0 +1,55 @@
+.activity-orb {
+  position: relative;
+  flex: none;
+  width: 64px;
+  height: 64px;
+  color: var(--t1);
+  pointer-events: none;
+}
+
+.activity-orb-state {
+  position: absolute;
+  right: 2px;
+  bottom: 1px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.activity-orb-canvas {
+  display: block;
+  width: 64px;
+  height: 64px;
+}
+
+.activity-orb-state > circle:first-child {
+  fill: var(--g1);
+  stroke-width: 0.8;
+}
+
+.activity-orb-rest {
+  fill: currentColor;
+  stroke: none;
+}
+
+.activity-orb[data-state="error"] .activity-orb-state > circle:first-child {
+  stroke-width: 1.8;
+}
+
+@media (forced-colors: active) {
+  .activity-orb {
+    color: CanvasText;
+    outline: 1px solid CanvasText;
+    outline-offset: -8px;
+    border-radius: 50%;
+  }
+
+  .activity-orb canvas {
+    visibility: hidden;
+  }
+
+  .activity-orb-state > circle:first-child {
+    fill: Canvas;
+  }
+}

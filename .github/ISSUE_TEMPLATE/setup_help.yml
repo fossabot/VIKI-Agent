@@ -1,0 +1,60 @@
+name: Setup or installation help
+description: Ask for help installing, starting, or configuring VIKI Agent.
+title: "[Setup]: "
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check Getting started and Troubleshooting through the Support link before opening
+        a report. For a suspected security vulnerability, follow SECURITY.md first.
+
+        Remove tokens, API keys, private paths, notes and conversation content from examples,
+        logs and screenshots. Do not attach a vault, app database, or provider configuration file.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Where does setup stop?
+      description: Describe what you tried and what happened, including the visible error.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: VIKI Agent version or commit
+      description: Give the installer filename or source commit if the app cannot start.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system and version
+      placeholder: Windows 11, macOS on Apple silicon, or Linux distribution and version
+    validations:
+      required: true
+  - type: dropdown
+    id: installation
+    attributes:
+      label: Installation method
+      options:
+        - Desktop installer
+        - Source checkout with the desktop window
+        - Source checkout with a browser app window
+        - Other or unsure
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps taken and fixes tried
+      description: Include commands if relevant, with private paths and account details removed.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Relevant error or diagnostics excerpt
+      description: |
+        Optional. If the app opens, check Diagnostics. Use Export diagnostics if needed and
+        inspect the file before sharing a relevant excerpt. Redaction may miss private information.
+      render: text

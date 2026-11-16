@@ -1,0 +1,58 @@
+/* Keep the floating wrapper in viewport coordinates while scaling its contents. */
+[data-radix-popper-content-wrapper]:has(> .organized-session-menu) {
+  zoom: calc(1 / var(--font-scale, 1));
+}
+
+.organized-session-menu {
+  zoom: var(--font-scale, 1);
+  width: 240px;
+  max-width: min(
+    calc((100vw - 16px) / var(--font-scale, 1)),
+    calc(var(--radix-dropdown-menu-content-available-width) / var(--font-scale, 1))
+  );
+  max-height: min(
+    calc((100dvh - 16px) / var(--font-scale, 1)),
+    calc(var(--radix-dropdown-menu-content-available-height) / var(--font-scale, 1))
+  );
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 4px 0;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.organized-session-menu .mi {
+  height: auto;
+  min-height: 34px;
+  padding-block: 7px;
+  overflow-wrap: anywhere;
+}
+
+.organized-session-menu .mi[data-highlighted] {
+  background: var(--fill-hi);
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+}
+
+.organized-session-menu .mi[data-disabled] {
+  color: var(--t3);
+  cursor: default;
+}
+
+.organized-session-close,
+.sess-copy-status {
+  color: var(--or-hi);
+}
+
+.sess-window-error {
+  color: var(--err);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (forced-colors: active) {
+  .organized-session-menu .mi[data-highlighted] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

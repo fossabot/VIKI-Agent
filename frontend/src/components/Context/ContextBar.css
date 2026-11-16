@@ -1,0 +1,91 @@
+/* Category hues are local to context data, independent of the app's monochrome accents.
+   Keep the legacy variable names used by the bar and its matching breakdown swatches. */
+.context-bar,
+.context-category-colors {
+  --accent-slate: var(--context-system-prompt);
+  --accent-blue: var(--context-system-tools);
+  --accent-purple: var(--context-mcp-tools);
+  --or-hi: var(--context-memory-files);
+  --accent-green: var(--context-skills);
+  --or: var(--context-messages);
+}
+
+/* The segmented context-usage meter. `.context-bar` is itself the track (var(--track),
+   border-radius 2px — the same fill and radius as StatusBar.css's `.statusbar-context-track`),
+   sized small (64x3, that same status-bar meter's own footprint) or large (12px tall at full
+   width, for the composer/rail placements). The used segments, the reserved block and the mark
+   are children laid on top of that track; their widths and the mark's offset are percentages of
+   `max` set inline by ContextBar.tsx, since only it knows the live token counts. */
+.context-bar {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  background: var(--track);
+  border-radius: 2px;
+}
+
+.context-bar-small {
+  width: 64px;
+  height: 3px;
+}
+
+.context-bar-large {
+  width: 100%;
+  height: 12px;
+}
+
+.context-bar-segment {
+  flex: none;
+  height: 100%;
+  transition: width 400ms;
+}
+
+/* The buffer VIKI reserves ahead of the hard limit: a diagonal hatch of the track colour against
+   --b1 (one step up the tokens.css border ladder) rather than a flat fill, so "set aside" never
+   reads as "used" at a glance. Anchored from the right edge with `position: absolute` inside the
+   track's own `position: relative` — it is not one of the left-to-right used segments, so it does
+   not take a flex slot among them. */
+.context-bar-reserved {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(45deg, var(--track) 0 3px, var(--b1) 3px 6px);
+  transition: width 400ms;
+}
+
+/* The auto-compact threshold: a 2px line positioned over the segments rather than a flex child
+   among them. aria-hidden in the markup because the bar's own role="img" + aria-label already
+   names the whole picture; this line is decoration on top of it, not separate information. */
+.context-bar-mark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--t0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .context-bar-segment {
+    transition: none;
+  }
+
+  .context-bar-reserved {
+    transition: none;
+  }
+}
+
+html[data-motion="reduce"] .context-bar-segment,
+html[data-motion="reduce"] .context-bar-reserved {
+  transition: none;
+}
+
+@media (forced-colors: active) {
+  .context-bar-segment {
+    border-right: 1px solid CanvasText;
+  }
+
+  .context-bar-mark {
+    background: Highlight;
+  }
+}

@@ -1,0 +1,154 @@
+/* NeedsYou: native/proposal summary rows. */
+.needs-you-band {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.needs-you-band .rail-section-head {
+  gap: 8px;
+}
+
+.needs-you-band .rail-section-count {
+  flex: none;
+}
+
+.needs-you-band--urgent {
+  border-color: var(--or);
+  background: var(--or);
+  color: var(--on-or);
+}
+
+.needs-you-band--urgent .lbl,
+.needs-you-band--urgent .ico {
+  color: var(--on-or);
+}
+
+.needs-you-band--urgent .attention-count {
+  background: var(--on-or);
+  color: var(--or);
+}
+
+.needs-you-band--subdued {
+  background: var(--g2);
+}
+
+.needs-you-band--subdued .rail-section-count--dim {
+  color: var(--t2);
+}
+
+.needs-you-pulse {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.needs-you-pulse::before,
+.needs-you-pulse::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--or);
+  border-radius: inherit;
+  content: "";
+  animation: needs-you-ring 720ms ease-out both;
+}
+
+.needs-you-pulse::after {
+  animation-delay: 120ms;
+}
+
+@keyframes needs-you-ring {
+  from {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+}
+
+.needs-you-proposal-group > .lbl {
+  display: block;
+  margin: 12px 0 4px;
+}
+
+.need {
+  display: block;
+  width: 100%;
+  min-height: 38px;
+  padding: 6px 0;
+  border: none;
+  border-bottom: 1px solid var(--hair-header);
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.need-title {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.need-meta {
+  display: block;
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--t3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .needs-you-pulse {
+    display: none;
+  }
+}
+
+html[data-motion="reduce"] .needs-you-pulse {
+  display: none;
+}
+
+/* Pushes to the far right of `.rail-section-head` regardless of how many siblings (lbl, count)
+   precede it there. */
+.rail-section-head .need-open {
+  margin-left: auto;
+  flex: none;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--or);
+  cursor: pointer;
+  padding: 0;
+}
+
+.need-open:hover {
+  color: var(--or-hi);
+}
+
+.need-open:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 1px;
+}
+
+.needs-you-band--urgent .rail-section-head .need-open,
+.needs-you-band--urgent .rail-section-head .need-open:hover {
+  color: var(--on-or);
+}
+
+@media (forced-colors: active) {
+  .needs-you-band {
+    border: 1px solid CanvasText;
+  }
+
+  .need-open:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}

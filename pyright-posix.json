@@ -1,0 +1,4 @@
+{
+  "extends": "./pyproject.toml",
+  "ignore": ["tests/acceptance/test_vault_write_accept.py"]
+}

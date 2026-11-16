@@ -1,0 +1,357 @@
+.vo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  color: var(--t1);
+}
+
+.vo-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* Below the container query, .vo-side has no box of its own: its blocks become direct
+   flex items of .vo-grid, ordered with Featured and Latest for the narrow layout. */
+.vo-side {
+  display: contents;
+}
+
+.vo-featured {
+  order: 1;
+}
+
+.vo-recent {
+  order: 2;
+}
+
+.vo-inbox {
+  order: 3;
+}
+
+.vo-rediscover {
+  order: 4;
+}
+
+.vo-bookmarks {
+  order: 5;
+}
+
+.vo-growth {
+  order: 6;
+}
+
+.vo-topics {
+  order: 7;
+}
+
+.vo-h2 {
+  margin: 0 0 10px;
+}
+
+.vo-h3 {
+  margin: 14px 0 8px;
+}
+
+.vo-quiet {
+  margin: 4px 0 0;
+  color: var(--t3);
+  font-size: 12px;
+}
+
+.vo-coverage {
+  margin: -4px 0 8px;
+}
+
+.vo-ref {
+  display: block;
+  margin-top: 4px;
+  color: var(--t3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.vo-read-failure {
+  margin: 0;
+  color: var(--t2);
+}
+
+.vo-meta {
+  margin: 4px 0 0;
+  color: var(--t2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.vo-summary {
+  margin: 4px 0 0;
+  color: var(--t2);
+  font-size: 13px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.vo-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vo-card {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  padding: 8px 10px;
+}
+
+.vo-card > p:first-child {
+  margin: 0;
+  color: var(--t0);
+  font-size: 15px;
+}
+
+.vo-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vo-items,
+.vo-captures {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vo-tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vo-item,
+.vo-capture {
+  min-width: 0;
+}
+
+.vo-meter {
+  display: flex;
+  overflow: hidden;
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 3px;
+  background: var(--track);
+}
+
+.vo-meter-segment {
+  flex: none;
+  height: 100%;
+}
+
+/* A small bar chart, not a filled row: fixed narrow slots with real gaps between them, left
+   aligned rather than stretched to fill the card, so 12 short bars read as a chart instead of
+   a solid stripe. Each bar's own height is set inline (px), scaled to match this height. */
+.vo-weeks {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 56px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vo-week {
+  display: flex;
+  align-items: flex-end;
+  flex: none;
+  width: 12px;
+  height: 100%;
+}
+
+/* The default: a past week with notes added. Muted via a text-colour token at reduced opacity
+   (never the accent), so it reads as "activity" without competing with the current week. */
+.vo-week-bar {
+  width: 100%;
+  min-height: 0;
+  border-radius: 1px;
+  background: var(--t2);
+  opacity: 0.55;
+}
+
+/* This week: the one accent-coloured bar in the chart. */
+.vo-week-bar-current {
+  background: var(--or);
+  opacity: 1;
+}
+
+/* A week with nothing added: just the track colour, full opacity, at its own 2px floor height
+   (set inline) rather than the muted colour's 3px+ floor, so "nothing happened" stays visibly
+   different from "a little happened". */
+.vo-week-bar-zero {
+  background: var(--track);
+  opacity: 1;
+}
+
+/* Shrinks to the bar row's own content width (12 bars + their gaps), so .vo-weeks-labels's
+   space-between below lands "This week" under the last bar instead of at the card's far edge —
+   its own width would otherwise be the full card, like any other block box. max-width keeps it
+   from overflowing a card wherever that content is wider than the card itself. */
+.vo-weeks-wrap {
+  width: max-content;
+  max-width: 100%;
+}
+
+.vo-weeks-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.vo button:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+@container vault-browse (width >= 880px) {
+  .vo-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+    grid-template-rows: max-content minmax(0, 1fr);
+    align-items: start;
+  }
+
+  /* Explicit rows keep Featured above Latest in the left column. */
+  .vo-recent {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .vo-featured {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* A real box again (not contents), sharing the side column beside Featured and Latest. */
+  .vo-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
+@media (forced-colors: active) {
+  .vo-week-bar {
+    forced-color-adjust: none;
+    background: CanvasText;
+    opacity: 1;
+  }
+
+  .vo-meter-segment {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+}
+
+/* The skeleton (VaultBrowser.tsx `overviewWaiting`, VaultOverview.tsx `VaultOverviewSkeleton`):
+   its wrapper divs reuse .vo-grid/.vo-recent/.vo-side/.vo-inbox/.vo-growth/.vo-topics as-is, so
+   the container query above already lays the skeleton out the same way it lays out the loaded
+   page; only these filler rectangles' own sizes are new. Heights approximate each real block's
+   own first line, and .vo-skel-chart matches .vo-weeks's real 56px height (WEEK_CHART_HEIGHT in
+   VaultOverview.tsx) so the Growth card does not resize when the real chart replaces it. */
+.vo-skel .vo-skel-heading {
+  width: 100px;
+  height: 15px;
+  margin: 0 0 10px;
+}
+
+.vo-skel .vo-skel-subheading {
+  width: 70px;
+  height: 12px;
+  margin: 14px 0 8px;
+}
+
+.vo-skel .vo-skel-title {
+  width: 80%;
+  height: 14px;
+  margin-bottom: 6px;
+}
+
+.vo-skel .vo-skel-meta {
+  width: 40%;
+  height: 11px;
+  margin-top: 4px;
+}
+
+.vo-skel .vo-skel-summary {
+  width: 100%;
+  height: 28px;
+  margin-top: 4px;
+}
+
+.vo-skel .vo-skel-chart {
+  width: 100%;
+  height: 56px;
+  margin-top: 8px;
+}
+
+.vo-skel .vo-skel-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.vo-skel .vo-skel-chip {
+  width: 64px;
+  height: 22px;
+  border-radius: 999px;
+}
+
+/* The real overview's one entrance: a view switch (skeleton to data, or straight to a cached
+   render) always swaps in a single render, so there is never a previous `.vo` left on screen to
+   animate out — only this mount fade-in is needed. Excludes `.vo-skel`, which fades in on the
+   loading kit's own `reveal-late` (--loading-delay then --motion-fast) instead. */
+.vo:not(.vo-skel) {
+  animation: vo-reveal var(--motion-content) var(--motion-ease-out);
+}
+
+@keyframes vo-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vo:not(.vo-skel) {
+    animation: none;
+  }
+}
+
+html[data-motion="reduce"] .vo:not(.vo-skel) {
+  animation: none;
+}

@@ -1,0 +1,37 @@
+.capability-context {
+  border: 1px solid var(--line);
+  border-inline-start: 2px solid var(--or);
+  border-radius: 6px;
+  background: var(--s0);
+  padding: 12px 14px;
+  color: var(--t2);
+  overflow-wrap: anywhere;
+}
+
+.capability-context > h3,
+.capability-context > h4 {
+  margin: 0 0 6px;
+  color: var(--t0);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.capability-context > p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.capability-context-name {
+  color: var(--t1);
+}
+
+.capability-context-ref {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.capability-context-coverage {
+  color: var(--or);
+}

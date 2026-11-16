@@ -1,0 +1,48 @@
+# Contributing to VIKI Agent
+
+VIKI Agent is licensed under the [GNU Affero General Public License](LICENSE), version 3 or any
+later version. External contributions also require the
+[Contributor License Agreement](CLA.md) before merge. You keep ownership while granting the
+Project Owner copyright and patent rights, including commercial relicensing rights. Using the app
+does not require a CLA.
+
+## Before submitting
+
+- Read [AGENTS.md](AGENTS.md) for the repository's rules and narrower test commands.
+- Run the full check from the repository root: `uv run python scripts/check.py` runs the lint,
+  type checks and test suites, and `uv run python scripts/linux_check.py` runs the Linux suites
+  in Docker.
+- Describe the change, how you verified it, and any remaining limitations.
+- Include only material you are authorized to contribute. Identify third-party files, their
+  sources and licenses, and any rights you cannot grant; their licenses must allow distribution
+  under the GNU Affero General Public License.
+- Keep secrets, personal conversation records, credentials and private vault content out of the
+  contribution. Do not post private contact details to sign the CLA.
+
+## Accept the agreement
+
+Ask a maintainer in your pull request for the approved canonical repository commit containing CLA
+version 1.0 and the README's Project Owner identification. Read both at that immutable revision,
+then post this statement in your pull request from your own authenticated GitHub account, filling
+in the fields:
+
+> I have read and agree to VIKI Agent Contributor License Agreement version 1.0 and intend this
+> comment to be my electronic signature. The canonical CLA and README revision is: [full commit
+> SHA and links to both files at that revision]. I accept for my contributions in this pull request
+> through head commit: [full head SHA]. I act [for myself / as an authorized representative of named
+> entity]. I have authority to grant these rights. Third-party material and exceptions: [list or none].
+
+Every external author must accept for the rights they hold, or be covered by a representative's
+express authorization. Update the acceptance when the pull request head changes. A commit
+`Signed-off-by` trailer or a checked box is not a substitute for this acceptance. If you cannot
+make the capacity or authority representations, discuss an authorized arrangement before
+contributing; an account or comment does not supply missing authority.
+
+## Review before merge
+
+A maintainer checks your acceptance by hand: the head commit it covers, every contributing rights
+holder, the CLA and README revision you accepted, and the third-party restrictions you disclosed.
+No bot or signing service confirms it, so keep your acceptance comment, because it is the record.
+The Project Owner does not need to sign an agreement with themselves for their own work.
+Acceptance does not guarantee merge. GitHub requests the Project Owner's review on every pull
+request through `.github/CODEOWNERS`, and a pull request merges only after that approval.

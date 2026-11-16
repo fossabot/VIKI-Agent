@@ -1,0 +1,40 @@
+.bot-look {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+}
+
+.bot-look-compact {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.bot-look-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.bot-look-compact .bot-look-actions {
+  gap: 4px;
+}
+
+.bot-look-actions p {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--t2);
+  font-size: 0.85rem;
+}
+
+.bot-look-status {
+  grid-column: 2;
+  min-height: 1.25em;
+  color: var(--t2);
+  font-size: 0.85rem;
+}
+
+.bot-look-compact .bot-look-status {
+  grid-column: 1;
+}

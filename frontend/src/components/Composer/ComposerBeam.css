@@ -1,0 +1,388 @@
+/* Adapted from border-beam 1.3.0 by Jakub Antalik (MIT License; the notice ships in
+   public/licenses/libraries-dev.txt): the mono "pulse-inner" breathe. A 1px ring (::after), a soft
+   inner glow (::before) and a blurred bloom paint the same mono highlights, whose colors are
+   tokens in styles/tokens.css; ComposerBeam eases the registered properties below, and the fade-in
+   raises --beam-opacity once on mount. */
+
+@property --beam-opacity {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: true;
+}
+
+@property --beam-w1 {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-h1 {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-w2 {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-h2 {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-w3 {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-h3 {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-gh {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-tl {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-tr {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-bl {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-br {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@property --beam-x1 {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+@property --beam-y1 {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+@property --beam-x2 {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+@property --beam-y2 {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+@property --beam-x3 {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+@property --beam-y3 {
+  syntax: "<length>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+.composer-beam {
+  --beam-stroke: 0.77;
+  --beam-inner: 0.22;
+  --beam-bloom: 0.33;
+  --beam-bloom-alpha: 0.76;
+  --beam-corner-alpha: 0.18;
+  --beam-filter: brightness(0.75) saturate(1.2);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border-radius: 14px;
+  isolation: isolate;
+  pointer-events: none;
+  animation: composer-beam-in 0.6s ease forwards;
+}
+
+[data-theme="light"] .composer-beam {
+  --beam-stroke: 0.16;
+  --beam-inner: 0.2;
+  --beam-bloom: 0.4;
+  --beam-bloom-alpha: 0.775;
+  --beam-corner-alpha: 0.08;
+  --beam-filter: brightness(1.3) saturate(0.75);
+}
+
+.composer-beam::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  padding: 1px;
+  clip-path: inset(0 round 14px);
+  background:
+    radial-gradient(
+      ellipse calc(70px * var(--beam-w1)) calc(40px * var(--beam-h1) * var(--beam-gh)) at
+        calc(33% + var(--beam-x1)) calc(-7.4% + var(--beam-y1)),
+      rgba(var(--beam-spot1-rgb), var(--beam-tl)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(60px * var(--beam-w2)) calc(35px * var(--beam-h2) * var(--beam-gh)) at
+        calc(12% + var(--beam-x2)) calc(-5% + var(--beam-y2)),
+      rgba(var(--beam-spot2-rgb), var(--beam-tl)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(40px * var(--beam-w3)) calc(70px * var(--beam-h3) * var(--beam-gh)) at
+        calc(2.1% + var(--beam-x3)) calc(68.3% + var(--beam-y3)),
+      rgba(var(--beam-spot3-rgb), var(--beam-bl)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(20px * var(--beam-w1)) calc(35px * var(--beam-h1) * var(--beam-gh)) at
+        calc(2.1% + var(--beam-x1)) calc(68.3% + var(--beam-y1)),
+      rgba(var(--beam-spot4-rgb), var(--beam-bl)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(180px * var(--beam-w2)) calc(32px * var(--beam-h2) * var(--beam-gh)) at
+        calc(74.4% + var(--beam-x2)) calc(100% + var(--beam-y2)),
+      rgba(var(--beam-spot5-rgb), var(--beam-br)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(85px * var(--beam-w3)) calc(26px * var(--beam-h3) * var(--beam-gh)) at
+        calc(55% + var(--beam-x3)) calc(100% + var(--beam-y3)),
+      rgba(var(--beam-spot6-rgb), var(--beam-br)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(74px * var(--beam-w1)) calc(32px * var(--beam-h1) * var(--beam-gh)) at
+        calc(93.9% + var(--beam-x1)) calc(0% + var(--beam-y1)),
+      rgba(var(--beam-spot7-rgb), var(--beam-tr)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(26px * var(--beam-w2)) calc(42px * var(--beam-h2) * var(--beam-gh)) at
+        calc(100% + var(--beam-x2)) calc(27.1% + var(--beam-y2)),
+      rgba(var(--beam-spot8-rgb), var(--beam-tr)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(52px * var(--beam-w3)) calc(48px * var(--beam-h3) * var(--beam-gh)) at
+        calc(100% + var(--beam-x3)) calc(27.1% + var(--beam-y3)),
+      rgba(var(--beam-spot9-rgb), var(--beam-tr)),
+      transparent
+    );
+  -webkit-mask:
+    linear-gradient(white 0 0) content-box,
+    linear-gradient(white 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(white 0 0) content-box,
+    linear-gradient(white 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+  will-change: opacity, filter;
+  opacity: calc(var(--beam-opacity) * var(--beam-stroke));
+  filter: var(--beam-filter);
+}
+
+.composer-beam::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  clip-path: inset(0 round 14px);
+  background:
+    radial-gradient(
+      ellipse calc(65px * var(--beam-w1)) calc(35px * var(--beam-h1) * var(--beam-gh)) at
+        calc(33% + var(--beam-x1)) calc(-7.4% + var(--beam-y1)),
+      rgba(var(--beam-spot1-rgb), var(--beam-tl)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(55px * var(--beam-w2)) calc(30px * var(--beam-h2) * var(--beam-gh)) at
+        calc(12% + var(--beam-x2)) calc(-5% + var(--beam-y2)),
+      rgba(var(--beam-spot2-rgb), var(--beam-tl)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(35px * var(--beam-w3)) calc(65px * var(--beam-h3) * var(--beam-gh)) at
+        calc(2.1% + var(--beam-x3)) calc(68.3% + var(--beam-y3)),
+      rgba(var(--beam-spot3-rgb), var(--beam-bl)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(15px * var(--beam-w1)) calc(30px * var(--beam-h1) * var(--beam-gh)) at
+        calc(2.1% + var(--beam-x1)) calc(68.3% + var(--beam-y1)),
+      rgba(var(--beam-spot4-rgb), var(--beam-bl)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(173px * var(--beam-w2)) calc(28px * var(--beam-h2) * var(--beam-gh)) at
+        calc(74.4% + var(--beam-x2)) calc(100% + var(--beam-y2)),
+      rgba(var(--beam-spot5-rgb), var(--beam-br)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(80px * var(--beam-w3)) calc(22px * var(--beam-h3) * var(--beam-gh)) at
+        calc(55% + var(--beam-x3)) calc(100% + var(--beam-y3)),
+      rgba(var(--beam-spot6-rgb), var(--beam-br)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(69px * var(--beam-w1)) calc(28px * var(--beam-h1) * var(--beam-gh)) at
+        calc(93.9% + var(--beam-x1)) calc(0% + var(--beam-y1)),
+      rgba(var(--beam-spot7-rgb), var(--beam-tr)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(22px * var(--beam-w2)) calc(38px * var(--beam-h2) * var(--beam-gh)) at
+        calc(100% + var(--beam-x2)) calc(27.1% + var(--beam-y2)),
+      rgba(var(--beam-spot8-rgb), var(--beam-tr)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse calc(47px * var(--beam-w3)) calc(44px * var(--beam-h3) * var(--beam-gh)) at
+        calc(100% + var(--beam-x3)) calc(27.1% + var(--beam-y3)),
+      rgba(var(--beam-spot9-rgb), var(--beam-tr)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 60px 60px at 0% 0%,
+      rgba(var(--beam-corner-rgb), calc(var(--beam-corner-alpha) * var(--beam-tl))),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 60px 60px at 100% 0%,
+      rgba(var(--beam-corner-rgb), calc(var(--beam-corner-alpha) * var(--beam-tr))),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 60px 60px at 0% 100%,
+      rgba(var(--beam-corner-rgb), calc(var(--beam-corner-alpha) * var(--beam-bl))),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 60px 60px at 100% 100%,
+      rgba(var(--beam-corner-rgb), calc(var(--beam-corner-alpha) * var(--beam-br))),
+      transparent 70%
+    );
+  -webkit-mask-image:
+    linear-gradient(white, transparent 28px, transparent calc(100% - 28px), white),
+    linear-gradient(to right, white, transparent 28px, transparent calc(100% - 28px), white);
+  -webkit-mask-composite: source-over;
+  mask-image:
+    linear-gradient(white, transparent 28px, transparent calc(100% - 28px), white),
+    linear-gradient(to right, white, transparent 28px, transparent calc(100% - 28px), white);
+  mask-composite: add;
+  pointer-events: none;
+  z-index: 1;
+  will-change: opacity, filter;
+  opacity: calc(var(--beam-opacity) * var(--beam-inner));
+  filter: var(--beam-filter);
+}
+
+.composer-beam-bloom {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  clip-path: inset(0 round 14px);
+  background:
+    radial-gradient(
+      ellipse 84px 48px at 33% -7.4%,
+      rgba(var(--beam-spot1-rgb), var(--beam-bloom-alpha)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 72px 42px at 12% -5%,
+      rgba(var(--beam-spot2-rgb), var(--beam-bloom-alpha)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 48px 84px at 2.1% 68.3%,
+      rgba(var(--beam-spot3-rgb), var(--beam-bloom-alpha)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 216px 38px at 74.4% 100%,
+      rgba(var(--beam-spot5-rgb), var(--beam-bloom-alpha)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 102px 31px at 55% 100%,
+      rgba(var(--beam-spot6-rgb), var(--beam-bloom-alpha)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 89px 38px at 93.9% 0%,
+      rgba(var(--beam-spot7-rgb), var(--beam-bloom-alpha)),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 62px 58px at 100% 27.1%,
+      rgba(var(--beam-spot9-rgb), var(--beam-bloom-alpha)),
+      transparent
+    );
+  -webkit-mask:
+    linear-gradient(white 0 0) content-box,
+    linear-gradient(white 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(white 0 0) content-box,
+    linear-gradient(white 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+  pointer-events: none;
+  z-index: 3;
+  will-change: opacity;
+  opacity: calc(var(--beam-opacity) * var(--beam-bloom));
+  filter: blur(8px) var(--beam-filter);
+}
+
+@keyframes composer-beam-in {
+  to {
+    --beam-opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (prefers-contrast: more), (forced-colors: active) {
+  .composer-beam::before,
+  .composer-beam::after,
+  .composer-beam-bloom {
+    visibility: hidden;
+  }
+}
+
+html[data-motion="reduce"] .composer-beam::before,
+html[data-motion="reduce"] .composer-beam::after,
+html[data-motion="reduce"] .composer-beam-bloom {
+  visibility: hidden;
+}

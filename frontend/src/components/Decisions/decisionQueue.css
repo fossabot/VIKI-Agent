@@ -1,0 +1,64 @@
+/* The undo bar: one "sends in 5 seconds" row per queued decision, newest first, plus
+   a single failure line when a send rejects (decisionQueue.tsx's UndoBar). Shares the toast
+   family's role tokens (Toast/SessionLimitToast.css) so every transient surface in the app reads
+   as the same kind of thing, and tokens.css's --err for the one error state. Fixed positioning
+   needs no positioned ancestor from whichever surface mounts it; z-index 50 matches the decision
+   inbox (DecisionInbox.css's own `position: fixed` backdrop), since this bar belongs to that same
+   surface and a later DOM sibling at an equal z-index already paints over it. */
+.decision-undo-bar {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 380px;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 50;
+}
+
+.decision-undo-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.decision-undo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--fill-toast);
+  border: 1px solid var(--b-strong);
+  border-radius: 10px;
+  box-shadow: 0 14px 36px var(--shadow-toast);
+  padding: 10px 10px 10px 14px;
+}
+
+.decision-undo-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.decision-undo-action {
+  flex: none;
+}
+
+.decision-undo-error {
+  margin: 0;
+  background: var(--fill-error);
+  border: 1px solid var(--err);
+  border-radius: 10px;
+  box-shadow: 0 14px 36px var(--shadow-toast);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--t0);
+}

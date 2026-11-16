@@ -1,0 +1,91 @@
+/* The editor beside the disk version: side by side when there is room, stacked below. */
+.code-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.code-editor-head,
+.code-editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+}
+
+/* Refused buttons stay focusable, so they are dimmed rather than disabled. */
+.code-editor-toolbar [aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.code-editor-status,
+.code-editor-message {
+  margin: 0;
+}
+
+/* Stays rendered while empty so screen readers announce the text that arrives; out of the flow so
+   the column's gap does not grow. */
+.code-editor-status:empty {
+  position: absolute;
+}
+
+.code-editor-message {
+  color: var(--err);
+}
+
+.code-editor-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.code-editor-main,
+.code-editor-disk {
+  min-width: 0;
+}
+
+.code-editor-disk h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--t0);
+}
+
+.code-editor-disk pre {
+  margin: 0 0 8px;
+  padding: 8px 12px;
+  max-height: 70vh;
+  overflow: auto;
+  font-family: var(--font-mono);
+  line-height: 1.5;
+  color: var(--t0);
+  background: var(--s0);
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+}
+
+.code-editor-host .cm-editor {
+  min-height: 12rem;
+  max-height: 70vh;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+}
+
+.code-editor-host .cm-scroller {
+  overflow: auto;
+}
+
+@media (min-width: 1100px) {
+  .code-editor-body {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .code-editor-main,
+  .code-editor-disk {
+    flex: 1 1 0;
+  }
+}

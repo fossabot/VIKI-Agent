@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 940" width="680" height="940" role="img" aria-labelledby="title desc">
+  <title id="title">Work, review, and reuse</title>
+  <desc id="desc">Five steps: notice what needs attention; choose a goal and relevant sources; Claude Code works in the chosen context; review changes, results and outstanding questions; keep a finding or decide the next action.</desc>
+  <rect width="680" height="940" fill="#0b0b0b" />
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b0b0bc" />
+    </marker>
+  </defs>
+  <text x="40" y="48" fill="#b0b0bc" font-family="Segoe UI, Arial, sans-serif" font-size="18" letter-spacing="2">Work, review, and reuse</text>
+  <path d="M 340 200 V 245" fill="none" stroke="#b0b0bc" stroke-width="2.5" marker-end="url(#arrow)" />
+  <rect x="60" y="90" width="560" height="110" rx="14" fill="#141414" stroke="#3a3a42" stroke-width="2" />
+  <text x="84" y="125" fill="#f8f8ff" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600">01  Notice</text>
+  <text x="84" y="155" fill="#b0b0bc" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="400">What needs attention</text>
+  <path d="M 340 365 V 410" fill="none" stroke="#b0b0bc" stroke-width="2.5" marker-end="url(#arrow)" />
+  <rect x="60" y="255" width="560" height="110" rx="14" fill="#141414" stroke="#3a3a42" stroke-width="2" />
+  <text x="84" y="290" fill="#f8f8ff" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600">02  Choose</text>
+  <text x="84" y="320" fill="#b0b0bc" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="400">A goal and the relevant sources</text>
+  <path d="M 340 530 V 575" fill="none" stroke="#b0b0bc" stroke-width="2.5" marker-end="url(#arrow)" />
+  <rect x="60" y="420" width="560" height="110" rx="14" fill="#1a1a1e" stroke="#3a3a42" stroke-width="2" />
+  <text x="84" y="455" fill="#f8f8ff" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600">03  Work</text>
+  <text x="84" y="485" fill="#b0b0bc" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="400">Claude Code works in the chosen context</text>
+  <path d="M 340 695 V 740" fill="none" stroke="#b0b0bc" stroke-width="2.5" marker-end="url(#arrow)" />
+  <rect x="60" y="585" width="560" height="110" rx="14" fill="#141414" stroke="#3a3a42" stroke-width="2" />
+  <text x="84" y="620" fill="#f8f8ff" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600">04  Review</text>
+  <text x="84" y="650" fill="#b0b0bc" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="400">Changes, results and outstanding questions</text>
+  <rect x="60" y="750" width="560" height="110" rx="14" fill="#141414" stroke="#3a3a42" stroke-width="2" />
+  <text x="84" y="785" fill="#f8f8ff" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600">05  Keep</text>
+  <text x="84" y="815" fill="#b0b0bc" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="400">A finding or the next action</text>
+</svg>

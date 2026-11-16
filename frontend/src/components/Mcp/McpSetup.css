@@ -1,0 +1,47 @@
+.mcp-setup {
+  min-width: 0;
+  color: var(--t1);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.mcp-setup h3,
+.mcp-setup h4 {
+  color: var(--t0);
+  margin: 12px 0 8px;
+}
+
+.mcp-setup h3:first-child {
+  margin-top: 0;
+}
+
+.mcp-setup label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.mcp-setup select {
+  max-width: 100%;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  color: var(--t0);
+  font: inherit;
+}
+
+.mcp-setup pre {
+  overflow-x: auto;
+  padding: 10px;
+  background: var(--g2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.mcp-setup li + li {
+  margin-top: 8px;
+}

@@ -1,0 +1,87 @@
+/* Rolling digits. `.roll-host` is the element embedding <RollingNumber> (VaultTiles'
+   `.tile-n`): its own glyphs are RollingNumber's real text node, the one textContent and a
+   plain-text query both read, kept in the layout but painted invisible with
+   -webkit-text-fill-color. `.roll` sits on top of them (absolutely positioned over the whole
+   host), repainted visible (-webkit-text-fill-color: currentColor overrides the inherited
+   transparent for itself and everything inside it), built from empty per-character spans whose
+   own ::before -- generated content, never part of textContent -- paints the glyph the host's
+   hidden text already carries. tabular-nums on both sides keeps the overlay's characters lined
+   up with the real ones under them.
+
+   Each `.roll-digit`'s ::before stays an ordinary in-flow block (an absolutely positioned
+   one takes the element out of flow, so an otherwise-empty `.roll-digit` has no in-flow content
+   left to size itself on and collapses to 0 width -- `overflow: hidden` then clips it to
+   nothing, invisible in a real browser, though jsdom has no layout and never catches it). In
+   flow, the "0..9" column stacks ten real lines and sizes the inline-block to one digit's width;
+   the parent's own `height: 1lh; overflow: hidden` still clips it to one row, and `--d` still
+   slides the right row into view via translateY. A plain `.roll-sep` carries no such clipping,
+   so without `vertical-align: top` on both kinds of span, an inline-block's default baseline
+   alignment (its own bottom edge, since it overflows: hidden) would sit it visibly lower than
+   the digits. */
+.roll-host {
+  position: relative;
+  font-variant-numeric: tabular-nums;
+  -webkit-text-fill-color: transparent;
+}
+
+.roll {
+  position: absolute;
+  inset: 0;
+  white-space: nowrap;
+  text-align: inherit;
+  font-variant-numeric: tabular-nums;
+  -webkit-text-fill-color: currentColor;
+}
+
+.roll-digit,
+.roll-sep {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.roll-digit {
+  height: 1lh;
+  overflow: hidden;
+}
+
+.roll-digit::before {
+  content: "0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9";
+  display: block;
+  white-space: pre;
+  transform: translateY(calc(var(--d) * -1lh));
+  transition: transform var(--digit-roll) var(--motion-ease-out);
+}
+
+.roll-sep::before {
+  content: attr(data-c);
+}
+
+/* Reduced motion (both triggers) and forced colours: the overlay is dropped and the host's own
+   (real) glyphs shown instead, so the number swaps at once instead of rolling. */
+@media (prefers-reduced-motion: reduce) {
+  .roll-host {
+    -webkit-text-fill-color: currentColor;
+  }
+
+  .roll {
+    display: none;
+  }
+}
+
+html[data-motion="reduce"] .roll-host {
+  -webkit-text-fill-color: currentColor;
+}
+
+html[data-motion="reduce"] .roll {
+  display: none;
+}
+
+@media (forced-colors: active) {
+  .roll-host {
+    -webkit-text-fill-color: currentColor;
+  }
+
+  .roll {
+    display: none;
+  }
+}

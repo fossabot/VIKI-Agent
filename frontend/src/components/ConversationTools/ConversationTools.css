@@ -1,0 +1,79 @@
+.conversation-tools {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 16px;
+  max-height: 35vh;
+  overflow: auto;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+.conversation-tools button,
+.turn-actions button {
+  border: 1px solid var(--line);
+  padding: 4px 8px;
+  border-radius: 5px;
+  margin: 3px;
+}
+.conversation-search input {
+  display: block;
+  width: 100%;
+  padding: 6px;
+  border: 1px solid var(--line);
+  background: var(--g2);
+  color: var(--t1);
+}
+.conversation-search ul,
+.archive-tools ul {
+  list-style: none;
+  padding: 0;
+}
+.conversation-search li button {
+  width: 100%;
+  text-align: left;
+}
+.conversation-search li span {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--t2);
+}
+.archive-tools p {
+  color: var(--t2);
+  line-height: 1.6;
+}
+.archive-tools label {
+  display: block;
+  margin: 8px 0;
+}
+.archive-tools input {
+  max-width: 100%;
+  display: block;
+  margin-top: 4px;
+}
+.archive-preview section {
+  margin: 24px 0;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.archive-preview img {
+  max-width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+}
+.archive-user-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.turn-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--t3);
+  font-size: 12px;
+  margin-top: 8px;
+}
+.turn-search-target {
+  outline: 2px solid var(--or);
+  outline-offset: 6px;
+  border-radius: 5px;
+}

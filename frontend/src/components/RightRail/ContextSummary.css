@@ -1,0 +1,69 @@
+.context-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 0 0;
+  border: 0;
+  border-top: 1px solid var(--hair);
+  background: none;
+  color: var(--t1);
+  font: inherit;
+  font-size: 12px;
+  text-align: left;
+}
+
+button.context-summary {
+  cursor: pointer;
+}
+
+.context-summary-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.context-summary-value {
+  color: var(--t0);
+  font-variant-numeric: tabular-nums;
+}
+
+.context-summary-detail {
+  color: var(--t2);
+  font-size: 11.5px;
+}
+
+.context-summary-track {
+  display: block;
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--track);
+}
+
+.context-summary-fill {
+  display: block;
+  height: 100%;
+  background: var(--or);
+}
+
+@media (forced-colors: active) {
+  .context-summary-track {
+    forced-color-adjust: none;
+    background: Canvas;
+    outline: 1px solid CanvasText;
+  }
+
+  .context-summary-fill {
+    background: CanvasText;
+  }
+}
+
+.context-summary:focus-visible {
+  outline: 2px solid var(--t1);
+  outline-offset: 3px;
+}

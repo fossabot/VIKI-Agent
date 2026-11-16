@@ -1,0 +1,163 @@
+{
+  "name": "viki-agent-desktop",
+  "productName": "VIKI Agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A local chat for your notes vault that runs your own Claude Code.",
+  "author": "VIKI Agent",
+  "homepage": "https://viki-agent.invalid",
+  "main": "main.mjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test \"test/*.test.mjs\"",
+    "lint": "node ../frontend/node_modules/@biomejs/biome/bin/biome check .",
+    "format": "node ../frontend/node_modules/@biomejs/biome/bin/biome format --write .",
+    "dist": "node build/dist.mjs",
+    "smoke": "electron test/window.smoke.mjs",
+    "e2e": "node test/app.e2e.mjs"
+  },
+  "devDependencies": {
+    "electron": "44.9.3",
+    "electron-builder": "26.17.0"
+  },
+  "dependencies": {
+    "electron-updater": "6.8.10"
+  },
+  "overrides": {
+    "minimatch@>=7.0.0 <11.0.1": "11.0.1"
+  },
+  "build": {
+    "appId": "app.viki-agent.desktop",
+    "directories": {
+      "output": "../dist/desktop",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.mjs",
+      "window.mjs",
+      "policy.mjs",
+      "server.mjs",
+      "updates.mjs",
+      "magpie.mjs",
+      "magpie-theme.mjs",
+      "package.json",
+      {
+        "from": "../frontend/node_modules/@fontsource/ibm-plex-sans/files",
+        "to": "fonts",
+        "filter": [
+          "ibm-plex-sans-latin-400-normal.woff2",
+          "ibm-plex-sans-latin-500-normal.woff2",
+          "ibm-plex-sans-latin-600-normal.woff2"
+        ]
+      },
+      {
+        "from": "../frontend/node_modules/@fontsource/ibm-plex-mono/files",
+        "to": "fonts",
+        "filter": [
+          "ibm-plex-mono-latin-400-normal.woff2",
+          "ibm-plex-mono-latin-500-normal.woff2"
+        ]
+      }
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "publish": null,
+    "extraResources": [
+      {
+        "from": "../dist/compiled/viki-agent.dist",
+        "to": "viki-agent"
+      },
+      {
+        "from": "../frontend/public/brand/mark.png",
+        "to": "icon.png"
+      },
+      {
+        "from": "../dist/notices/THIRD-PARTY-NOTICES.txt",
+        "to": "THIRD-PARTY-NOTICES.txt"
+      }
+    ],
+    "electronFuses": {
+      "runAsNode": false,
+      "enableCookieEncryption": true,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableEmbeddedAsarIntegrityValidation": true,
+      "onlyLoadAppFromAsar": true,
+      "grantFileProtocolExtraPrivileges": false,
+      "resetAdHocDarwinSignature": true
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "../frontend/public/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "../frontend/public/brand/mark.png",
+      "category": "public.app-category.productivity",
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "VIKI Agent uses the microphone only while you dictate a message or hold a hands-free conversation.",
+        "NSDocumentsFolderUsageDescription": "VIKI Agent and the Claude Code it runs for you read and save files in the folders you choose.",
+        "NSDesktopFolderUsageDescription": "VIKI Agent and the Claude Code it runs for you read and save files in the folders you choose.",
+        "NSDownloadsFolderUsageDescription": "VIKI Agent and the Claude Code it runs for you read and save files in the folders you choose.",
+        "NSRemovableVolumesUsageDescription": "VIKI Agent and the Claude Code it runs for you read and save files in the folders you choose.",
+        "NSNetworkVolumesUsageDescription": "VIKI Agent and the Claude Code it runs for you read and save files in the folders you choose."
+      }
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "deb"
+        }
+      ],
+      "icon": "../frontend/public/brand/mark.png",
+      "executableName": "viki-agent",
+      "category": "Office",
+      "maintainer": "VIKI Agent <support@viki-agent.invalid>",
+      "description": "A local chat for your notes vault that runs your own Claude Code."
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libuuid1",
+        "libsecret-1-0",
+        "libsecret-tools",
+        "git",
+        "zenity | kdialog"
+      ]
+    }
+  }
+}

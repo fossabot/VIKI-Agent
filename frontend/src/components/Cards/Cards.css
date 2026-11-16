@@ -1,0 +1,368 @@
+/* The cards' shared shell and each card's own rows, following the design's permission
+   card and plan card — see Cards.tsx's own header comment for the two places the frozen
+   acceptance test overrides that render. `.chip` is reused as-is from styles/base.css (not
+   redefined here); `.btn`/`.btn.go`/`.btn.alt` are shared primitives that live once in
+   styles/base.css (see the note above the question card). */
+
+.card {
+  margin-top: 16px;
+  border: 1px solid var(--b-strong);
+  border-radius: 12px;
+  background: var(--g1);
+  padding: 16px;
+  min-width: 0;
+}
+
+.card-target {
+  outline: 2px solid var(--or);
+  outline-offset: 4px;
+  animation: card-target-flash 1.6s ease-out 1;
+}
+
+@keyframes card-target-flash {
+  from {
+    background: rgb(var(--or-rgb) / 0.18);
+  }
+  to {
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-target {
+    animation: none;
+  }
+}
+
+html[data-motion="reduce"] .card-target {
+  animation: none;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card-agent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--t2);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* The one chip in the app whose text is the model's: AskUserQuestion's `header`, which the
+   server passes through uncut (driver.py's `_questions`). `.chip` is `white-space: nowrap` at a
+   fixed 20px, so wrapping — what `.message-column` gives the rest of the card — cannot help it
+   and it can only truncate. `overflow: hidden` is what lets it truncate at all: a flex item's
+   automatic minimum size is its content's only while its overflow is visible. Scoped to the card
+   rather than added to base.css's `.chip`, which the rails, the header, the palette and the other
+   cards draw from with text the app wrote. No `text-overflow: ellipsis` with it — the chip is an
+   inline-flex box, and ellipsis renders on a block container's inline content, so it would be a
+   dead declaration. */
+.card-head .chip {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.card-question {
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: var(--t0);
+  overflow-wrap: anywhere;
+}
+
+/* --- permission card (kind "tool") ---------------------------------------------------------- */
+
+.card-tool {
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  /* The design's panel fill between --g1 and --g2 in the dark theme. */
+  background: var(--fill-tool);
+  padding: 8px 12px;
+  font-size: 12.5px;
+  line-height: 20px;
+  color: var(--t1);
+  /* A command the user is authorising must be readable to its end, so it wraps rather than
+     being clipped — and, like .card-plan, scrolls past a point instead of pushing Allow once and
+     Deny off the screen. `anywhere` because a long argument is often one unbroken token (a URL, a
+     path) that `break-word` would leave overflowing. `pre-wrap` because the shell reads a line
+     break as the end of a command: collapsed to a space, a second command reads as arguments of
+     the first, or as part of the comment before it. */
+  max-height: 220px;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.card-tool-name {
+  color: var(--or);
+}
+
+.card-reason {
+  margin-top: 8px;
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--t2);
+  overflow-wrap: anywhere;
+}
+
+/* DecisionText.tsx's lines about the text above: hidden characters written out, or a box that
+   scrolls. Its own look is DecisionText.css's; only the gap to the card's rows is set here. */
+.card > .decision-notes {
+  margin-top: 8px;
+}
+
+/* --- plan card (kind "plan") ----------------------------------------------------------------- */
+
+.card-plan {
+  margin-top: 12px;
+  /* "scrolling after 320px so a long plan cannot push the buttons off screen" (contract). */
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--fill-tool); /* the same --fill-tool fill as .card-tool */
+  padding: 12px 16px;
+}
+
+/* Markdown.tsx's own `.md.jp` wrapper lands inside `.card-plan`; Conversation.css sizes `.md`
+   for the reply column (15px/26px, --t0), so the card's own copy of the design's smaller
+   card-scale type is scoped here rather than changed there. */
+.card-plan .md {
+  margin-top: 0;
+  font-size: 14px;
+  line-height: 23px;
+  color: var(--t1);
+}
+
+.card-plan .md h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.card-plan .md p {
+  margin: 0 0 8px;
+}
+
+/* Conversation.css's `.md ul, .md ol` (the reply column's own scale) makes both a flex column
+   with a 4px gap; overriding only margin/padding here left that flex-column in place, so list
+   items were spaced by the 4px gap *plus* their own margins (flex items' margins never
+   collapse). `display: block` puts the list back under normal flow so `.card-plan .md li`'s
+   `margin: 2px 0` below is the only thing spacing the steps, matching the design. */
+.card-plan .md ul,
+.card-plan .md ol {
+  display: block;
+  margin: 0 0 8px;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 23px;
+}
+
+.card-plan .md li {
+  margin: 2px 0;
+}
+
+.card-plan .md li::marker {
+  color: var(--or);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+
+.card-plan .md code {
+  color: var(--or-hi);
+}
+
+/* --- shared action row ------------------------------------------------------------------------ */
+
+.card-actions {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--hair);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card-note {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--t3);
+  overflow-wrap: anywhere;
+}
+
+.card-actions .card-note {
+  flex: 1 1 180px;
+}
+
+.card > .card-note {
+  margin-top: 12px;
+}
+
+/* The recorded choice and what became of it, in place of the buttons. Same rhythm as
+   .card-actions, which it replaces, so a card does not jump when its choice is recorded. */
+.card-record {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--hair);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  line-height: 20px;
+  color: var(--t2);
+  overflow-wrap: anywhere;
+}
+
+.card-record > :first-child {
+  font-weight: 500;
+  color: var(--t1);
+}
+
+/* .btn, .btn.go, .btn.alt and .btn:disabled are NOT declared here: they are shared primitives
+   used by the slash menu, the model menu and the error cards too, and they live once in
+   styles/base.css. A second bare `.btn` in a component stylesheet is exactly the collision
+   that single definition exists to prevent. Card-specific button behaviour, if any is ever
+   needed, is scoped `.card .btn`. */
+
+/* --- question card (AskUserQuestion) ---------------------------------------------------------- */
+
+/* Only ever seen when a single ask carries more than one question (the tool allows up to four):
+   the groups need to read as separate decisions rather than one long list of options. */
+.card-group + .card-group {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hair);
+}
+
+.card-options {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-option {
+  min-height: 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  background: none;
+  padding: 8px 12px;
+  font: inherit;
+  text-align: left;
+  color: var(--t1);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.card-option:hover:not(:disabled) {
+  background: var(--g2);
+}
+
+.card-option--selected {
+  color: var(--t0);
+  border-color: var(--b-strong);
+  background: var(--g3);
+}
+
+.card-option-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.card-option-check {
+  color: var(--or);
+}
+
+.card-option-desc {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--t3);
+}
+
+.card-other-toggle {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  padding: 4px 2px;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  color: var(--t3);
+  cursor: pointer;
+}
+
+.card-other {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-other input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  padding: 0 10px;
+  font: inherit;
+  font-size: 13px;
+  color: var(--t0);
+}
+
+.card-other input:disabled {
+  opacity: 0.5;
+}
+
+.card-progress {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.card-other label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card button:focus-visible,
+.card input:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  .card-target {
+    outline: 2px solid Highlight;
+  }
+
+  .card button:focus-visible,
+  .card input:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .card-option--selected {
+    border-color: Highlight;
+  }
+}

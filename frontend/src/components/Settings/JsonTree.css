@@ -1,0 +1,47 @@
+/* JsonTree's own layout. The shared card chrome is Settings.css's; this
+   file only arranges the key/value grid and the nested-group indent. Every scalar stays a plain
+   text node (JsonTree.tsx's own safety rule), so nothing here ever reaches into text content. */
+
+.json-tree-map {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 4px 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.json-tree-entry {
+  display: contents;
+}
+
+.json-tree-key {
+  color: var(--t3);
+}
+
+.json-tree-value {
+  margin: 0;
+}
+
+/* A group's key becomes a label over its value instead of sitting beside it: both span the
+   grid's full width, and the value is indented behind a hairline rule rather than a column. */
+/* A little extra above a group's own key, so a run of several groups still reads as separate
+   entries at the tighter 4px row gap. */
+.json-tree-group > .json-tree-key {
+  grid-column: 1 / -1;
+  margin-top: 2px;
+}
+
+.json-tree-group > .json-tree-value {
+  grid-column: 1 / -1;
+  padding-left: 12px;
+  border-left: 1px solid var(--hair);
+}
+
+.json-tree-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.json-tree-list > li + li {
+  margin-top: 4px;
+}

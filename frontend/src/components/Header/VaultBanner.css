@@ -1,0 +1,24 @@
+/* Sizes follow the design 1:1. The two warm alphas
+   are the design's own: a tint of --or at 7% and 30% through --or-rgb, so each theme sets it,
+   and they say "elsewhere", which is why this bar reads warm where ReconnectBanner reads
+   neutral. Same 28px side padding as .conversation-header, so the text lines up with the title
+   above it. */
+.vault-banner {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 28px;
+  background: rgb(var(--or-rgb) / 0.07);
+  border-bottom: 1px solid rgb(var(--or-rgb) / 0.3);
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.vault-banner-dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--or);
+}

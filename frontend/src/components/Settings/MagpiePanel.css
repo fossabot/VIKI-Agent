@@ -1,0 +1,44 @@
+.app-view.magpie-stage-host {
+  position: relative;
+  overflow: hidden;
+}
+
+.app-view.magpie-stage-host > :not(.magpie-stage) {
+  visibility: hidden;
+}
+
+.app-view.magpie-stage-host
+  :is([role="dialog"], [role="menu"], [role="listbox"], .git-popover, .context-popover) {
+  visibility: visible;
+}
+
+.magpie-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  background: var(--g1);
+  color: var(--t0);
+  text-align: center;
+}
+
+.magpie-stage h2,
+.magpie-stage p {
+  margin: 0;
+}
+
+.magpie-stage h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.magpie-stage p {
+  max-width: 420px;
+  font-size: 13px;
+  color: var(--t2);
+}

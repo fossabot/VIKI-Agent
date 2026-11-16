@@ -1,0 +1,169 @@
+/* The Review tab and the integration and push panels it holds. Long paths and subjects wrap, and
+   the diff scrolls inside its own box, so the page never scrolls sideways. */
+.review {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.review > * {
+  min-width: 0;
+}
+
+.review-bar,
+.review-tools,
+.review-entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-width: 0;
+}
+
+.review-bar {
+  align-items: end;
+}
+
+.review-bar label,
+.review-form label {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.review-bar label {
+  flex: 1 1 12em;
+}
+
+.review-bar select,
+.review-form textarea {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.review-form {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.review-form label,
+.review-form textarea {
+  width: 100%;
+}
+
+.review-form textarea {
+  min-height: 5em;
+  font: inherit;
+  resize: vertical;
+}
+
+.review-reason {
+  margin: 0;
+  color: var(--t2);
+}
+
+.review-refusal {
+  margin: 0;
+  color: var(--err);
+}
+
+.review-entries,
+.review-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.review-entry {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--hair);
+}
+
+.review-path,
+.review-path-button {
+  min-width: 0;
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+
+.review-path-button {
+  padding: 4px 0;
+  border: none;
+  background: none;
+  color: var(--t0);
+  font-size: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.review-path-button:hover {
+  text-decoration: underline;
+}
+
+.review-path-button:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.review-view {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  min-width: 0;
+}
+
+.review-view-title {
+  margin: 0;
+}
+
+.review-content {
+  margin: 0;
+  padding: 0 12px;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--s0);
+  color: var(--t1);
+  font-family: var(--font-mono);
+  font-size: var(--code-font-size, 13px);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.review-view .code-diff,
+.review-view .review-content {
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+}
+
+.review-panel {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.review-panel-list li {
+  min-width: 0;
+}
+
+/* `.btn` keeps its label on one line, so "Integrate into <branch>" and "Push <branch>" with a long
+   branch name would run past the pane. These wrap instead and grow taller than the 32px
+   `.btn.sm` (the extra class outranks it whatever order the sheets load in). */
+.review-panel .btn.sm {
+  white-space: normal;
+  height: auto;
+  min-height: 32px;
+  padding-block: 6px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-align: start;
+}

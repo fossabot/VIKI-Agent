@@ -1,0 +1,119 @@
+/* The per-kind item lists with their costs — plain tables/lists beneath ContextBar's
+   segmented meter and ContextMeter's headline total. Five <section>s stacked in a column;
+   each keeps the rest of the app's plain-list look (hairline row dividers, muted small text for
+   the hidden-items note) rather than introducing a new visual language of its own. */
+.context-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.context-items h2 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.context-items table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.context-items th,
+.context-items td {
+  padding: 7px 8px 7px 0;
+  border-bottom: 1px solid var(--hair);
+  text-align: left;
+}
+
+.context-items-key {
+  margin: 0 0 8px;
+  color: var(--t3);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.context-category-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.context-category-swatch {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+
+.context-items [data-kind="buffer"] .context-category-swatch {
+  background: repeating-linear-gradient(45deg, var(--track) 0 2px, var(--t3) 2px 3px);
+}
+
+.context-items [data-kind="deferred"] .context-category-swatch {
+  border: 1px dashed var(--t3);
+}
+
+.context-items [data-kind="free"] .context-category-swatch {
+  border-color: var(--t3);
+}
+
+.context-category-track {
+  display: block;
+  width: 100%;
+  min-width: 48px;
+  height: 4px;
+  margin-top: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--track);
+}
+
+.context-category-fill {
+  display: block;
+  height: 100%;
+}
+
+.context-items td:nth-child(2) {
+  font-variant-numeric: tabular-nums;
+}
+
+.context-items td:last-child {
+  width: 42%;
+  font-variant-numeric: tabular-nums;
+}
+
+.context-items ul {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  list-style: none;
+}
+
+.context-items li {
+  padding: 2px 0;
+  border-bottom: 1px solid var(--hair);
+}
+
+.context-items-hidden {
+  color: var(--t3);
+  font-size: 12px;
+}
+
+@media (forced-colors: active) {
+  .context-category-swatch {
+    border-color: CanvasText;
+  }
+
+  .context-category-track {
+    outline: 1px solid CanvasText;
+  }
+
+  .context-category-fill {
+    box-sizing: border-box;
+    border-top: 4px solid Highlight;
+  }
+}

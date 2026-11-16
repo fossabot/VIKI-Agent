@@ -1,0 +1,273 @@
+.topbar {
+  flex: none;
+  /* border-box; the design sizes this bar content-box (48px + the 1px hairline),
+     so the border-box height needs the hairline folded in to land on the same 49px. */
+  min-height: 49px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 0 16px 0 20px;
+  border-bottom: 1px solid var(--hair);
+  container-type: inline-size;
+}
+
+.wordmark {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.18em;
+  color: var(--t0);
+}
+
+.tabs {
+  display: flex;
+  gap: 24px;
+  margin-left: 36px;
+  height: 48px;
+  align-items: stretch;
+  font-size: 14px;
+}
+
+.tabs.tabs-expanded {
+  gap: 16px;
+  margin-left: 24px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  color: var(--t2);
+}
+
+.tab-active {
+  color: var(--t0);
+  box-shadow: inset 0 -2px 0 var(--or);
+}
+
+.tab-inert {
+  cursor: default;
+}
+
+.tab-action {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.compact-navigation {
+  display: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--t0);
+  background: var(--g2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.compact-navigation:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 2px;
+}
+
+.topbar-right {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.decisions-count {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  border-radius: 7px;
+  background: var(--or);
+  color: var(--on-or);
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+}
+
+/* The Routines tab's attention count: the same bubble, in the tab's own flow instead of a
+   corner of an icon button. */
+.tab-count {
+  position: static;
+  margin-left: 6px;
+}
+
+.new-session {
+  height: 32px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--on-or);
+  background: var(--or);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  /* The bar's only real action, so flex never squeezes it: once .topbar-right
+     gives up its own min-width, `flex: none` keeps New session from being the next thing
+     compressed. The 700px container block further down already trims its padding, in S windows
+     up to 724px at scale 1 (the query reads the content box); below 480px (the sub-band further
+     down) the padding narrows again on purpose — a deliberate shrink of the button, not flex
+     eating its width. */
+  flex: none;
+}
+
+/* The rail drawer toggles. 32px square, the New session button's height, so the bar's
+   own 49px is untouched. The focus ring is Copy.css's — the same 1px var(--or) every control
+   whose own chrome is too quiet to show focus borrows. */
+.rail-toggle {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background: none;
+  color: var(--t2);
+  cursor: pointer;
+  position: relative;
+}
+
+.rail-toggle-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--or);
+}
+
+.rail-toggle:hover {
+  color: var(--t0);
+}
+
+.rail-toggle:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 2px;
+}
+
+/* The left toggle stands where the rail it opens would be, so the wordmark moves in from the edge.
+   The child combinator keeps this off the right toggle, `.topbar-right`'s own first child. */
+.topbar > .rail-toggle:first-child {
+  margin-left: -8px;
+  margin-right: 4px;
+}
+
+@container (max-width: 1000px) {
+  .topbar {
+    flex-wrap: wrap;
+  }
+
+  .tabs,
+  .tabs.tabs-expanded {
+    gap: 10px;
+    margin-left: 12px;
+  }
+
+  .topbar-right {
+    flex: 1 1 auto;
+    min-width: min-content;
+  }
+}
+
+/* Match the shared local-width docking threshold, including fractional widths under zoom.
+   Naming the shell avoids treating an 800px bar's 764px content box as a narrow window. */
+@container shell not (min-width: 800px) {
+  .tabs {
+    display: none;
+  }
+
+  .compact-navigation {
+    display: block;
+    margin-left: 6px;
+    max-width: 64px;
+  }
+
+  .topbar-right {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+/* Action sizing follows the bar's content width after its padding, including root zoom. */
+@container (max-width: 700px) {
+  .new-session {
+    padding: 0 10px;
+  }
+}
+
+/* Keep the narrow viewport's gutter; navigation uses the shared local-width query above. */
+@media not all and (min-width: 800px) {
+  .topbar {
+    padding: 0 12px;
+  }
+}
+
+/* This sub-band is itself a container block, coming after the S band above, so its narrower
+   values win wherever a property repeats. At 400px (and 440px x1.15) the rail and decisions
+   toggles narrow to 28px (the app menu keeps its own 32px, pinned by
+   e2e/scenarios/shell/narrow-views.test.ts), and New session's padding drops to 4px. A long name wraps
+   after navigation, before the controls, so Help can stay visible without cutting the name or
+   adding empty name rows. */
+@container (max-width: 455px) {
+  .wordmark {
+    order: 1;
+    font-size: 16px;
+    letter-spacing: normal;
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+
+  .wordmark .tile-wordmark-small {
+    height: 12px;
+  }
+
+  .topbar-right {
+    gap: 2px;
+    order: 2;
+    flex: none;
+    min-width: 0;
+  }
+
+  .rail-toggle {
+    width: 28px;
+  }
+
+  .new-session {
+    padding: 0 4px;
+  }
+}
+
+@media (forced-colors: active) {
+  /* A border, not an outline: the outline channel stays free for the UA's own :focus-visible
+     ring, so a keyboard user tabbed onto the selected tab still sees focus move, not just the
+     selection mark that was already on screen. */
+  .tab-active {
+    border-bottom: 2px solid Highlight;
+  }
+
+  .rail-toggle-dot {
+    background: Highlight;
+  }
+}

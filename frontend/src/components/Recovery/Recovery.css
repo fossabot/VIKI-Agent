@@ -1,0 +1,35 @@
+/* RecoveryView: one column, no rail, no composer. `.app-view`'s own scroll and
+   padding are Shell.css's; this file only shapes what the view adds inside that region. */
+
+.recovery-view h1 {
+  margin: 0 0 12px;
+}
+
+.recovery-view > p {
+  max-width: 640px;
+  color: var(--t1);
+}
+
+.recovery-next-steps {
+  max-width: 640px;
+  margin-top: 24px;
+}
+
+.recovery-next-steps li {
+  margin-bottom: 12px;
+  color: var(--t1);
+}
+
+.recovery-diagnostics {
+  margin-top: 24px;
+  border-top: 1px solid var(--hair);
+  padding-top: 20px;
+}
+
+/* Below 800px the view is already one column at every width; nothing here changes. */
+@media not all and (min-width: 800px) {
+  .recovery-view > p,
+  .recovery-next-steps {
+    max-width: none;
+  }
+}

@@ -1,0 +1,148 @@
+/* RunPeek: the right rail's read-only look at one run's own transcript. */
+
+.run-peek {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.run-peek-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: none;
+}
+
+.run-peek-back {
+  flex: none;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--t2);
+  cursor: pointer;
+  padding: 0;
+}
+
+.run-peek-id {
+  flex: 1;
+  min-width: 0;
+}
+
+.run-peek-title {
+  font-size: 13px;
+  color: var(--t1);
+  overflow-wrap: anywhere;
+}
+
+.run-peek-meta {
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--t3);
+  overflow-wrap: anywhere;
+}
+
+.run-peek-jump {
+  flex: none;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--or);
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Waiting for you: outside the scrolling body (flex: none, like the header) so it stays visible
+   regardless of how far the transcript below has scrolled. */
+.run-peek-requests {
+  flex: none;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--hair);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Focus lands on the list itself when the request it was in goes (RunPeek.tsx's module doc), so
+   it takes the rail's own ring: a keyboard user has to see where they were put. Drawn inside the
+   box, because `.run-peek` clips whatever is outside it. */
+.run-peek-requests:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: -2px;
+}
+
+@media (forced-colors: active) {
+  .run-peek-requests:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+
+.run-peek-body {
+  margin-top: 12px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.run-peek-task > summary {
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--t2);
+}
+
+.run-peek-text,
+.run-peek-message,
+.run-peek-agent,
+.run-peek-tool {
+  margin-top: 8px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.run-peek-tool {
+  color: var(--t2);
+}
+
+/* Own classes, not Conversation.css's `.tool-rest`/`.tool-tail`: those are sized for a flex row
+   that truncates to one line, which would clip or refuse to wrap a long or hostile tool line
+   here, where every line keeps wrapping (pre-wrap, overflow-wrap: anywhere, set on the parent
+   `.run-peek-tool`, which these inherit). */
+.run-peek-tool-rest {
+  color: var(--t2);
+}
+
+.run-peek-tool-tail {
+  color: var(--t3);
+}
+
+.run-peek-tool-error {
+  color: var(--err);
+}
+
+.run-peek-tool-pending {
+  color: var(--t3);
+}
+
+.run-peek-note {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--t3);
+  overflow-wrap: anywhere;
+}
+
+.run-peek-result {
+  margin-top: 14px;
+  border-top: 1px solid var(--hair);
+  padding-top: 10px;
+}
+
+.run-peek-result-head {
+  margin: 0;
+  font-size: 12px;
+  color: var(--t2);
+}

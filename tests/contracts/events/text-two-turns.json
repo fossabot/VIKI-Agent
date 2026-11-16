@@ -1,0 +1,64 @@
+{
+  "fixture": "claude/text-two-turns.jsonl",
+  "vault": "%VAULT%",
+  "mode": "auto",
+  "note": "Two plain text turns on one process; rate_limit_event status allowed stays silent; init/status carry the unchanged mode.",
+  "events": [
+    {
+      "type": "text.delta",
+      "data": {
+        "block_id": "msg_011CewLTVX2xTUHtjKpC1Tm2:0",
+        "text": "Prime directive 1: Never edit or overwrite anything in `_raw/` (new file deposits allowed, create-only) and never alter the owner's original words anywhere."
+      }
+    },
+    {
+      "type": "text.done",
+      "data": {
+        "block_id": "msg_011CewLTVX2xTUHtjKpC1Tm2:0",
+        "text": "Prime directive 1: Never edit or overwrite anything in `_raw/` (new file deposits allowed, create-only) and never alter the owner's original words anywhere."
+      }
+    },
+    {
+      "type": "turn.done",
+      "data": {
+        "status": "success",
+        "usage": {
+          "input_tokens": 2,
+          "output_tokens": 57,
+          "cache_read_tokens": 30746,
+          "cache_creation_tokens": 15037
+        },
+        "context_percent": null,
+        "duration_ms": 3982
+      }
+    },
+    {
+      "type": "text.delta",
+      "data": {
+        "block_id": "msg_011CewLTnSH1yUcCsTwZuB3M:0",
+        "text": "B"
+      }
+    },
+    {
+      "type": "text.done",
+      "data": {
+        "block_id": "msg_011CewLTnSH1yUcCsTwZuB3M:0",
+        "text": "B"
+      }
+    },
+    {
+      "type": "turn.done",
+      "data": {
+        "status": "success",
+        "usage": {
+          "input_tokens": 2,
+          "output_tokens": 3,
+          "cache_read_tokens": 45783,
+          "cache_creation_tokens": 4492
+        },
+        "context_percent": null,
+        "duration_ms": 2858
+      }
+    }
+  ]
+}

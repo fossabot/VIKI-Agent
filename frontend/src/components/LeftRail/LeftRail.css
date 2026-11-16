@@ -1,0 +1,341 @@
+.left-rail {
+  flex: none;
+  width: 272px;
+  border-right: 1px solid var(--hair);
+  padding: 14px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: color-mix(in srgb, var(--g1) 45%, transparent);
+  background-image: radial-gradient(
+    ellipse at top left,
+    color-mix(in srgb, var(--or) 8%, transparent),
+    transparent 70%
+  );
+  backdrop-filter: blur(22px);
+}
+
+.shell-rail-content > .left-rail {
+  width: 100%;
+  min-height: 0;
+}
+
+.rail-navigation {
+  flex: none;
+  display: grid;
+  gap: 3px;
+  margin-bottom: 12px;
+}
+
+.rail-nav-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  color: var(--t2);
+  background: transparent;
+  cursor: pointer;
+}
+
+.rail-nav-button:hover {
+  background: var(--fill-pill);
+  color: var(--t0);
+}
+
+.rail-nav-button[aria-current="page"] {
+  background: var(--g3);
+  border-color: var(--line);
+  box-shadow: inset 2px 0 var(--or);
+  color: var(--t0);
+  font-weight: 600;
+}
+
+.rail-nav-button > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.rail-nav-button > .ico {
+  flex: none;
+}
+
+.rail-nav-button.rail-new {
+  color: var(--on-or);
+  background: var(--or);
+  border-color: transparent;
+}
+
+.rail-new + .rail-nav-button {
+  margin-top: 8px;
+}
+
+.rail-count {
+  margin-left: auto;
+}
+
+.rail-nav-button[aria-disabled="true"],
+.rail-nav-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.rail-footer {
+  flex: none;
+  display: grid;
+  gap: 8px;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid var(--hair);
+}
+
+.rail-workspace {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--g2) 60%, transparent);
+  color: var(--t1);
+  font: inherit;
+  text-align: left;
+}
+
+button.rail-workspace {
+  cursor: pointer;
+}
+
+.rail-workspace > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.rail-workspace strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.rail-workspace small,
+.rail-local {
+  display: block;
+  font-size: 11px;
+  color: var(--t3);
+}
+
+.rail-local {
+  padding-inline: 6px;
+}
+
+.rail-nav-button:focus-visible,
+.rail-workspace:focus-visible {
+  outline: 2px solid var(--or-hi);
+  outline-offset: 2px;
+}
+
+.rail-search:focus-visible,
+.sess:focus-visible,
+.sess-other:focus-visible {
+  outline: 2px solid var(--or-hi);
+  outline-offset: 2px;
+}
+
+.rail-search {
+  flex: none;
+  width: 100%;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--g2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  font-size: 13px;
+  color: var(--t3);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.rail-search:hover {
+  background: var(--fill-hi);
+  color: var(--t1);
+}
+
+.rail-search > .ico,
+.rail-search-hint {
+  flex: none;
+}
+
+.rail-search > span:not(.rail-search-hint) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rail-search-hint {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--t3);
+  border: 1px solid var(--b-strong);
+  border-radius: 3px;
+  padding: 0 5px;
+  line-height: 16px;
+}
+
+.rail-sessions {
+  flex: 1;
+  /* Navigation and the workspace footer must not collapse the session scroll area. */
+  min-height: 80px;
+  overflow-y: auto;
+  min-width: 0;
+  padding-inline: 4px;
+  margin-inline: -4px;
+}
+
+/* SessionList: groups, rows and the collapsed Other toggle. */
+.sess-group {
+  margin-bottom: 4px;
+}
+
+/* The listing note. Dim and quiet like a group label, but never one: it says what
+   the last read of the list observed, not what the rows below it are. */
+.sess-note {
+  margin: 18px 12px 6px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--t3);
+}
+
+.sess-group .lbl {
+  display: block;
+  margin: 14px 12px 4px; /* the design: 14px 12px 4px above every group but the first */
+}
+
+.sess-group:first-child .lbl {
+  margin: 18px 12px 6px;
+}
+
+.sess-other {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+}
+
+.sess {
+  position: relative;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.sess:hover:not(.sess-selected) {
+  background: var(--fill-pill);
+}
+
+.sess .t {
+  display: block;
+  font-size: 13.5px;
+  line-height: 20px;
+  color: var(--t1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A row started by VIKI carries this extra class on `.t` alongside the plain rule above,
+   and only then — every other row keeps the plain block title that rule pins. The chip must
+   stay readable rather than being squeezed by the title, so only `.t-label` (not `.t` itself)
+   keeps the ellipsis, as a shrinkable flex item; the chip (shared `.chip`, sized for this line by
+   `.sess .t .chip` below) never shrinks. */
+.sess .t.sess-title-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sess .t.sess-title-chip .t-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sess .t .chip {
+  flex: none;
+}
+
+.sess .m {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--t3);
+}
+
+.sess-selected {
+  background: var(--g3);
+  border-color: var(--line);
+  padding: 7px 11px;
+}
+
+.sess-selected::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: var(--or);
+  border-radius: 1px;
+}
+
+.sess-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--or);
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .left-rail {
+    background: var(--g1);
+    backdrop-filter: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .rail-nav-button[aria-current="page"] {
+    border-color: Highlight;
+    box-shadow: none;
+  }
+
+  .rail-nav-button:focus-visible,
+  .rail-workspace:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .rail-search:focus-visible,
+  .sess:focus-visible,
+  .sess-other:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .left-rail {
+    background: var(--g1);
+    backdrop-filter: none;
+  }
+}

@@ -1,0 +1,39 @@
+/* DecisionText: the code a hidden character is written out as, and the lines that say a request's
+   text had such characters or runs past its box. Loaded with DecisionText.tsx, so the chat's cards
+   and the right rail's inline answers draw them alike. */
+
+/* Inverted, like the urgent Needs you band: the codes are the part of a command to look at first,
+   and the app's palette has no warning hue to give them. */
+.hidden-code {
+  border-radius: 3px;
+  padding: 0 2px;
+  background: var(--or);
+  color: var(--on-or);
+}
+
+.decision-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-left: 2px solid var(--or);
+  padding-left: 8px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--t0);
+  overflow-wrap: anywhere;
+}
+
+.decision-notes p {
+  margin: 0;
+}
+
+@media (forced-colors: active) {
+  .hidden-code {
+    background: Mark;
+    color: MarkText;
+  }
+
+  .decision-notes {
+    border-left-color: CanvasText;
+  }
+}

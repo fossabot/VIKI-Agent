@@ -1,0 +1,185 @@
+.messaging-view {
+  max-width: 860px;
+  padding: clamp(16px, 3vw, 40px);
+  color: var(--t1);
+}
+.messaging-view h2 {
+  margin: 0;
+  color: var(--t0);
+  font-size: 18px;
+}
+.messaging-view :is(p, li) {
+  line-height: 1.6;
+}
+.messaging-view :is(h1, h2, p, li, code) {
+  overflow-wrap: anywhere;
+}
+.messaging-about p {
+  margin: 8px 0 0;
+}
+.messaging-bot {
+  padding: 12px 16px;
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--s0);
+}
+.messaging-bot > p {
+  margin: 8px 0 0;
+}
+.messaging-setup {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.messaging-setup summary {
+  color: var(--t0);
+  cursor: pointer;
+}
+.messaging-cooldown,
+.messaging-config-status {
+  color: var(--or-hi);
+}
+.messaging-bot-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+.messaging-provider-heading {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.messaging-disclosure {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 4px 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.messaging-disclosure .ico {
+  color: var(--t2);
+  transform: rotate(-90deg);
+}
+.messaging-disclosure[aria-expanded="true"] .ico {
+  transform: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .messaging-disclosure .ico {
+    transition: transform 0.15s ease;
+  }
+}
+.messaging-provider-logo {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  object-fit: contain;
+}
+.messaging-provider-logo--mattermost {
+  background: var(--brand-logo-backdrop);
+}
+.messaging-status[data-state="connected"] {
+  background: var(--or);
+  border-color: var(--or);
+  color: var(--on-or);
+}
+.messaging-restart,
+.messaging-reason {
+  color: var(--or-hi);
+}
+.messaging-error {
+  color: var(--err);
+}
+.messaging-bot-body {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.messaging-capabilities {
+  margin-top: 24px;
+}
+.messaging-setup summary:focus-visible,
+.messaging-about summary:focus-visible,
+.messaging-capabilities button:focus-visible,
+.messaging-disclosure:focus-visible,
+.messaging-toggle:focus-visible,
+.messaging-bot-heading .btn:focus-visible,
+.messaging-view .page-actions button:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+/* The on/off switch: a 32x18 track with a round knob drawn by its own `::after`, the familiar
+   settings-panel toggle. The button itself carries no chrome of its own — its track
+   and label are the whole control, so it stays flush with the form's other footer buttons. */
+.messaging-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--t0);
+  font: inherit;
+  cursor: pointer;
+}
+.messaging-toggle[aria-disabled="true"] {
+  cursor: default;
+  opacity: 0.6;
+}
+.messaging-switch-track {
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--g2);
+  border: 1px solid var(--line);
+}
+.messaging-switch-track::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--t0);
+}
+.messaging-switch-state {
+  min-width: 3ch;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .messaging-switch-track,
+  .messaging-switch-track::after {
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      transform 0.15s ease;
+  }
+}
+html[data-motion="reduce"] .messaging-disclosure .ico,
+html[data-motion="reduce"] .messaging-switch-track,
+html[data-motion="reduce"] .messaging-switch-track::after {
+  transition: none;
+}
+.messaging-toggle[aria-checked="true"] .messaging-switch-track {
+  background: var(--or);
+  border-color: var(--or);
+}
+.messaging-toggle[aria-checked="true"] .messaging-switch-track::after {
+  background: var(--on-or);
+  transform: translateX(14px);
+}
+@media (forced-colors: active) {
+  .messaging-switch-track {
+    border-color: ButtonText;
+  }
+}

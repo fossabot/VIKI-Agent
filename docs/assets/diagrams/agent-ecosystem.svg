@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 810" width="1160" height="810" role="img" aria-labelledby="title desc">
+  <title id="title">How VIKI Agent connects the parts</title>
+  <desc id="desc">Vault signals feed VIKI's Decision loop. Decision sends permitted state to the optional JEV service and receives assessments. Local grants and routine checks govern Bot starts. A profile configures a Bot, whose regular conversation uses Claude Code. A routine for the same profile and vault starts a fresh Claude Code chat for each attempt. A regular chat also uses Claude Code. Review replies and resulting files in the appropriate chat and vault.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#b3b3c0"/>
+    </marker>
+  </defs>
+  <rect width="1160" height="810" fill="#0b0b0b"/>
+  <g fill="none" stroke="#b3b3c0" stroke-width="2.5" marker-end="url(#arrow)">
+    <path d="M350 145H405"/>
+    <path d="M755 112H840"/>
+    <path d="M840 177H755"/>
+    <path d="M705 210V265H985V300"/>
+    <path d="M350 370H405"/>
+    <path d="M755 370H840"/>
+    <path d="M580 440V530"/>
+    <path d="M985 440V530"/>
+    <path d="M840 595H755"/>
+    <path d="M350 595H405"/>
+    <path d="M580 665V720"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif" fill="#b3b3c0" font-size="19">
+    <text x="30" y="32">VIKI Agent on your computer; JEV is a separate model service</text>
+    <text x="764" y="98">state</text>
+    <text x="763" y="164">ratings</text>
+    <text x="785" y="251">local start checks</text>
+    <text x="594" y="491">regular conversation</text>
+    <text x="999" y="491">attempt</text>
+  </g>
+  <g fill="#151515" stroke="#41414c" stroke-width="2">
+    <rect x="30" y="65" width="320" height="145" rx="12"/>
+    <rect x="405" y="65" width="350" height="145" rx="12" stroke="#97d6be"/>
+    <rect x="840" y="65" width="290" height="145" rx="12" stroke="#bbadf0" stroke-dasharray="7 5"/>
+    <rect x="30" y="300" width="320" height="140" rx="12"/>
+    <rect x="405" y="300" width="350" height="140" rx="12"/>
+    <rect x="840" y="300" width="290" height="140" rx="12"/>
+    <rect x="30" y="530" width="320" height="135" rx="12"/>
+    <rect x="405" y="530" width="350" height="135" rx="12" stroke="#97d6be"/>
+    <rect x="840" y="530" width="290" height="135" rx="12"/>
+    <rect x="30" y="720" width="1100" height="65" rx="12"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="600" fill="#f8f8ff">
+    <text x="52" y="105">Vault</text>
+    <text x="427" y="105">Decision loop</text>
+    <text x="862" y="105">JEV / TypeSafe</text>
+    <text x="52" y="342">Profile</text>
+    <text x="427" y="342">Bot</text>
+    <text x="862" y="342">Routine</text>
+    <text x="52" y="572">Regular chat</text>
+    <text x="427" y="572">Claude Code</text>
+    <text x="862" y="572">Run session</text>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#c6c6d0">
+    <text x="52" y="143">Goals, tasks and Kanban cards</text>
+    <text x="52" y="177">Notes, sources and results</text>
+    <text x="427" y="143">Attention, timing and grants</text>
+    <text x="427" y="177">Items, plans and eligible starts</text>
+    <text x="862" y="143">Optional model service</text>
+    <text x="862" y="177">Structured assessments</text>
+    <text x="52" y="380">Role and instructions</text>
+    <text x="52" y="414">Model, tools and settings</text>
+    <text x="427" y="380">Profile + persistent vault</text>
+    <text x="427" y="414">Conversation + its routines</text>
+    <text x="862" y="380">Prompt + profile + vault</text>
+    <text x="862" y="414">Trigger and run settings</text>
+    <text x="52" y="610">You open a workspace</text>
+    <text x="52" y="642">and send a request</text>
+    <text x="427" y="610">Your installed agent runtime</text>
+    <text x="427" y="642">Tools, hooks and permissions</text>
+    <text x="862" y="610">New chat per attempt</text>
+    <text x="862" y="642">Current profile + prompt</text>
+    <text x="580" y="760" text-anchor="middle">Review the reply and resulting files in the relevant chat and vault</text>
+  </g>
+</svg>

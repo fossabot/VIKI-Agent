@@ -1,0 +1,73 @@
+.bot-code-folder {
+  min-width: 0;
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--s0);
+  overflow-wrap: anywhere;
+}
+
+.bot-code-folder > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  color: var(--t1);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bot-code-folder-value {
+  color: var(--t2);
+  font-weight: 400;
+}
+
+.bot-code-folder > summary:focus-visible,
+.bot-code-folder select:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.bot-code-folder-field {
+  display: grid;
+  gap: 4px;
+  margin-top: 8px;
+  color: var(--t1);
+  font-size: 13px;
+}
+
+.bot-code-folder select {
+  width: 100%;
+  max-width: 360px;
+  padding: 5px 8px;
+  border: 1px solid var(--b-alt);
+  border-radius: 5px;
+  background: var(--s0);
+  color: var(--t1);
+  font: inherit;
+}
+
+.bot-code-folder select:disabled {
+  opacity: 0.5;
+}
+
+.bot-code-folder-note {
+  margin: 8px 0 0;
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.bot-code-folder [role="alert"] {
+  margin: 8px 0 0;
+  color: var(--err);
+  font-size: 12px;
+}
+
+@media (forced-colors: active) {
+  .bot-code-folder > summary:focus-visible,
+  .bot-code-folder select:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}

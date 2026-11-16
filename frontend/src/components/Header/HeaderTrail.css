@@ -1,0 +1,92 @@
+/* The header's right-hand trail (HeaderTrail.tsx): the agents pill, the mode chip and the search
+   button, in one flex row that owns the row's single `margin-left: auto` — HeaderMenu.css drops
+   its own copy from `.header-menu-wrap` now that the ⋯ menu sits inside this row as a child. */
+.header-trail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex: none;
+}
+
+/* Pill-shaped and worn in the --or role tokens rather than the shared .chip utility's own
+   values: that utility is 20px tall with a 3px radius (a label, not a status), and this is a
+   live, clickable status that needs its own ring to spin inside it. */
+.agents-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  box-sizing: border-box;
+  padding: 0 10px 0 8px;
+  border-radius: 11px;
+  font-size: 12px;
+  color: var(--or);
+  background: rgb(var(--or-rgb) / 0.08);
+  border: 1px solid rgb(var(--or-rgb) / 0.45);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.agents-pill:hover,
+.agents-pill:focus-visible {
+  background: rgb(var(--or-rgb) / 0.16);
+}
+
+.agents-pill-ring {
+  width: 10px;
+  height: 10px;
+}
+
+/* The permission-mode trigger. Unlike ModelChip.tsx's own `.model-chip` (which resets to plain
+   text with `all: unset`), this one is a visible bordered pill beside the agents pill, so its
+   whole box model is spelled out here rather than reset. Its dropdown borrows ModelChip.css's
+   `.chip-menu` row classes wholesale (see the import in HeaderTrail.tsx) instead of redefining
+   them a second time. */
+.mode-chip {
+  height: 22px;
+  padding: 0 8px 0 10px;
+  border-radius: 11px;
+  font-size: 12px;
+  color: var(--t1);
+  background: transparent;
+  border: 1px solid var(--b1);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.mode-chip:hover:not(:disabled),
+.mode-chip:focus-visible {
+  color: var(--t0);
+}
+
+.mode-chip:disabled {
+  cursor: default;
+}
+
+.header-tools-button {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: none;
+  color: var(--t2);
+  cursor: pointer;
+}
+
+.header-tools-button:hover,
+.header-tools-button:focus-visible,
+.header-tools-button[aria-expanded="true"] {
+  color: var(--t0);
+  border-color: var(--b1);
+}
+
+.header-tools-button .ico {
+  stroke-width: 1.5;
+}

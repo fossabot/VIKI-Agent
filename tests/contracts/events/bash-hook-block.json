@@ -1,0 +1,67 @@
+{
+  "fixture": "claude/bash-hook-block.jsonl",
+  "vault": "%VAULT%",
+  "mode": "auto",
+  "note": "The vault guard blocks a Bash call: the other PreToolUse hook succeeds silently; the blocked one (exit 2) becomes a hook event; the tool result is an error without an exit code, so no tail.",
+  "events": [
+    {
+      "type": "tool.started",
+      "data": {
+        "block_id": "toolu_01KeRHSjScanMLQF6XeZWoJh",
+        "tool": "Bash",
+        "row": {
+          "head": "echo",
+          "rest": "probe >> no-such-dir/settings.json",
+          "tail": ""
+        },
+        "parent_id": ""
+      }
+    },
+    {
+      "type": "hook",
+      "data": {
+        "name": "PreToolUse:Bash",
+        "outcome": "blocked",
+        "message": "Example guard: this command would write, move or delete a protected path (CLAUDE.md, .claude/settings.json, .claude/hooks/, .viki/). Only the owner edits these: read them freely, propose edits in /retro."
+      }
+    },
+    {
+      "type": "tool.done",
+      "data": {
+        "block_id": "toolu_01KeRHSjScanMLQF6XeZWoJh",
+        "is_error": true,
+        "summary": "PreToolUse:Bash hook error: [powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PROJECT_DIR}/.claude/hooks/e…",
+        "preview": "PreToolUse:Bash hook error: [powershell -NoProfile -ExecutionPolicy Bypass -File \"${CLAUDE_PROJECT_DIR}/.claude/hooks/example-guard.ps1\"]: Example guard: this command would write, move or delete a protected path (CLAUDE.md, .claude/settings.json, .claude/hooks/, .viki/). Only the owner edits these: read them freely, propose edits in /retro.",
+        "tail": ""
+      }
+    },
+    {
+      "type": "text.delta",
+      "data": {
+        "block_id": "msg_011CewLUQf7iG1KgFzdjGyeV:0",
+        "text": "The command was blocked before execution — the example guard hook (`.claude/hooks/example-guard.ps1`) intercepted it because the target path `no-such-dir/settings.json` matches the protected pattern for `.claude/settings.json`. Hook message: \"Example guard: this command would write, move or delete a protected path (CLAUDE.md, .claude/settings.json, .claude/hooks/, .viki/). Only the owner edits these: read them freely, propose edits in /retro.\"\n\nNo file was created or modified."
+      }
+    },
+    {
+      "type": "text.done",
+      "data": {
+        "block_id": "msg_011CewLUQf7iG1KgFzdjGyeV:0",
+        "text": "The command was blocked before execution — the example guard hook (`.claude/hooks/example-guard.ps1`) intercepted it because the target path `no-such-dir/settings.json` matches the protected pattern for `.claude/settings.json`. Hook message: \"Example guard: this command would write, move or delete a protected path (CLAUDE.md, .claude/settings.json, .claude/hooks/, .viki/). Only the owner edits these: read them freely, propose edits in /retro.\"\n\nNo file was created or modified."
+      }
+    },
+    {
+      "type": "turn.done",
+      "data": {
+        "status": "success",
+        "usage": {
+          "input_tokens": 4,
+          "output_tokens": 273,
+          "cache_read_tokens": 75903,
+          "cache_creation_tokens": 19727
+        },
+        "context_percent": null,
+        "duration_ms": 6302
+      }
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+.note-card {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  color: var(--t1);
+  transition: transform var(--motion-fast) var(--motion-ease-out);
+}
+
+.note-card-lead {
+  border-inline-start: 3px solid var(--label-purple);
+  padding-inline-start: 11px;
+}
+
+.note-card-compact {
+  padding: 6px 8px;
+}
+
+.note-card-title {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--t0);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.note-card-ref {
+  display: block;
+  margin-top: 3px;
+  color: var(--t3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.note-card-kicker,
+.note-card-meta,
+.note-card-quiet {
+  margin: 5px 0 0;
+  color: var(--t2);
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.note-card-kicker {
+  color: var(--label-slate);
+}
+
+.note-card-time {
+  display: block;
+  margin-top: 5px;
+  color: var(--t3);
+  font-size: 12px;
+}
+
+.note-card-summary {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 5px 0 0;
+  color: var(--t2);
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.note-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 7px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.note-card-tags li {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--t1);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.note-card-bookmark {
+  margin-top: 7px;
+  padding: 2px 5px;
+  border: 0;
+  background: none;
+  color: var(--t1);
+  font: inherit;
+  cursor: pointer;
+}
+
+.note-card-bookmark:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.note-card:has(:focus-visible) {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.note-card:hover {
+  transform: translateY(-1px);
+}
+
+@media (forced-colors: active) {
+  .note-card:has(:focus-visible) {
+    outline: 2px solid Highlight;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note-card,
+  .note-card:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+html[data-motion="reduce"] .note-card,
+html[data-motion="reduce"] .note-card:hover {
+  transform: none;
+  transition: none;
+}

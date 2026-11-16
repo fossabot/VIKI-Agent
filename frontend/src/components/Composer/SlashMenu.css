@@ -1,0 +1,140 @@
+/* The `/` command menu, from the design: its `.menu`/`.mi`/`.lbl`/`.hl`/`.kbd` rules,
+   ported 1:1. Colors and radii that already have a token use var(--...) from
+   styles/tokens.css, the design's own values included (the panel fill, its border, the
+   selected row's fill): tokens.css holds those as role tokens (--fill-popover, --b-pop,
+   --fill-hi), so each theme sets its own.
+
+   Every rule below but `.menu` itself is scoped `.menu ...`: `.lbl`, `.mi`, `.d`, `.hl` and `.kbd`
+   are generic enough names that, left bare, they'd win globally the instant Composer mounts (a
+   bare `.lbl` would shift LeftRail's and RightRail's own section headings). The design itself
+   writes `.mi .d`, not bare `.d` — scoping here matches the design's own selectors, not just
+   this file's safety margin.
+
+   - .menu        anchored to the composer's own wrapper (Composer.css's `.composer-wrap` is
+                   `position: relative`), spanning its width and sitting just above the pill.
+                   base.css's .menu-panel draws it: --fill-popover, --b-pop, 8px radius, shadow.
+   - .lbl         the design's section headings (Vault skills / Commands); .lbl-rule adds the
+                   hairline + top gap the design draws between the two groups.
+   - .mi          one 34px row; .mi.on is the keyboard/hover selection, an inset orange bar on
+                   the --fill-hi row fill (the design's values, both tokens.css tokens).
+   - .mi-name     the mono name, fixed 150px so descriptions line up; .mi-hint is the dim
+                   argument_hint that can follow it; .d is the description, truncated to one line.
+   - .hl          the matched substring, in var(--or).
+   - .menu-note   the "no matches" line, centred dim text.
+   - .menu-hints  the footer row of kbd hints plus the vault-wide command count, dim and small.
+   - .kbd         the small key-cap the design uses everywhere for a shortcut name. */
+
+.menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 8px);
+  box-sizing: border-box;
+  padding-top: 2px;
+  max-height: 60vh;
+  overflow-y: auto;
+  /* Above `.jump-pill`'s 3 (Conversation.css). The pill is on screen exactly when the user has
+     scrolled up, sticky at the bottom of the scroll box — which is where this menu's footer
+     lands — and being opaque it painted over the last row and the hint line, and took their
+     clicks: a click meant for the bottom command jumped the transcript instead. The menu is the
+     modal-ish surface, so the menu rises rather than the pill dropping. 6 clears the pill and
+     the two menus at 5, and stays under the toast and the palette; tokens.css lists the ladder,
+     since the numbers themselves live in six different stylesheets. */
+  z-index: 6;
+}
+
+.menu .lbl {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t3);
+  padding: 10px 12px 4px 12px;
+}
+
+.menu .lbl-rule {
+  border-top: 1px solid var(--hair);
+  margin-top: 4px;
+}
+
+.menu .mi {
+  /* Reset a <button>'s own chrome — it's one for a11y (see SlashMenu.tsx), not for its look. */
+  width: 100%;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: var(--t1);
+  cursor: pointer;
+}
+
+.menu .mi.on {
+  background: var(--fill-hi); /* the selected row's fill (.mi.on) */
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+}
+
+.menu .mi-name {
+  flex: none;
+  width: 150px;
+}
+
+.menu .mi-hint {
+  flex: none;
+  color: var(--t3);
+}
+
+.menu .mi .d {
+  color: var(--t3);
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.menu .hl {
+  color: var(--or);
+}
+
+.menu .menu-note {
+  padding: 14px 12px;
+  font-size: 13px;
+  color: var(--t3);
+  text-align: center;
+}
+
+.menu .menu-hints {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--b1); /* the hints row's top hairline */
+  font-size: 11.5px;
+  color: var(--t3);
+}
+
+.menu .menu-hints-count {
+  margin-left: auto;
+}
+
+/* Composer.css carries the same rule, scoped to its own Stop pill, for the same key-cap glyph — the
+   two files aren't nested, so there's no shared parent stylesheet to hoist this one small rule
+   into without pulling in one file's rules for the other's component; duplicating three lines
+   beat that. */
+.menu .kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--t2);
+  border: 1px solid var(--b-strong); /* the --b-strong border Composer.css also uses for the pill */
+  border-radius: 3px;
+  padding: 0 5px;
+  line-height: 16px;
+}

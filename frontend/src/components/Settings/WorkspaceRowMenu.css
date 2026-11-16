@@ -1,0 +1,64 @@
+/* WorkspaceRowMenu: a workspace row's "⋯" menu. Shared primitives come from styles/base.css
+   as-is: `.mi` and `.menu-panel` (the row and dropdown chrome every menu in this app shares)
+   and `.ico` (stroke-based icons). RemoveConfirm renders ConfirmDialog, which carries its own
+   chrome (Dialog/ConfirmDialog.css). Only the
+   trigger button, the panel's width and its separator are below — kept to the monochrome tokens
+   (no `--or`/`--fill-hi`): this row-level menu carries no accent color of its own. */
+
+.ws-row-menu-trigger {
+  padding: 0 4px;
+  background: none;
+  border: none;
+  color: var(--t2);
+  cursor: pointer;
+}
+
+/* The trigger also carries `btn txt sm`, so this page's "every button is a styled
+   variant" guard holds. `.btn.sm`'s own height and padding would otherwise blow this icon-only
+   trigger up to a labeled button's size; the extra type selector (not just `.ws-row-menu-trigger
+   .btn`, which would only tie `.btn.sm` on specificity) beats it outright, restoring the
+   compact square regardless of stylesheet order. */
+button.ws-row-menu-trigger.btn {
+  height: auto;
+  padding: 0 4px;
+}
+
+.ws-row-menu-trigger:hover,
+.ws-row-menu-trigger:focus-visible {
+  color: var(--t0);
+  outline: none;
+}
+
+.ws-row-menu {
+  width: 220px;
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+
+.ws-row-menu .mi[data-highlighted] {
+  background: var(--s1);
+  color: var(--t0);
+}
+
+.ws-row-menu .mi[data-disabled] {
+  color: var(--t3);
+  cursor: default;
+}
+
+.ws-row-menu-sep {
+  height: 1px;
+  margin: 4px 0;
+  border: none;
+  background: var(--hair);
+}
+
+@media (forced-colors: active) {
+  .ws-row-menu-trigger:focus-visible {
+    outline: 2px solid Highlight;
+  }
+
+  .ws-row-menu .mi[data-highlighted] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

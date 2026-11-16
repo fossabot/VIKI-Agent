@@ -1,0 +1,68 @@
+/* App.tsx's own chrome. `.conversation-title`'s font is read by ConversationHeader.tsx (see
+   Conversation.css's own note on it) even though that component owns the element; moving the
+   rule into a component-owned stylesheet is a rename with no value change, left for whoever
+   next touches ConversationHeader.
+
+   Composer.css owns `.composer` / `.composer-icon` / `.composer-actions` / `.composer-mic` /
+   `.composer-submit` outright. Never add a `.composer` rule here: this file is emitted after
+   Composer.css in the bundle, so anything here wins on equal specificity — a stray `height`
+   would fight Composer.tsx's own resize of the textarea, which is exactly the bug a duplicate
+   block invites the next time someone tunes the pill in the file that actually owns it and
+   sees no effect. */
+.conversation-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--t0);
+}
+
+/* The fork-armed hint: the composer has no prop for "the next message forks", so this sits
+   directly above the pill inside Shell's own composer slot — the same position States.tsx's
+   HistoryNote was designed for ("directly above the composer, not in the scroll box"), reused
+   here rather than inventing a new Shell region. Small and dim (var(--t3), the tone
+   HistoryNote gives its own meta line) — it is a passing reminder, not an alert: var(--or-hi)
+   is the rail's "writing…" colour and reads as one. */
+.fork-note {
+  max-width: 760px;
+  margin: 0 auto 6px;
+  font-size: 12.5px;
+  color: var(--t3);
+}
+
+/* Where a card sits: inside the reply body, past VIKI's 36px face and the
+   14px gap beside it. App renders the cards as siblings of the conversation (they can be open
+   when there is no turn to nest them in), so the indent is a rule rather than a parent. */
+.card-column {
+  margin-left: 50px;
+}
+/* Draft status stays beside the editor; long recovered text cannot widen the shell. */
+.draft-status,
+.draft-conflict,
+.local-drafts,
+.closed-editor {
+  font-size: 12px;
+  padding: 4px 12px;
+  overflow-wrap: anywhere;
+}
+.draft-status button,
+.draft-conflict button,
+.closed-editor button {
+  margin: 4px;
+}
+.draft-conflict pre {
+  max-height: 160px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.local-drafts ul {
+  max-height: 160px;
+  overflow: auto;
+}
+
+/* S (below 800px): the 50px indent that lines a card up behind VIKI's face is a luxury
+   of a wide column. At 400 CSS px it is a tenth of the window, so the cards take the full column
+   like every other row. */
+@media not all and (min-width: 800px) {
+  .card-column {
+    margin-left: 0;
+  }
+}

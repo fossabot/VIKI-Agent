@@ -1,0 +1,30 @@
+.bot-chat-activity-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bot-chat-activity-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bot-chat-activity-head h2 {
+  margin: 0;
+  font-weight: 400;
+  flex: 1 0 auto;
+  white-space: nowrap;
+}
+.bot-chat-activity > p,
+.bot-chat-activity-run p {
+  margin: 6px 0 0;
+  font-size: 12px;
+}
+.bot-chat-activity-run {
+  margin-top: 12px;
+}
+.bot-chat-memory-source {
+  margin: 6px 0 0;
+  font-size: 12px;
+}

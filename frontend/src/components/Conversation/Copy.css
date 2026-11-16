@@ -1,0 +1,31 @@
+/* CopyButton: a quiet control that must not compete with the code or the reply it sits
+   beside — no border, no fill at rest, dim type. Reuses tokens.css's own greys; no new palette.
+   Placement (right-aligned in the reply's name row; a small bar above a fenced block) is each
+   caller's own CSS, in Conversation.css, so this file only states what the control looks like. */
+.copy-btn {
+  flex: none;
+  height: 20px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--t3);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  color: var(--t1);
+}
+
+/* Focus is NOT hover. Dropping the ring here would leave a keyboard user with no way to tell
+   which control they are on. The ring is the browser's own, kept rather than restyled, so it
+   stays whatever the user's system says a focus ring looks like. */
+.copy-btn:focus-visible {
+  color: var(--t1);
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}

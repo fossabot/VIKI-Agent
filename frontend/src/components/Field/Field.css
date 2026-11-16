@@ -1,0 +1,22 @@
+.field {
+  display: grid;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t1);
+}
+
+.field-more > summary {
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.field-error {
+  margin: 0;
+  font-size: 12px;
+  color: var(--err);
+}

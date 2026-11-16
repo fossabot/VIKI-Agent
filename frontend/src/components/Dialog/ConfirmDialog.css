@@ -1,0 +1,65 @@
+/* ConfirmDialog: a small inline alertdialog card. A destructive confirm uses the plain go button
+   with a trash icon, not a red one; only the error line takes the error colour. */
+
+.confirm-dialog {
+  display: grid;
+  gap: 8px;
+  max-width: 480px;
+  padding: 12px 16px;
+  border: 1px solid var(--b-strong);
+  border-radius: 8px;
+  background: var(--fill-raised);
+  font-size: 13px;
+  line-height: 1.5;
+  /* For the card's own scroll into view on open: the top margin keeps the control that opened it
+     on screen above the card, the bottom one keeps the card off the scroller's edge. */
+  scroll-margin-block: 64px 24px;
+}
+
+/* For a host that mounts the card directly under the row of buttons that opened it. */
+.confirm-dialog-under-opener {
+  margin-top: 12px;
+}
+
+.confirm-dialog p {
+  margin: 0;
+}
+
+.confirm-dialog-heading {
+  font-weight: 600;
+}
+
+.confirm-dialog-list {
+  margin: 4px 0 0;
+  padding-inline-start: 20px;
+}
+
+.confirm-dialog-irreversible {
+  color: var(--t0);
+  font-weight: 600;
+}
+
+/* The error also carries the shared settings-error class; this rule sets its size so it looks
+   the same on screens that don't load Settings.css. */
+.confirm-dialog [role="alert"] {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--err);
+}
+
+/* The row is scrolled into view after the card, for a scroller too short for the card and its
+   scroll margins. Its margin is the card's padding and border under the row, so that scroll ends
+   on the card's bottom edge: a card that fits its scroller is then wholly in view, and one that
+   does not still shows the focused Cancel. */
+.confirm-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  scroll-margin-bottom: 13px;
+}
+
+@media (forced-colors: active) {
+  .confirm-dialog {
+    border-color: CanvasText;
+  }
+}

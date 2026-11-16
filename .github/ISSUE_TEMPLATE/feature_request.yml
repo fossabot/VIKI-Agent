@@ -1,0 +1,29 @@
+name: Feature request
+description: Suggest a change to VIKI Agent.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues before opening a new request. Describe your workflow using
+        sample data, with private notes, conversation content and account details removed.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the task and where the current app gets in your way.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe what you would see or do in VIKI Agent.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or workarounds
+      description: If you have tried another approach, explain what it does and what is missing.

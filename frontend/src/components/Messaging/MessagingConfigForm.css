@@ -1,0 +1,95 @@
+.messaging-config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.messaging-config-form section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messaging-config-form .lbl {
+  margin: 0;
+}
+
+.messaging-config-form > section > p {
+  margin: 0;
+  color: var(--t2);
+  line-height: 1.6;
+}
+
+.messaging-config-guide {
+  align-self: flex-start;
+  height: auto;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.messaging-config-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.messaging-config-field label {
+  color: var(--t0);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.messaging-config-hint {
+  margin: 0;
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.messaging-config-field input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--g1);
+  color: var(--t0);
+  font: inherit;
+}
+
+.messaging-config-field input::placeholder {
+  color: var(--t3);
+}
+
+.messaging-config-field input:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.messaging-config-note {
+  margin: 0;
+  color: var(--or-hi);
+}
+
+.messaging-config-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.messaging-config-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.messaging-config-guide:focus-visible,
+.messaging-config-actions button:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}

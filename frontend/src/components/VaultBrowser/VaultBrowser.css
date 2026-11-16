@@ -1,0 +1,497 @@
+.vault-browser {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  color: var(--t1);
+}
+
+.vault-browser > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.vault-controls {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g1);
+}
+
+.vault-search {
+  display: grid;
+  flex: 1 1 240px;
+  gap: 6px;
+  min-width: 0;
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.vault-search input,
+.vault-filters select {
+  min-width: 0;
+  max-width: 100%;
+  padding: 7px 9px;
+  border: 1px solid var(--b-alt);
+  border-radius: 5px;
+  background: var(--s0);
+  color: var(--t0);
+  font: inherit;
+}
+
+.vault-filters,
+.vault-pages {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.vault-filters legend {
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.vault-controls > .vault-filters {
+  flex: 2 1 400px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.vault-filters label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.vault-bookmark-filter {
+  color: var(--t2);
+}
+
+.vault-tag-filter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.vault-pages p {
+  flex: 1 1 200px;
+  margin: 0;
+  color: var(--t2);
+}
+
+.vault-list,
+.vault-inspector {
+  overflow: auto;
+  max-height: 70vh;
+}
+
+/* The named container VaultOverview.css lays its sections out by. */
+.vault-list {
+  grid-column: 1;
+  container: vault-browse / inline-size;
+}
+
+.vault-views {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.vault-views > button[aria-pressed="true"] {
+  border-color: var(--or);
+  background: var(--fill-hi);
+}
+
+.vault-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 6px;
+}
+
+.vault-row:hover,
+.vault-row:has([aria-current="true"]) {
+  background: var(--fill-hi);
+}
+
+.vault-row:has([aria-current="true"]) {
+  box-shadow: inset 2px 0 0 var(--or);
+}
+
+.vault-note-icon {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 30px;
+  height: 34px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--t2);
+  background: var(--fill-pill);
+}
+
+.vault-row:has([aria-current="true"]) .vault-note-icon {
+  color: var(--or);
+}
+
+.vault-row-label {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+.vault-row-label > button {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--t0);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  text-align: left;
+  cursor: pointer;
+}
+
+.vault-row-meta,
+.vault-row-summary {
+  margin: 2px 0 0;
+  color: var(--t2);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.vault-row-summary {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 13px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.vault-ref {
+  display: block;
+  margin-top: 4px;
+  color: var(--t3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.vault-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--t2);
+  font-size: 13px;
+}
+
+.vault-chips > li {
+  overflow-wrap: anywhere;
+}
+
+.vault-reader-kicker {
+  color: var(--or);
+  font-weight: 600;
+}
+
+.vault-reader-tag {
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--or);
+  font: inherit;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.vault-reader-tag:hover {
+  text-decoration: underline;
+}
+
+.vault-reader-date,
+.vault-reader-hint {
+  margin: 8px 0 0;
+  color: var(--t3);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.vault-reader-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.vault-reader-actions > button {
+  max-width: 100%;
+  white-space: normal;
+}
+
+.vault-reader-bookmark {
+  color: var(--t1);
+}
+
+.vault-reader-bookmark[aria-pressed="true"] {
+  color: var(--or);
+}
+
+.vault-bookmark {
+  flex-shrink: 0;
+  padding: 3px 6px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--t3);
+  font: inherit;
+  cursor: pointer;
+}
+
+.vault-bookmark[aria-pressed="true"] {
+  color: var(--or);
+}
+
+.vault-bookmark:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.vault-row-label > button:focus-visible,
+.vault-bookmark:focus-visible,
+.vault-views > button:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+.vault-inspector {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--s0);
+  padding: 16px;
+}
+
+.vault-reader-head > h2 {
+  margin: 12px 0 4px;
+  color: var(--t0);
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.vault-note-content {
+  min-width: 0;
+  margin: 16px 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g1);
+}
+
+.vault-note-content > .md {
+  max-width: 68ch;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.vault-note-content .md-note-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--t3);
+  text-underline-offset: 2px;
+}
+
+.vault-note-content .md-note-link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--or);
+}
+
+.vault-note-content .md-note-link:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.vault-inspector pre,
+.vault-inspector textarea {
+  max-width: 100%;
+  overflow: auto;
+}
+
+.vault-related {
+  min-width: 0;
+}
+
+.vault-related ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vault-related li,
+.vault-related-missing {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.vault-reader-tag:focus-visible,
+.vault-reader-bookmark:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.vault-history ul {
+  padding-left: 16px;
+}
+
+.vault-commit {
+  overflow-wrap: anywhere;
+}
+
+.vault-commit time {
+  color: var(--t3);
+}
+
+@media (min-width: 800px) {
+  .vault-browser {
+    grid-template-columns: var(--vault-list-width, minmax(240px, 1fr)) minmax(0, 2fr);
+  }
+
+  .vault-inspector {
+    grid-column: 2;
+  }
+
+  /* With no note open, the browse column (list or overview) has the whole width to itself. */
+  .vault-browser:not([data-open]) > .vault-list {
+    grid-column: 1 / -1;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media not all and (min-width: 800px) {
+  .vault-browser[data-open] .vault-list {
+    display: none;
+  }
+
+  .vault-inspector {
+    grid-column: 1;
+  }
+}
+
+.vault-reader-head > h2 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.vault-resize-controls {
+  position: absolute;
+  width: 0;
+  pointer-events: none;
+}
+.vault-resize-controls > * {
+  pointer-events: auto;
+}
+.vault-resize-controls > .resize-handle {
+  left: 0;
+}
+.vault-split-reset {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 2;
+  white-space: nowrap;
+}
+.vault-browser[data-split] > .vault-inspector {
+  padding-bottom: 50px;
+}
+
+.vault-quiet {
+  color: var(--t3);
+  font-size: 12px;
+}
+
+/* .vault-updating floats over the overview instead of sitting in flow, so the remembered
+   overview underneath never shifts up a line when a quiet refresh's held indicator unmounts. */
+.vault-overview-host {
+  position: relative;
+}
+
+.vault-updating {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.vault-notice {
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g1);
+  color: var(--t1);
+  font-size: 13px;
+}
+
+.vault-more {
+  color: var(--t2);
+  font-size: 13px;
+}
+
+.vault-more > summary {
+  cursor: pointer;
+}
+
+@media (forced-colors: active) {
+  .vault-row:has([aria-current="true"]),
+  .vault-views > [aria-pressed="true"] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  .vault-reader-tag:focus-visible,
+  .vault-reader-bookmark:focus-visible {
+    outline-color: Highlight;
+  }
+}

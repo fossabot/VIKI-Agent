@@ -1,0 +1,98 @@
+.worktrees {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.worktrees ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.worktrees-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 8px;
+}
+
+.worktrees-form label {
+  display: grid;
+  gap: 2px;
+  flex: 1 1 12em;
+  min-width: 0;
+}
+
+.worktrees-form input {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.worktrees-form p {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.worktree-row {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.worktree-row[data-state="removed"] {
+  opacity: 0.55;
+}
+
+.worktree-head,
+.worktree-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.worktree-path {
+  font-family: var(--font-mono);
+  color: var(--t2);
+}
+
+.worktrees-refusal {
+  margin: 0;
+  color: var(--err);
+}
+
+.worktrees-cleanup {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.worktrees-cleanup p {
+  margin: 0;
+}
+
+.worktrees-decisions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.worktrees-decisions li {
+  display: grid;
+  gap: 2px;
+}
+
+/* The header's New session button stays focusable while refused, so it is dimmed, not disabled. */
+.workbench-folder [aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}

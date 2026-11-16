@@ -1,0 +1,62 @@
+.bot-memory-card {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--g1);
+}
+
+.bot-memory-card > header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 12px;
+}
+
+.bot-memory-card-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bot-memory-card-list li {
+  display: grid;
+  gap: 2px;
+}
+
+.bot-memory-card-list small {
+  color: var(--t3);
+}
+
+.bot-memory-card h3,
+.bot-memory-card p {
+  margin: 0;
+}
+
+.bot-memory-card code {
+  color: var(--t3);
+  overflow-wrap: anywhere;
+}
+
+.bot-memory-card > .btn {
+  justify-self: start;
+}
+
+/* A long Bot name wraps inside the button instead of overflowing a narrow window. */
+.bot-memory-card > .btn.bot-memory-ask {
+  height: auto;
+  min-height: 44px;
+  padding-block: 8px;
+  text-align: left;
+  white-space: normal;
+}
+
+@media not all and (min-width: 800px) {
+  .bot-memory-card {
+    padding: 10px;
+  }
+}

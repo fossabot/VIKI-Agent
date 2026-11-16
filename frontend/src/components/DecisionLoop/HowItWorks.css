@@ -1,0 +1,67 @@
+/* The "How VIKI works" strip (HowItWorks.tsx). The page is the container. */
+.dloop-how {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  color: var(--t1);
+}
+
+.dloop-how-heading {
+  margin: 0;
+  color: var(--t0);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dloop-how-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dloop-how-step {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.dloop-how-no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--b-strong);
+  border-radius: 50%;
+  background: var(--fill-pill);
+  color: var(--t1);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.dloop-how-text {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  min-width: 0;
+}
+
+.dloop-how-text p,
+.dloop-how-foot {
+  margin: 0;
+  color: var(--t2);
+}
+
+.dloop-how-title {
+  color: var(--t0);
+}
+
+@container (width < 480px) {
+  .dloop-how-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

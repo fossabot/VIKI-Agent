@@ -1,0 +1,82 @@
+/**
+ * AgentsSection: the roster rows (VIKI's plain row, the vault agents' expandable buttons)
+ * and the summary of App's Library fold around them. `.rail-agents`, `.rail-agents-head`,
+ * `.rail-agents-count`, `.agent`, `.agent .s` and `.agent .s-on` are defined only here: this
+ * section sits in the right rail (after Needs review, before Routines, inside the right
+ * drawer below 1280 px).
+ */
+.rail-agents {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: 40%;
+  overflow-y: auto;
+  border-top: 1px solid var(--hair);
+  padding-top: 10px;
+}
+
+.rail-agents-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 8px 4px;
+}
+
+.rail-agents-count {
+  font-size: 12px;
+  color: var(--or);
+}
+
+.agent {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 8px;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.agent .s {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.agent .s-on {
+  color: var(--or);
+}
+
+/* A roster row is a real <button> (a toggle); VIKI's row is a plain div, so the reset is
+   scoped to the button alone. */
+button.agent {
+  width: 100%;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+button.agent:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+/* A roster row's expanded profile: its description, then Model/Tools/Last run. Padding lines
+   the text under the name, not the face (8px row padding + 24px face + 10px gap). */
+.agent-details {
+  padding: 2px 8px 8px 42px;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.agent-details p {
+  margin: 2px 0;
+}
+
+/* App's `Library · N subagents` fold under the run list. Its summary carries base.css's `.lbl`
+   itself, as AgentRuns' Done summary does, so this places it and adds no copy of that look. */
+.agents-library > summary {
+  cursor: pointer;
+  margin: 14px 8px 4px;
+}

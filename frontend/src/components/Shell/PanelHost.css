@@ -1,0 +1,41 @@
+.panel-placement-host {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.panel-placement {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.panel-placement-head {
+  padding: 8px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.panel-placement-head h3 {
+  margin: 0 0 4px;
+  font-size: inherit;
+}
+
+.panel-placement-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.panel-placement-head [data-panel-grip] {
+  touch-action: none;
+  cursor: grab;
+}
+
+.panel-drop-target {
+  padding: 8px;
+  border: 1px dashed var(--hair);
+}
+
+.panel-drop-target.is-target {
+  border-style: solid;
+  background: var(--fill-hi);
+}

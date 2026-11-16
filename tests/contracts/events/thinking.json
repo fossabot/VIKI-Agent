@@ -1,0 +1,51 @@
+{
+  "fixture": "claude/thinking.jsonl",
+  "vault": "%VAULT%",
+  "mode": "auto",
+  "note": "Summarized thinking (thinking_delta) then text in the same message; signature deltas and system/thinking_tokens stay silent; the thinking duration comes from the fixture clock (t_ms).",
+  "events": [
+    {
+      "type": "thinking.delta",
+      "data": {
+        "block_id": "msg_011CewM5CCW3kx8YctfqEpiD:0",
+        "text": "I need to find twin prime pairs below 200, so I'm listing out all primes under 200 first to check which ones have p+2 also prime.\n\nGoing through the list, I find these p values work: 3, 5, 11, 17, 29, 41, 59, 71, 101, 107, 137, 149, 179, 191, and 197. I'm double-checking other candidates like 2, 7, 13, and 19 to confirm none of those form valid pairs.\n\nContinuing through the rest, none of these pairs work either since the second number always factors out—159, 165, 169, 175, 183, 195, and 201 are all composite, so no prime pairs found yet.\n\nCompiling the full list of lower twin primes below 200: 3, 5, 11, 17, 29, 41, 59, 71, 101, 107, 137, 149, 179, 191, 197. Adding them sequentially gives a running total that ends at 1297, so I'll verify this sum once more to be sure.\n\nLet me redo this sum step by step to double-check, adding each number in sequence: 3, 8, 19, 36, 65, 106, 165, 236, 337, 444, 581, 730, 909, then continuing toward 1297.\n\nI want to verify my prime list is correct, so I'm cross-checking against the known set of 46 primes below 200 to make sure nothing was missed or miscounted.\n\nNow I'm working on twin primes -- pairs where both p and p+2 are prime, with p under 200. I'm going through the prime list checking each one to see if adding 2 also lands on a prime.\n\nContinuing through the list, I find more twin prime pairs at 59, 71, and 101, while ruling out the rest by checking p+2 for factors.\n\nContinuing through 181, 191, 193, 197, 199, I find matches at 191 and 197. This confirms the final list: 3, 5, 11, 17, 29, 41, 59, 71, 101, 107, 137, 149, 179, 191, 197 — 15 primes total, matching my earlier count.\n\nAdding these up gives a sum of 1297. Since this is straightforward arithmetic, I'll just report the number directly.\n\n"
+      }
+    },
+    {
+      "type": "thinking.done",
+      "data": {
+        "block_id": "msg_011CewM5CCW3kx8YctfqEpiD:0",
+        "text": "I need to find twin prime pairs below 200, so I'm listing out all primes under 200 first to check which ones have p+2 also prime.\n\nGoing through the list, I find these p values work: 3, 5, 11, 17, 29, 41, 59, 71, 101, 107, 137, 149, 179, 191, and 197. I'm double-checking other candidates like 2, 7, 13, and 19 to confirm none of those form valid pairs.\n\nContinuing through the rest, none of these pairs work either since the second number always factors out—159, 165, 169, 175, 183, 195, and 201 are all composite, so no prime pairs found yet.\n\nCompiling the full list of lower twin primes below 200: 3, 5, 11, 17, 29, 41, 59, 71, 101, 107, 137, 149, 179, 191, 197. Adding them sequentially gives a running total that ends at 1297, so I'll verify this sum once more to be sure.\n\nLet me redo this sum step by step to double-check, adding each number in sequence: 3, 8, 19, 36, 65, 106, 165, 236, 337, 444, 581, 730, 909, then continuing toward 1297.\n\nI want to verify my prime list is correct, so I'm cross-checking against the known set of 46 primes below 200 to make sure nothing was missed or miscounted.\n\nNow I'm working on twin primes -- pairs where both p and p+2 are prime, with p under 200. I'm going through the prime list checking each one to see if adding 2 also lands on a prime.\n\nContinuing through the list, I find more twin prime pairs at 59, 71, and 101, while ruling out the rest by checking p+2 for factors.\n\nContinuing through 181, 191, 193, 197, 199, I find matches at 191 and 197. This confirms the final list: 3, 5, 11, 17, 29, 41, 59, 71, 101, 107, 137, 149, 179, 191, 197 — 15 primes total, matching my earlier count.\n\nAdding these up gives a sum of 1297. Since this is straightforward arithmetic, I'll just report the number directly.\n\n",
+        "duration_ms": 26884
+      }
+    },
+    {
+      "type": "text.delta",
+      "data": {
+        "block_id": "msg_011CewM5CCW3kx8YctfqEpiD:1",
+        "text": "1297"
+      }
+    },
+    {
+      "type": "text.done",
+      "data": {
+        "block_id": "msg_011CewM5CCW3kx8YctfqEpiD:1",
+        "text": "1297"
+      }
+    },
+    {
+      "type": "turn.done",
+      "data": {
+        "status": "success",
+        "usage": {
+          "input_tokens": 2,
+          "output_tokens": 3449,
+          "cache_read_tokens": 0,
+          "cache_creation_tokens": 62988
+        },
+        "context_percent": null,
+        "duration_ms": 30529
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+.vsp {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+  color: var(--t1);
+}
+
+.vsp-header h1,
+.vsp-header p,
+.vsp-growth h2,
+.vsp-growth p,
+.vsp-topics h2,
+.vsp-topics p,
+.vsp-notes h2,
+.vsp-group h2,
+.vsp-group p {
+  margin-block: 0 8px;
+}
+
+.vsp-header p,
+.vsp-meta,
+.vsp-empty {
+  color: var(--t2);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.vsp-ref {
+  display: inline-block;
+  max-width: 100%;
+  color: var(--t2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.vsp-count {
+  margin: 4px 0 0;
+  color: var(--t2);
+  font-size: 13px;
+}
+
+.vsp-growth,
+.vsp-group {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+}
+
+.vsp-meta {
+  margin: 5px 0 0;
+}
+
+.vsp-tags,
+.vsp-note-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vsp-tags {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.vsp-tag,
+.vsp-action {
+  min-height: 32px;
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--g2);
+  color: var(--t1);
+  font: inherit;
+  cursor: pointer;
+}
+
+.vsp-tag:hover,
+.vsp-action:hover {
+  border-color: var(--t3);
+}
+
+.vsp-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.vsp-list-head label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--t2);
+  font-size: 12px;
+}
+
+.vsp-list-head select {
+  max-width: 100%;
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--g2);
+  color: var(--t1);
+  font: inherit;
+}
+
+.vsp-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 10px;
+}
+
+.vsp-group > .note-card {
+  margin-top: 8px;
+}
+
+.vsp-group .vsp-action {
+  margin-top: 8px;
+}
+
+.vsp button:focus-visible,
+.vsp select:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  .vsp button:focus-visible,
+  .vsp select:focus-visible {
+    outline-color: Highlight;
+  }
+}

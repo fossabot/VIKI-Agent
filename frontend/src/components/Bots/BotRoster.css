@@ -1,0 +1,64 @@
+.bots-roster {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  gap: 16px;
+}
+.bots-group h2 {
+  margin: 0 0 8px;
+  color: var(--t1);
+  font-size: 13px;
+  font-weight: 600;
+}
+.bots-group-action {
+  margin: 0 0 8px;
+}
+.bots-group ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.bots-group .bots-row {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+}
+.bots-row-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.bots-row-text > .btn {
+  white-space: normal;
+  height: auto;
+  min-height: 44px;
+}
+.bots-role {
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--t2);
+  font-size: 11px;
+}
+.bots-time {
+  color: var(--t3);
+  font-size: 11px;
+}
+.bots-status,
+.bots-purpose {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bots-status {
+  color: var(--t1);
+  font-size: 12px;
+}
+.bots-purpose {
+  color: var(--t2);
+  font-size: 12px;
+}

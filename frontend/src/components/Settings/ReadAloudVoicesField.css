@@ -1,0 +1,22 @@
+/* The voices field's fieldset carries no browser box; its rows are a label above a select, with
+   the Settings tokens for spacing and colour. */
+.read-aloud-voices {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.read-aloud-voices-lang {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.read-aloud-voices-lang label {
+  font-size: 12px;
+  color: var(--t2);
+}

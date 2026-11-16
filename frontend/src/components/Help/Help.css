@@ -1,0 +1,222 @@
+/* Shared chrome for the help system: the help-center dialog (backdrop, panel, its nav/page
+   split, a search hit, its actions row and status line) and the Tour (.tour,
+   .tour-highlight). One file, not two, because the center and the tour share a vocabulary
+   (.help-actions, .help-status) instead of keeping parallel copies of the same chrome. */
+
+.help-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  z-index: 50;
+}
+
+.help-panel {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 760px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 120px);
+  display: flex;
+  overflow: hidden;
+  background: var(--g1);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  z-index: 51;
+}
+
+.help-nav {
+  flex: none;
+  width: 200px;
+  overflow-y: auto;
+  border-right: 1px solid var(--line);
+  padding: 0 8px 8px;
+}
+
+/* Sticky so the Help heading, Close help and the search box stay visible while the topic
+   list below scrolls — .help-nav itself is overflow-y: auto. */
+.help-nav-top {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+  background: var(--g1);
+}
+
+.help-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.help-head h2 {
+  margin: 0;
+}
+
+.help-search {
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--g2);
+  color: var(--t0);
+  font: inherit;
+  font-size: 13px;
+}
+
+.help-search::placeholder {
+  color: var(--t3);
+}
+
+.help-group-title {
+  margin: 12px 8px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--t3);
+}
+
+.help-page {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 20px 24px;
+}
+
+/* S (below 800px): no room for the nav beside the page, so it stacks above instead,
+   with a bottom divider taking over from the border it loses on the right. */
+@media not all and (min-width: 800px) {
+  .help-panel {
+    flex-direction: column;
+  }
+
+  .help-nav {
+    width: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    flex: none;
+    min-height: 0;
+    max-height: 40vh;
+  }
+
+  .help-page {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+}
+
+.help-hit {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.help-hit:hover,
+.help-hit:focus-visible {
+  background: var(--g3);
+}
+
+/* A nav topic button is one line and fits the fixed height above, but a search hit (HelpCenter.tsx)
+   also carries a snippet that must wrap inside its own row instead of overflowing into the next. */
+.help-page .help-hit {
+  height: auto;
+  min-height: 36px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 6px 8px;
+}
+
+/* A related card's two spans: the topic title, then its lead sentence. */
+.help-related .help-hit > span:first-child {
+  font-weight: 600;
+  color: var(--t0);
+}
+
+.help-related .help-hit > span:last-child {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.help-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.help-status {
+  margin: 0;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+/* The tour: a small docked card, never a backdrop — the UI it is explaining has to stay visible
+   behind it. Same z-index tier as the search palette's own panel (the stacking order tokens.css
+   writes down once); the two are never open together. */
+.tour {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 340px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - 48px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--g1);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  z-index: 51;
+}
+
+.tour h2 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+.tour .md {
+  margin: 0 0 16px;
+}
+
+.tour .help-actions {
+  margin-top: auto;
+}
+
+.tour-skip {
+  margin-right: auto;
+}
+
+/* Applied to the real `[data-region]` element elsewhere in the app, never inside this panel. */
+.tour-highlight {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (forced-colors: active) {
+  .tour-highlight {
+    outline-color: Highlight;
+  }
+}

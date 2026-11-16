@@ -1,0 +1,758 @@
+/* The conversation column, from the design's Chat screen. The g0-g3 / t0-t3 / or / or-hi
+   tokens all live in styles/tokens.css and are used by var() below, as are --s0 (panel fill),
+   --s1 (raised fill) and --b1/--b2 (the two off-palette borders the design uses for the tools
+   panel and the user bubble). They sit in tokens.css rather than scoped to this column because
+   `.md`, `.md-code` and `.md-inline-code` also render inside a plan card, which is a sibling of
+   `.conversation-list` and not a descendant: column-scoped tokens would leave a fenced block in
+   a plan without its border and its fill. Chat role colors are scoped to `.conversation-list`
+   in the same token stylesheet. */
+.conversation-list {
+  /* The actual scroll box is Shell's `.conversation-scroll` ancestor, which already carries
+     `padding: 24px 24px 0`; this only adds the bottom gap that ancestor's own padding lacks. */
+  padding: 0 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  /* The Face presence dot's ring matches the surface it sits on (Face.css's --face-ring); the
+     conversation surface is --g1, not the shell's --g0 default. */
+  --face-ring: var(--g1);
+  /* Everything in this column is arbitrary text the app did not write — model prose, the user's
+     own pasted prompt, tool output — and one unbreakable token (a URL, a hash, a base64 blob)
+     otherwise paints straight through the 720px `.message-column` and turns on a horizontal
+     scrollbar for the whole conversation pane: Shell.css's `.conversation-scroll` scrolls
+     vertically, which computes the other axis to `auto` as well. Set once here and inherited,
+     rather than repeated on `.md`, `.user-turn`, `.tool-preview` and `.thought-full`.
+     `anywhere` rather than `break-word` for the reason Cards.css already gives (a long argument
+     is usually one token), plus one more: only `anywhere` feeds its break opportunities into
+     min-content, which is what lets a wide `.md table`'s auto layout shrink its columns instead
+     of overflowing. Fenced code is exempt by construction — `<pre>`'s `white-space: pre` allows
+     no wrapping at all, so `.md-code` keeps its own horizontal scroll. */
+  overflow-wrap: anywhere;
+}
+
+.turn {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .user-turn is the bubble itself (the acceptance tests select it directly); this wrapper only
+   right-aligns it and the timestamp under it. */
+.turn-user {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 560px;
+}
+
+.user-turn {
+  background: var(--chat-prompt-fill);
+  border: 1px solid var(--b2);
+  border-inline-start: 3px solid var(--chat-prompt);
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--t0);
+  white-space: pre-wrap;
+}
+
+.cmd-chip {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 13px;
+  color: var(--or-hi);
+}
+
+/* A message hands-free sent: a small, quiet tag where the request it carries
+   is not shown. */
+.voice-chip {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 0 6px;
+  border: 1px solid var(--b2);
+  border-radius: 8px;
+  font-size: 11.5px;
+  line-height: 18px;
+  color: var(--t3);
+  vertical-align: 1px;
+}
+
+.user-at {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.reply {
+  display: flex;
+  gap: 14px;
+}
+
+.turn-user + .reply {
+  margin-top: 14px;
+}
+
+.reply-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.reply-name-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-height: 26px;
+  height: auto;
+}
+
+.reply-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--chat-reply);
+}
+
+/* The composer owns animated activity; reply portraits retain a quiet presence dot. */
+.reply-has-activity > .face .face-presence {
+  animation: none;
+}
+
+/* The reply's own CopyButton: pinned to the far end of the name row, past "VIKI" and its
+   profile chips, rather than a row of its own — a reply that is mostly a couple of sentences has
+   no other use for that space, and a dedicated row under the last block would draw the eye every
+   time whether or not the user ever means to copy. */
+.reply-name-row .copy-btn {
+  margin-left: auto;
+}
+
+.reply-cancelled {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--t3);
+}
+
+/* --- thought row -------------------------------------------------------------------------- */
+
+/* The row and its revealed text are siblings, not parent and child: text inside the button
+   cannot be selected, because every drag over it is a click on the toggle. */
+.thought-block {
+  margin-top: 10px;
+}
+
+.thought {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  color: var(--t3);
+  font-size: 13px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.thought-label {
+  flex: none;
+  color: var(--chat-thought);
+}
+
+.thought-sep {
+  flex: none;
+}
+
+.thought-summary,
+.thought-duration {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.thought-full {
+  margin-top: 6px;
+  border-inline-start: 2px solid var(--chat-thought);
+  padding-inline-start: 12px;
+  white-space: pre-wrap;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--t2);
+}
+
+/* --- tools panel --------------------------------------------------------------------------- */
+
+.tools {
+  margin-top: 8px;
+  border: 1px solid var(--b1);
+  border-inline-start: 3px solid var(--chat-tool);
+  border-radius: 12px;
+  background: var(--s0);
+  padding: 8px 12px;
+  font-size: 12.5px;
+  line-height: 22px;
+  color: var(--t2);
+}
+
+.tool-group-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-bottom: 4px;
+  color: var(--t3);
+  font-family: var(--font-sans);
+  font-size: 12px;
+}
+
+.tool-error-count,
+.tool-error-label {
+  color: var(--chat-failure);
+  font-weight: 600;
+}
+
+.tool-error-label {
+  flex: none;
+  font-family: var(--font-sans);
+  font-size: 11px;
+}
+
+.tool-row {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  border: none;
+  background: none;
+  padding: 2px 0;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: default;
+  /* The row is the only thing here that can still widen the column: `.tool-head` is `flex: none`
+     by design (the tool's name must never be the part that truncates), so the column's
+     `overflow-wrap` cannot reach it and it is laid out at its full text width whatever that is —
+     and for Bash and PowerShell the head is the command's first whitespace-delimited token, cut
+     at 160 characters, which for an argv written without spaces is the whole command
+     (mapper.py's own note). Clipping here costs nothing on a row that fits and keeps the
+     pathological one from turning on a horizontal scrollbar for the whole pane. */
+  overflow: hidden;
+}
+
+button.tool-row {
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button.tool-row:hover,
+button.tool-row[aria-expanded="true"] {
+  background: var(--fill-hi);
+}
+
+button.tool-row:focus-visible,
+.tool-more:focus-visible,
+.thought:focus-visible,
+.routing-summary-toggle:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.tool-head {
+  flex: none;
+  /* Blend toward the text tone so amber stays readable on a hovered tool row in either theme. */
+  color: var(--chat-tool);
+}
+
+.tool-row--error .tool-head {
+  color: var(--chat-failure);
+}
+
+.tool-rest {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--t2);
+}
+
+.tool-tail {
+  flex: none;
+  color: var(--t3);
+}
+
+.tool-more {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 2px 0;
+  margin-top: 2px;
+  font: inherit;
+  text-align: left;
+  color: var(--t3);
+  cursor: pointer;
+}
+
+.tool-preview {
+  margin: 6px 0 8px;
+  padding: 8px 0 0;
+  border-top: 1px solid var(--hair);
+  white-space: pre-wrap;
+  color: var(--t3);
+}
+
+/* --- routing row --------------------------------------------------------------------------- */
+
+.routing {
+  margin-top: 8px;
+}
+
+.routing-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  line-height: 20px;
+}
+
+.routing-text {
+  color: var(--t2);
+}
+
+.routing-reason,
+.routing-status {
+  color: var(--t3);
+}
+
+.routing-tools {
+  /* Clears the 18px face plus the row's own 8px gap, so nested tool rows sit under the agent
+     name rather than the face. */
+  margin-left: 26px;
+}
+
+/* The live/finished word and its counts (Blocks.tsx's `routingMeta`) — dim, same indent as the
+   nested tool rows below it. */
+.routing-meta {
+  margin-top: 4px;
+  margin-left: 26px;
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--t3);
+}
+
+/* The subagent's closing words stay compact until its keyboard-accessible disclosure opens. */
+.routing-summary {
+  margin-top: 6px;
+  margin-left: 26px;
+  font-size: 12.5px;
+  line-height: 18px;
+  color: var(--t3);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.routing-summary--open {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  white-space: pre-wrap;
+}
+
+.routing-summary-toggle {
+  margin: 4px 0 0 26px;
+  padding: 2px 0;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: var(--t2);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.routing-summary-toggle:hover {
+  color: var(--or-hi);
+}
+
+/* A block-level jump's own row (Blocks.tsx's RoutingRow `target` prop), once the whole-turn
+   outline moves down to it: same outline as `.turn-search-target` (ConversationTools.css) at a
+   tighter offset, since this box is already indented, plus one brief flash so a row already in
+   view still announces the jump even with no scrolling to catch the eye. */
+.routing-target {
+  outline: 2px solid var(--or);
+  outline-offset: 4px;
+  border-radius: 5px;
+  animation: routing-flash 1.6s ease-out 1;
+}
+
+@keyframes routing-flash {
+  from {
+    background: rgb(var(--or-rgb) / 0.18);
+  }
+  to {
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routing-target {
+    animation: none;
+  }
+}
+
+html[data-motion="reduce"] .routing-target {
+  animation: none;
+}
+
+/* --- notice row -----------------------------------------------------------------------------
+   Lives inside the shared `.tools mono` panel (never on its own — see Conversation.tsx's
+   "Grouped tool/notice panels"), so it takes that panel's font-size/line-height/color and only
+   overrides what the design calls out on top of them. The headline's own colour, between --t2
+   and --t3, is the tokens.css role token --t-head, so each theme sets its own. */
+
+.notice-row {
+  display: flex;
+  gap: 8px;
+  color: var(--t-head);
+}
+
+.notice-mark {
+  flex: none;
+  color: var(--chat-tool);
+}
+
+.notice-tail {
+  color: var(--t3);
+}
+
+/* --- header title ---------------------------------------------------------------------------- */
+
+/* styles/app.css sets the title's font; `.conversation-header` (Shell's 53px flex row) has no
+   rule truncating a long one to its one line, so it wraps and gets clipped by the row's fixed
+   height, squeezing the chips beside it. */
+.conversation-header .conversation-title {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The tab strip stands in for the title (ConversationHeader's `tabs` prop): it shrinks and
+   scrolls inside the 52px row before the chips do. */
+.conversation-header .session-tabs {
+  flex: 0 1 auto;
+  padding: 0;
+}
+
+/* When used as the title, the selected or active (unfocused) tab reads in full up to 480px. */
+.conversation-header .session-tab[data-selected="true"],
+.conversation-header .session-tab[data-active="true"] {
+  flex: 0 1 auto;
+  max-width: min(480px, 100%);
+}
+
+/* --- markdown prose (Markdown.tsx's `.md`) ---------------------------------------------------- */
+
+.md {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 26px;
+  color: var(--t0);
+  /* Restated rather than inherited from `.conversation-list` (see the note there for why it is
+     needed at all): Cards.tsx renders a plan's `.md` too, and that one lands outside this
+     column, where nothing else would give it the rule. */
+  overflow-wrap: anywhere;
+}
+
+.md > :first-child {
+  margin-top: 0;
+}
+
+/* The over-cap and error-boundary fallback (Markdown.tsx's PlainText): `<pre>`'s UA default of
+   `white-space: pre` would paint each paragraph of arbitrary text as one unbroken line, and
+   `.conversation-list`'s `overflow-wrap: anywhere` above gives no break opportunity while
+   wrapping stays off, so it would still scroll the whole conversation pane sideways. */
+.md-plain {
+  margin: 0;
+  white-space: pre-wrap;
+  font: inherit;
+}
+
+.md p {
+  margin: 10px 0;
+}
+
+.md h1,
+.md h2,
+.md h3,
+.md h4 {
+  margin: 18px 0 8px;
+  font-weight: 600;
+  color: var(--t0);
+}
+
+.md h1 {
+  font-size: 22px;
+}
+.md h2 {
+  font-size: 19px;
+}
+.md h3 {
+  font-size: 16.5px;
+}
+.md h4 {
+  font-size: 15px;
+}
+
+.md ul,
+.md ol {
+  margin: 8px 0;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14.5px;
+  line-height: 24px;
+  color: var(--t1);
+}
+
+.md ul {
+  list-style: none;
+}
+
+.md ul > li {
+  display: block;
+  position: relative;
+  padding-left: 18px;
+}
+
+.md ul > li:not(.task-list-item)::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--or);
+}
+
+.md ol {
+  padding-left: 20px;
+}
+
+.md li > p {
+  margin: 0;
+}
+
+.md blockquote {
+  margin: 10px 0;
+  padding: 2px 14px;
+  border-left: 2px solid var(--line);
+  color: var(--t2);
+}
+
+.md hr {
+  margin: 16px 0;
+  border: none;
+  border-top: 1px solid var(--line);
+}
+
+.md table {
+  margin: 10px 0;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.md th,
+.md td {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+.md th {
+  color: var(--t1);
+  background: var(--g2);
+}
+
+.md a {
+  color: var(--or-hi);
+}
+
+.md strong {
+  color: var(--t0);
+  font-weight: 600;
+}
+
+.md del {
+  color: var(--t3);
+}
+
+/* Wraps a fenced block's <pre> (the copy control): the CopyButton sits in `.md-code-bar`, a
+   sibling of `.md-code`, never a child of it — `.md-code`'s only child stays the <code>
+   react-markdown rendered, so copying it (and the frozen "code keeps its text verbatim" check,
+   which reads `.md-code`'s own textContent) is never contaminated by the button's own label. */
+.md-code-wrap {
+  margin: 10px 0;
+}
+
+.md-code-bar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.md-code {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--s0);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--t1);
+}
+
+.md-code code {
+  font-family: inherit;
+}
+
+.md-inline-code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--s0);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--t1);
+}
+
+/* A fenced block with no info string (mdast-util-to-hast only sets `language-*` when the fence
+   has one) still gets `.md-inline-code` from Markdown.tsx's className guess — undo the inline
+   styling here rather than change what that class means for the real inline case. */
+.md-code .md-inline-code {
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* Markdown is also used for vault notes and plan cards; these reading cues belong to chat. */
+.conversation-list .md a {
+  color: var(--chat-prompt);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.conversation-list .md-inline-code {
+  color: var(--chat-reply);
+}
+
+.conversation-list .md-code .md-inline-code {
+  color: var(--t1);
+}
+
+.conversation-list .md blockquote {
+  border-inline-start-color: var(--chat-thought);
+}
+
+.conversation-list .md th {
+  background: var(--chat-heading-fill);
+}
+
+/* The ↓ Jump to latest pill, from the design. The design places it 34px above the composer; here
+   it is sticky to the bottom of the scroll box, which is the same place on screen and keeps it
+   with the state that decides whether to show it. */
+.jump-pill {
+  position: sticky;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  margin: -28px auto 0;
+  padding: 0 12px;
+  width: fit-content;
+  border-radius: 14px;
+  border: 1px solid rgb(var(--or-rgb) / 0.55);
+  background: var(--fill-raised);
+  box-shadow: 0 6px 18px var(--shadow-pill);
+  color: var(--or-hi);
+  font-size: 12.5px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.jump-pill:hover,
+.jump-pill:focus-visible {
+  border-color: var(--or);
+  outline: none;
+}
+
+@media (forced-colors: active) {
+  button.tool-row:focus-visible,
+  .tool-more:focus-visible,
+  .thought:focus-visible,
+  .routing-summary-toggle:focus-visible,
+  .jump-pill:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+
+/* --- waiting steer rows: a message sent while Claude Code is still on its current step,
+   shown below the last turn until its steer.ended arrives ------------------------------------- */
+
+.steer-waiting {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.steer-waiting-text {
+  white-space: pre-wrap;
+  color: var(--t2);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.steer-waiting-images,
+.steer-waiting-caption {
+  margin-top: 2px;
+  color: var(--t3);
+}
+
+/* --- turn menu: the finished turn's "More actions" (⋯) menu, which holds Quote, New chat,
+   Edit-in-new-chat and Select-for-export ------------------------------------------------------ */
+
+.turn-menu {
+  width: 220px;
+  padding: 4px 0;
+}
+
+.turn-menu .mi {
+  height: auto;
+  min-height: 34px;
+  padding-block: 7px;
+  overflow-wrap: anywhere;
+}
+
+/* Same highlight as LeftRail/OrganizedSessionMenu.css's own `.mi[data-highlighted]`. */
+.turn-menu .mi[data-highlighted] {
+  background: var(--fill-hi);
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+}
+
+.turn-menu-check {
+  margin-left: auto;
+}
+
+@media (forced-colors: active) {
+  .turn-menu .mi[data-highlighted] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

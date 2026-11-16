@@ -1,0 +1,20 @@
+.bots-desk-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+
+.bots-desk-head h2 {
+  margin: 0;
+}
+
+.bots-desk-head .bots-status {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.bots-job {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

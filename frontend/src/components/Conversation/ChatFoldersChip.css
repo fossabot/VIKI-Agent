@@ -1,0 +1,17 @@
+/* ChatFoldersChip's menu. The panel chrome and its rows (`.mi`) are worn as-is from
+   styles/base.css's shared `.menu-panel`; only the separator and the top label need their own
+   rule, the way every other menu in this app that has one already does: the separator copies the
+   shape of Settings/WorkspaceRowMenu.css's `.ws-row-menu-sep`, and the label's padding copies
+   Composer/ModelChip.css's `.chip-menu .lbl` (the only other `Dropdown.Label` in the app, reused
+   as-is by Header/HeaderTrail.tsx's own mode chip). */
+
+.chat-folders-sep {
+  height: 1px;
+  margin: 4px 0;
+  border: none;
+  background: var(--hair);
+}
+
+.chat-folders-menu .lbl {
+  padding: 6px 12px 4px 12px;
+}

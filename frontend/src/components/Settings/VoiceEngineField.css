@@ -1,0 +1,147 @@
+/* The engine radios stack as one row each (label above a one-line description), the description
+   indented 20px to line up under the label text, not the radio — the same indent
+   Onboarding.css's `.starter-choice-desc` already uses for the same shape. The pack card nests
+   under the Natural voices option at that same indent, as a quiet bordered panel. */
+.voice-engine-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.voice-engine-option label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--t0);
+  cursor: pointer;
+}
+
+.voice-engine-option-desc {
+  margin: 2px 0 0 20px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--t3);
+}
+
+.voice-engine-option-action {
+  margin: 6px 0 0 20px;
+}
+
+.voice-pack-card {
+  margin: 8px 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 560px;
+  padding: 10px 12px;
+  border: 1px solid var(--b1);
+  border-radius: 8px;
+  background: var(--s1);
+}
+
+.voice-pack-status {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--t1);
+}
+
+.voice-pack-sub {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--t3);
+}
+
+.voice-pack-link {
+  color: var(--or-hi);
+}
+
+.voice-pack-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* The status sentence on the left, the rolling percent on the right. */
+.voice-pack-progress-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.voice-pack-pct {
+  font-size: 12px;
+  color: var(--t2);
+}
+
+/* Reset first, so the two vendor pseudo-elements fully replace the native widget instead of
+   layering under it. */
+.voice-pack-progress {
+  appearance: none;
+  width: 100%;
+  height: var(--progress-height);
+  border: none;
+  border-radius: calc(var(--progress-height) / 2);
+  background: var(--b1);
+}
+
+.voice-pack-progress::-webkit-progress-bar {
+  background: var(--b1);
+  border-radius: calc(var(--progress-height) / 2);
+}
+
+.voice-pack-progress::-webkit-progress-value {
+  background: var(--or);
+  border-radius: calc(var(--progress-height) / 2);
+}
+
+.voice-pack-progress::-moz-progress-bar {
+  background: var(--or);
+  border-radius: calc(var(--progress-height) / 2);
+}
+
+/* While the size is unknown: a moving segment says "working" instead of a percent. */
+.voice-pack-progress-indet {
+  position: relative;
+  width: 100%;
+  height: var(--progress-height);
+  border-radius: calc(var(--progress-height) / 2);
+  background: var(--b1);
+  overflow: hidden;
+}
+
+.voice-pack-progress-indet::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 32%;
+  border-radius: inherit;
+  background: var(--or);
+  animation: voice-pack-indet calc(var(--motion-base) * 4) var(--motion-ease) infinite;
+}
+
+@keyframes voice-pack-indet {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
+/* Reduced motion, both triggers: the segment stops moving but stays visible, dimmed, rather than
+   leaving the bar looking empty. */
+@media (prefers-reduced-motion: reduce) {
+  .voice-pack-progress-indet::after {
+    animation: none;
+    opacity: 0.45;
+  }
+}
+
+html[data-motion="reduce"] .voice-pack-progress-indet::after {
+  animation: none;
+  opacity: 0.45;
+}

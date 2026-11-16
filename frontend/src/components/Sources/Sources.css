@@ -1,0 +1,362 @@
+/* The Sources family's one stylesheet: SourcesStrip's own `.reply-sources` row,
+   the `.source-chip`/`.source-chip-*` classes SourceChip.tsx renders but does not style itself,
+   and `.chat-sources`/`.chat-digest`/`.digest-*` for "Files in this chat" (ChatSources.tsx,
+   its own doc comment there). Never the classes thought, tools, routing, md, reply or chip: those
+   belong to Conversation/Blocks.tsx and base.css's own `.chip` (an orange accent pill with a
+   different meaning), so every class here is its own name. */
+
+.reply-sources {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.sources-header {
+  flex: 1 0 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sources-label {
+  flex: none;
+  color: var(--t1);
+  font-weight: 600;
+}
+
+.sources-count {
+  color: var(--t3);
+  font-size: 11px;
+}
+
+.reply-source-list {
+  flex: 1 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.reply-source {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: min(300px, 100%);
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--fill-tool);
+}
+
+.source-strip-ref {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 17px;
+  color: var(--t3);
+  overflow-wrap: anywhere;
+}
+
+/* SourceChip.tsx's own button (note/web/search) and its no-`resolve` fallback `<span>`. Shrinks
+   in its flex row and truncates a long label with an ellipsis; the full ref stays in the
+   accessible name and the hover card. With no agent, the label is this element's own direct text
+   and truncates here; with an agent, `.source-chip-label` (below) truncates instead, so the
+   agent suffix (flex: none) never does. */
+.source-chip {
+  flex: 0 1 auto;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 28px;
+  padding: 4px 8px;
+  border: 1px solid var(--b-strong);
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--t2);
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* With no agent, `ChipLabel` renders the label as a plain text child, not a flex child; in
+   `inline-flex` (above) that text clips mid-glyph with no "…" instead of ellipsing. Falls back to
+   `inline-block` only when there is no `.source-chip-agent` child (below) to keep on the label's
+   own line. */
+.source-chip:not(:has(> .source-chip-agent)) {
+  display: inline-block;
+}
+
+.reply-source > .source-chip {
+  width: 100%;
+  min-height: 24px;
+  padding: 0;
+  border: none;
+  text-align: left;
+}
+
+/* The chip's label, when it has an agent suffix to protect (SourceChip.tsx's `ChipLabel`): the
+   part of `.source-chip` that shrinks and ellipses, so a long title truncates before
+   `.source-chip-agent` (flex: none, below) ever does. */
+.source-chip-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The reading agent's name, appended inside `.source-chip`: dim, same token as the other
+   de-emphasised text in this row (.sources-label, .source-chip-ref). Fixed size (never shrinks,
+   never truncates) and its own whitespace, independent of whatever `.source-chip` inherits. */
+.source-chip-agent {
+  flex: none;
+  color: var(--t3);
+  white-space: pre;
+}
+
+.source-chip:hover {
+  color: var(--t1);
+  background: var(--fill-hi);
+}
+
+.source-chip:focus-visible {
+  color: var(--t1);
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+.sources-more {
+  flex: none;
+  min-height: 28px;
+  margin-left: auto;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--fill-tool);
+  color: var(--t2);
+  font: inherit;
+  cursor: pointer;
+}
+
+.sources-more:hover {
+  color: var(--t0);
+  background: var(--fill-hi);
+}
+
+.sources-more:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.sources-badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: var(--fill-hi);
+  color: var(--t3);
+  white-space: nowrap;
+}
+
+.sources-save {
+  flex: none;
+  min-height: 28px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--t3);
+  cursor: pointer;
+}
+
+.sources-save:hover {
+  color: var(--t1);
+  background: var(--fill-hi);
+}
+
+.sources-save:focus-visible {
+  color: var(--t1);
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+/* Breaks onto its own line in the wrapping flex row, directly under whichever control raised it,
+   rather than claiming a fixed corner of the strip (there is no per-chip positioning wrapper). */
+.sources-message {
+  flex: 1 0 100%;
+  color: var(--t3);
+}
+
+/* SourceChip.tsx's hover/focus card. Same chrome as `.menu-panel` (base.css), restated rather
+   than shared: that class also carries the dropdown-panel contract (absolute position, its own
+   width) this card does not want. Flex-basis 100% for the same reason as `.sources-message`. */
+.source-chip-tooltip {
+  flex: 1 0 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border: 1px solid var(--b-pop);
+  border-radius: 8px;
+  background: var(--fill-popover);
+  box-shadow: 0 12px 32px var(--shadow);
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.source-chip-tooltip p {
+  margin: 4px 0 0;
+}
+
+.source-chip-tooltip :first-child {
+  margin-top: 0;
+}
+
+.source-chip-ref {
+  display: block;
+  font-family: var(--font-mono);
+  color: var(--t3);
+  overflow-wrap: anywhere;
+}
+
+.source-chip-title {
+  color: var(--t1);
+  font-weight: 600;
+}
+
+.source-chip-summary {
+  color: var(--t2);
+}
+
+.source-chip-status {
+  flex: 1 0 100%;
+  color: var(--t3);
+}
+
+/* "Files in this chat" (ChatSources.tsx): a RailSection holding `.chat-digest`, whose own
+   Changed/Read/Web/Searches groups (`.digest-group`) and their "By agents" folds
+   (`.digest-agents`) are plain `<details>` — this file only styles their rows and text. */
+.chat-sources {
+  color: var(--t1);
+}
+
+/* Scrolls instead of growing the rail without bound once several groups are open. */
+.chat-digest {
+  max-height: min(320px, 45vh);
+  overflow-y: auto;
+}
+
+.digest-group {
+  margin-top: 8px;
+}
+
+.digest-group summary,
+.digest-agents summary {
+  cursor: pointer;
+}
+
+.digest-count {
+  margin-left: 4px;
+  color: var(--t3);
+}
+
+.digest-agents {
+  margin: 4px 0 4px 16px;
+}
+
+.digest-list {
+  margin: 4px 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A row never wraps: its name (or chip) ellipses before the row grows the rail wider. */
+.digest-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 2px 0;
+}
+
+.digest-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A file row in a span lays out like the button (below): same two children, same flex row. */
+.digest-text:has(.digest-name) {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+/* The name stays whole; the folder gives way first. */
+.digest-name {
+  flex: 0 0 auto;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.digest-folder {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--t3);
+}
+
+.digest-times,
+.digest-agent {
+  flex: none;
+  color: var(--t3);
+}
+
+.digest-open {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.digest-open:focus-visible {
+  outline: 1px solid var(--or);
+  outline-offset: 1px;
+}
+
+@media (forced-colors: active) {
+  .sources-more:focus-visible,
+  .sources-save:focus-visible,
+  .source-chip:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}

@@ -1,0 +1,156 @@
+.palette-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  z-index: 50;
+}
+
+.palette {
+  position: fixed;
+  top: clamp(16px, 12vh, 120px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560px;
+  max-width: calc(100% - 32px);
+  max-height: calc(100% - clamp(16px, 12vh, 120px) - 16px);
+  background: var(--g1);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  z-index: 51;
+  display: flex;
+  flex-direction: column;
+}
+
+.palette-input {
+  width: 100%;
+  height: 44px;
+  flex: none;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--g2);
+  color: var(--t0);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.palette-input:focus {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+  border-color: var(--or);
+}
+
+.palette-note {
+  margin: 8px 4px 0;
+  font-size: 12.5px;
+  color: var(--t3);
+}
+
+.palette-hits {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-block: 4px;
+}
+
+.hit {
+  width: 100%;
+  min-height: 44px;
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.hit:hover,
+.hit-active {
+  background: var(--g3);
+}
+
+.hit:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: -2px;
+}
+
+.hit-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.hit-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--t1);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.hit-heading > .chip {
+  display: block;
+  flex: none;
+  max-width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 18px;
+}
+
+.hit-badge {
+  flex: none;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--g3);
+  color: var(--t1);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.hit-snippet {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--t3);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.hit-snippet:empty {
+  display: none;
+}
+
+.hit-at {
+  flex: none;
+  font-size: 11px;
+  color: var(--t3);
+}
+
+@media (forced-colors: active) {
+  .palette-input:focus {
+    outline: 2px solid Highlight;
+  }
+
+  .hit:focus-visible {
+    outline: 2px solid Highlight;
+  }
+
+  .hit-active {
+    outline: 1px solid Highlight;
+    outline-offset: -1px;
+  }
+}

@@ -1,0 +1,393 @@
+/* Neutral brand tokens with Ghost White accents, shared by both themes and higher contrast.
+   Legacy accent names stay compatible with saved profiles and session labels. */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --g0: #0b0b0b;
+  --g1: #0d0d0d;
+  --g2: #111111;
+  --g3: #161616;
+  --line: #262626;
+  --hair: #1c1c1c;
+  --t0: #ededed;
+  --t1: #d4d4d4;
+  --t2: #b3b3b3;
+  --t3: #a3a3a3;
+  --or: #f8f8ff;
+  --or-hi: #ffffff;
+
+  /* The two panel fills, code borders and error text. They are declared here rather than on
+     `.conversation-list`: a plan card — a sibling of that element, never a descendant —
+     renders `.md-code` outside that scope, where they would be unresolved and silently drop
+     the block's border and fill (an unresolved custom property produces no console error). */
+  --s0: #111111;
+  --s1: #161616;
+  --b1: #222222;
+  --b2: #2a2a2a;
+  --err: #ededed;
+
+  /* Role tokens: a fill, border, shadow or text colour a stylesheet reaches for by what it is
+     for, not by its raw value, so the light theme below can give it a different one. */
+  --on-or: #000000;
+  --or-rgb: 248 248 255;
+  --fill-tool: #0f0f0f;
+  --fill-error: #121212;
+  --fill-pill: #131313;
+  --fill-popover: #141414;
+  --fill-toast: #151515;
+  --fill-raised: #1a1a1a;
+  --hair-header: #1a1a1a;
+  --fill-hi: #1d1d1d;
+  --b-pop: #2e2e2e;
+  --b-strong: #333333;
+  --b-alt: #3a3a3a;
+  --t-head: #a3a3a3;
+  --scrim: rgb(0 0 0 / 50%);
+  --scrim-image: rgb(0 0 0 / 75%);
+  --shadow-pill: rgb(0 0 0 / 50%);
+  --shadow: rgb(0 0 0 / 55%);
+  --shadow-toast: rgb(0 0 0 / 60%);
+  --face-dim: #4a4a4a;
+  --track: #262626;
+  --accent-orange: var(--or);
+  --accent-red: var(--err);
+  --accent-slate: #a3a3a3;
+  --accent-blue: #b5b5b5;
+  --accent-green: #c7c7c7;
+  --accent-purple: #d9d9d9;
+
+  /* Session color labels: distinct hues; names are the stored keys, slate shows teal. */
+  --label-blue: #60a5fa;
+  --label-green: #4ade80;
+  --label-orange: #fb923c;
+  --label-purple: #c084fc;
+  --label-red: #fb7185;
+  --label-slate: #2dd4bf;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --g0: #f4f4f4;
+  --g1: #fbfbfb;
+  --g2: #ffffff;
+  --g3: #ececec;
+  --line: #d6d6d6;
+  --hair: #e2e2e2;
+  --t0: #111111;
+  --t1: #262626;
+  --t2: #444444;
+  --t3: #515151;
+  --or: #000000;
+  --or-hi: #171717;
+  --s0: #ffffff;
+  --s1: #ececec;
+  --b1: #dcdcdc;
+  --b2: #d2d2d2;
+  --err: #111111;
+
+  --on-or: #ffffff;
+  --or-rgb: 0 0 0;
+  --fill-tool: #f7f7f7;
+  --fill-error: #f8f8f8;
+  --fill-pill: #ffffff;
+  --fill-popover: #ffffff;
+  --fill-toast: #ffffff;
+  --fill-raised: #e8e8e8;
+  --hair-header: #e5e5e5;
+  --fill-hi: #e4e4e4;
+  --b-pop: #cfcfcf;
+  --b-strong: #c8c8c8;
+  --b-alt: #bdbdbd;
+  --t-head: #505050;
+  --scrim: rgb(0 0 0 / 30%);
+  --scrim-image: rgb(0 0 0 / 75%);
+  --shadow-pill: rgb(0 0 0 / 14%);
+  --shadow: rgb(0 0 0 / 16%);
+  --shadow-toast: rgb(0 0 0 / 18%);
+  --face-dim: #b5b5b5;
+  --track: #d6d6d6;
+  --accent-orange: var(--or);
+  --accent-red: var(--err);
+  --accent-slate: #5e5e5e;
+  --accent-blue: #363636;
+  --accent-green: #4a4a4a;
+  --accent-purple: #545454;
+
+  /* Session color labels: distinct hues; names are the stored keys, slate shows teal. */
+  --label-blue: #1d4ed8;
+  --label-green: #15803d;
+  --label-orange: #c2410c;
+  --label-purple: #7e22ce;
+  --label-red: #be123c;
+  --label-slate: #0f766e;
+}
+
+/* The OS's own "more contrast" preference: raises the neutral text tokens, --face-dim and the
+   eight borders to their "more" minimums; the action and error text tokens (--or, --or-hi, --err)
+   keep their 4.5:1, and the block never touches the accents or the fills they sit on. */
+@media (prefers-contrast: more) {
+  :root,
+  [data-theme="dark"] {
+    --t2: #c8c8c8;
+    --t3: #b0b0b0;
+    --face-dim: #b0b0b0;
+    --t-head: #b8b8b8;
+    --line: #7a7a7a;
+    --hair: #7a7a7a;
+    --b1: #7a7a7a;
+    --b2: #7a7a7a;
+    --hair-header: #7a7a7a;
+    --b-pop: #7a7a7a;
+    --b-strong: #7a7a7a;
+    --b-alt: #7a7a7a;
+  }
+
+  [data-theme="light"] {
+    --t2: #2e2e2e;
+    --t3: #383838;
+    --face-dim: #383838;
+    --t-head: #333333;
+    --line: #6e6e6e;
+    --hair: #6e6e6e;
+    --b1: #6e6e6e;
+    --b2: #6e6e6e;
+    --hair-header: #6e6e6e;
+    --b-pop: #6e6e6e;
+    --b-strong: #6e6e6e;
+    --b-alt: #6e6e6e;
+  }
+}
+
+/* Chat roles inherit the theme's label hues without recoloring shared app accents. */
+.conversation-list {
+  --chat-prompt: var(--label-blue);
+  --chat-reply: var(--label-slate);
+  --chat-thought: var(--label-purple);
+  --chat-tool: color-mix(in srgb, var(--label-orange) 80%, var(--t0));
+  --chat-failure: var(--label-red);
+  --chat-prompt-fill: color-mix(in srgb, var(--chat-prompt) 8%, var(--s1));
+  --chat-heading-fill: color-mix(in srgb, var(--chat-prompt) 6%, var(--g2));
+}
+
+/* Context categories use local data colors; shared app accents remain neutral. */
+.context-bar,
+.context-category-colors {
+  --context-system-prompt: #94a3b8;
+  --context-system-tools: #60a5fa;
+  --context-mcp-tools: #c084fc;
+  --context-memory-files: #facc15;
+  --context-skills: #4ade80;
+  --context-messages: #fb923c;
+}
+
+[data-theme="light"] .context-bar,
+[data-theme="light"] .context-category-colors {
+  --context-system-prompt: #64748b;
+  --context-system-tools: #2563eb;
+  --context-mcp-tools: #9333ea;
+  --context-memory-files: #a16207;
+  --context-skills: #15803d;
+  --context-messages: #c2410c;
+}
+
+/* Kanban status lanes: one scoped data colour per status, built only from the session label hues;
+   Other and Couldn't read stay neutral; chrome stays monochrome. */
+.kanban {
+  --kanban-todo: var(--label-blue);
+  --kanban-working: var(--label-orange);
+  --kanban-blocked: var(--label-red);
+  --kanban-review: var(--label-purple);
+  --kanban-done: var(--label-green);
+}
+
+/* Decision data series reuse distinct session label hues inside their own surface. */
+.dloop-data {
+  --dloop-held: var(--label-slate);
+  --dloop-listed: var(--label-blue);
+  --dloop-attention: var(--label-orange);
+  --dloop-reports: var(--label-purple);
+  --dloop-useful: var(--label-green);
+  --dloop-wrong: var(--label-red);
+  --dloop-later: var(--label-blue);
+  --dloop-stopped: var(--label-purple);
+}
+
+/* Syntax colors are local to code content; shared app accents remain neutral. Selection keeps
+   these neutral fills even when more contrast raises the global border token --b2. */
+.code-syntax,
+.cm-editor {
+  --code-keyword: #c586c0;
+  --code-function: #dcdcaa;
+  --code-variable: #9cdcfe;
+  --code-string: #ce9178;
+  --code-number: #b5cea8;
+  --code-type: #4ec9b0;
+  --code-meta: #c5bda0;
+  --code-invalid: #f48771;
+  --code-comment: #8fb57b;
+  --code-selection: #2a2a2a;
+}
+
+[data-theme="light"] .code-syntax,
+[data-theme="light"] .cm-editor {
+  --code-keyword: #7133a7;
+  --code-function: #6e5200;
+  --code-variable: #005a9e;
+  --code-string: #92350e;
+  --code-number: #1b604a;
+  --code-type: #00605d;
+  --code-meta: #554a24;
+  --code-invalid: #a32121;
+  --code-comment: #246020;
+  --code-selection: #d2d2d2;
+}
+
+.messaging-provider-logo--mattermost {
+  --brand-logo-backdrop: #ffffff;
+}
+
+/* The launcher's tile behind the brand mark (Launcher.css): the mark's own white, in both themes. */
+.dloop-launcher {
+  --dloop-launcher-tile: #ffffff;
+}
+
+/* The composer glow's mono highlights and inner corner tint (ComposerBeam.css), as channels so
+   each highlight can carry its own animated alpha. Comma-separated for rgba(): measured in Edge,
+   the space form rgb(r g b / a) shifted the gradients' edge pixels by one level. */
+.composer-beam {
+  --beam-spot1-rgb: 180, 180, 180;
+  --beam-spot2-rgb: 140, 140, 140;
+  --beam-spot3-rgb: 160, 160, 160;
+  --beam-spot4-rgb: 130, 130, 130;
+  --beam-spot5-rgb: 170, 170, 170;
+  --beam-spot6-rgb: 150, 150, 150;
+  --beam-spot7-rgb: 190, 190, 190;
+  --beam-spot8-rgb: 145, 145, 145;
+  --beam-spot9-rgb: 165, 165, 165;
+  --beam-corner-rgb: 255, 255, 255;
+}
+
+[data-theme="light"] .composer-beam {
+  --beam-corner-rgb: 0, 0, 0;
+}
+
+:root {
+  --font-sans:
+    "IBM Plex Sans", "IBM Plex Sans JP", "Yu Gothic UI", "Meiryo", "Hiragino Sans",
+    "Noto Sans CJK JP", sans-serif;
+  --font-jp:
+    "IBM Plex Sans JP", "IBM Plex Sans", "Yu Gothic UI", "Meiryo", "Hiragino Sans",
+    "Noto Sans CJK JP", sans-serif;
+  --font-mono:
+    "IBM Plex Mono", ui-monospace, "Cascadia Mono", "SF Mono", Menlo, "DejaVu Sans Mono", monospace;
+}
+
+/* The loading kit's motion tokens (components/Loading): durations, one easing curve and one
+   pixel length, no colour — colour-free on purpose, same as the font block above, so neither
+   needs the per-theme duplication the [data-theme] blocks carry. Each name is the one switch
+   for its effect: --loading-delay mirrors SHOW_DELAY_MS (components/Loading/Loading.tsx);
+   --spinner-lap and --spinner-lap-reduced are the two spinner speeds; --skeleton-sweep is the
+   skeleton's mask sweep; --shimmer-sweep is the text shimmer; --digit-roll is the
+   rolling-number flip; --progress-height is the voice-pack bar height. */
+:root {
+  --loading-delay: 300ms;
+  --motion-fast: 150ms;
+  --motion-base: 300ms;
+  --motion-content: 220ms;
+  --motion-ease: cubic-bezier(0.33, 0, 0.67, 1);
+  --motion-ease-out: cubic-bezier(0.2, 0.9, 0.25, 1);
+  --skeleton-sweep: 2s;
+  --spinner-lap: 1.5s;
+  --spinner-lap-reduced: 1.8s;
+  --shimmer-sweep: 2s;
+  --digit-roll: 520ms;
+  --progress-height: 6px;
+}
+
+/* Type, space and radius ladders: the sizes the stylesheets use, written down once (a comment for
+   the same reason as the stacking order below). Type: 11 mono labels · 12 hints and meta · 13
+   dense controls · 14 body and buttons · 16 and 18 section headings · 20 Settings page titles ·
+   24 page titles (.page-title). Space: 4 · 6 · 8 · 12 · 16 · 24. Radius: 3 chips · 4 · 5 small
+   buttons · 6 buttons and cards · 8 menus and panels · 12 large cards · 999px pills. */
+
+/* The stacking order, written down once because the z-index declarations this app has are spread
+   over the stylesheets of the components that own them and the next one added has nowhere else to
+   look — that is how the slash menu came to be painted over by the jump pill:
+     100      image overlay
+     51 / 50  search palette (its panel, then its backdrop)
+     51       retry review, avatar editor (AvatarEditor.css:14)
+     50       decision inbox
+     50       settings review
+     45       data reset dialog
+     45       rail drawer (its backdrop and its panel)
+     44 / 43  VIKI panel (its panel, then its backdrop)
+     40       session-limit toast
+     30       VIKI launcher
+     6        slash menu, model menu
+     5        session row menu, header menu, app menu
+     3        jump-to-latest pill
+   A comment rather than tokens: turning the numbers into var()s would mean editing every one of
+   those other components' stylesheets, to buy nothing an app this size needs. */
+
+/* The two layout breakpoints, written down once for the same reason:
+     1280   the right rail docks at or above this width, and is a drawer below it
+     800    the left rail docks at or above this width, and is a drawer below it
+   They are viewport CSS pixels, so they follow browser zoom as well as window size. The numbers
+   live in two kinds of place and both have to move together: the JavaScript that decides which
+   rails are docked (components/Shell/useLayoutMode.ts, the single source of truth) and the CSS
+   that reshapes what is left, every rule of which is under `not all and (min-width: 800px)` —
+   Shell.css, TopBar.css, StatusBar.css, Composer.css, ModelChip.css, Toast/SessionLimitToast.css
+   and styles/app.css. The negation is deliberate: `(max-width: 799px)` would leave the open
+   interval (799, 800) — reachable by zoom, since an 879px window at 110% reports about 799.1 —
+   with the drawers of the narrow layout and the CSS of the wide one. Not custom properties: a
+   media query cannot read one. */
+
+/* Bot icon hues (botIconDesign.ts BOT_HUES, botHues.ts): the two assigned-only hues' own colours.
+   `.bot-icon` always carries data-theme="dark" on itself (botIconDesign.ts), so these default to
+   the dark, bright pair there too; a `[data-bot-hue]` swatch drawn outside that forced-dark SVG
+   takes the darker, light-safe pair instead, under a real `[data-theme="light"]` ancestor. One
+   resolved `--bot-hue` per BOT_HUES entry, for such a swatch to read regardless of which hue. */
+.bot-icon,
+[data-bot-hue] {
+  --bot-amber: #facc15;
+  --bot-pink: #f472b6;
+}
+
+[data-theme="light"] [data-bot-hue] {
+  --bot-amber: #a16207;
+  --bot-pink: #b0207a;
+}
+
+[data-bot-hue="blue"] {
+  --bot-hue: var(--label-blue);
+}
+
+[data-bot-hue="green"] {
+  --bot-hue: var(--label-green);
+}
+
+[data-bot-hue="orange"] {
+  --bot-hue: var(--label-orange);
+}
+
+[data-bot-hue="purple"] {
+  --bot-hue: var(--label-purple);
+}
+
+[data-bot-hue="red"] {
+  --bot-hue: var(--label-red);
+}
+
+[data-bot-hue="teal"] {
+  --bot-hue: var(--label-slate);
+}
+
+[data-bot-hue="amber"] {
+  --bot-hue: var(--bot-amber);
+}
+
+[data-bot-hue="pink"] {
+  --bot-hue: var(--bot-pink);
+}

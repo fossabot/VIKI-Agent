@@ -1,0 +1,421 @@
+/* The composer: the input pill, with sizes that follow the design 1:1; every colour is a
+   styles/tokens.css token, the pill's border and fill included (--b-strong and --fill-pill,
+   role tokens for values that sit between the design's others, as Shell.css's header hairline
+   is).
+
+   - .composer-wrap    a plain positioning host, exactly the pill's own width, so
+                        SlashMenu (itself `position: absolute`) can sit flush above it. Adds no
+                        chrome of its own — data-region="composer" stays on `.composer` beneath,
+                        per Shell.tsx's contract.
+   - .composer         the 760px pill: min-height 56px, then grows with .composer-box's own
+                        height (Composer.tsx measures and sets it) up to 40vh; radius 14,
+                        gap 12, padding 0 10px 0 14px, contents centred as in the design.
+   - .composer-icon    the plus mark, var(--t3), sized by the "ico" utility class.
+   - .composer-box     the textarea itself: no border/outline of its own so the pill reads as
+                        one field (under forced colours it takes a 2px Highlight focus outline,
+                        the rule at the foot of this file, `@media (forced-colors: active)`),
+                        background transparent so the pill's own fill shows through.
+                        JP face (the "jp" utility class) at the design's own 14.5px, line-height
+                        24px in var(--t0); 15px of vertical padding makes a single line exactly
+                        54px, which inside the border-box pill's 1px borders is the design's 56px.
+                        Placeholder in var(--t3), matching the design's dimmed hint. No resize
+                        handle and no max-height here: Composer.tsx's MAX_HEIGHT_FRACTION is the
+                        only place the 40vh cap is written, and overflow-y makes it scroll.
+   - .composer-actions / .composer-mic   the mic in var(--t2).
+   - .composer-submit  the design's 36px orange circle, var(--or) under a var(--on-or) arrow.
+                        Disabled while a turn runs: the design has no such state, so this uses
+                        var(--g3) (the palette's other muted panel surface) with the arrow
+                        dimmed to var(--t3).
+   - .composer-stop    replaces .composer-submit while a turn runs. 36px tall,
+                        radius 18 (a pill, not a circle), var(--or)-on-dark outline and wash —
+                        the design's alpha values, over the --or channels (tokens.css's --or-rgb).
+                        .composer-stop-dot is the small rounded
+                        square before the word; .kbd (scoped under .composer-stop — a bare `.kbd`
+                        would leak globally, as a bare `.lbl` in SlashMenu.css would;
+                        shared in substance, not selector, with SlashMenu.css's own rule for
+                        the same key-cap glyph) names the Esc shortcut after it.
+   - .composer-refusal  the line App puts above the pill when it refuses a send itself; see that
+                        rule's own comment at the foot of this file.
+   - .composer-blocked  the line Composer puts above the pill when a blocked Enter did nothing;
+                        see that rule's own comment below .composer-refusal's. */
+
+.composer-wrap {
+  display: flow-root;
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  /* McpServers.css anchors its dialog here. Assumes one composer renders per
+     window; add anchor-scope if a second one ever does. */
+  anchor-name: --composer;
+}
+
+.menu[data-composer-hosted] {
+  position: fixed;
+  right: auto;
+}
+
+.composer {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  max-width: 760px;
+  min-height: 56px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border: 1px solid var(--b-strong);
+  border-radius: 14px;
+  background: var(--fill-pill);
+  box-shadow: 0 4px 18px var(--shadow-pill);
+  display: flex;
+  /* Keep the message field usable when scaled controls need their own row. */
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px 0 14px;
+}
+
+.composer-activity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  margin: 0 0 8px 2px;
+}
+
+.composer-activity-copy {
+  min-width: 0;
+}
+
+.composer-activity-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  overflow-wrap: anywhere;
+}
+
+.composer-activity-name {
+  color: var(--t0);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.composer-activity-caption {
+  color: var(--t2);
+  font: 10px var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.composer-activity-label {
+  margin-top: 4px;
+  color: var(--t2);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* The working line: `key={label}` (Composer.tsx) remounts this span on every new label, which
+   replays the fade-and-rise below each time. `.working-shimmer` adds a slow --t3/--t0 sweep,
+   clipped to the text (a gradient clip), while the strip is active (ActivityState "active"
+   only). */
+.composer-activity-text {
+  display: inline-block;
+  animation: composer-activity-in var(--motion-base) var(--motion-ease-out) both;
+}
+
+@keyframes composer-activity-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+.composer-activity-text.working-shimmer {
+  background: linear-gradient(90deg, var(--t3) 0 35%, var(--t0) 50%, var(--t3) 65% 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation:
+    composer-activity-in var(--motion-base) var(--motion-ease-out) both,
+    composer-activity-shimmer var(--shimmer-sweep) linear infinite;
+}
+
+@keyframes composer-activity-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* The strip's own clock (Elapsed, Composer.tsx): `aria-hidden`, so only the visible digits need
+   a style — the atomic announcement above already names the work in words. */
+.composer-activity-elapsed {
+  margin-left: 6px;
+  font: 11px var(--font-mono);
+  color: var(--t3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Keep the editor and visibility observer mounted while the decorative beam runs its frame loop.
+   Removing only the beam stops its oscillator without depending on a CSS fade event. */
+.composer-beam-host {
+  position: relative;
+  width: 100%;
+}
+
+.composer:focus-within {
+  outline: 2px solid var(--t2);
+  outline-offset: 2px;
+}
+
+.composer-icon {
+  color: var(--t3);
+  flex: none;
+}
+
+.composer-box {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 15px 0;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow-y: auto;
+  background: transparent;
+  color: var(--t0);
+  font-size: 14.5px;
+  line-height: 24px;
+}
+
+.composer-box::placeholder {
+  color: var(--t3);
+}
+
+.composer-actions {
+  margin-left: auto;
+  flex: none;
+  min-width: 0;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.composer-mic {
+  color: var(--t2);
+}
+
+.composer-submit {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--or);
+  color: var(--on-or);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.composer-submit:disabled {
+  background: var(--g3);
+  color: var(--t3);
+  cursor: default;
+}
+
+.composer-submit:hover:not(:disabled) {
+  background: var(--or-hi);
+}
+
+.composer-submit:focus-visible,
+.composer-stop:focus-visible,
+.composer-steer:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+.composer-stop {
+  flex: none;
+  height: 36px;
+  padding: 0 12px 0 10px;
+  border-radius: 18px;
+  border: 1px solid rgb(var(--or-rgb) / 0.7); /* var(--or) at 70% */
+  background: rgb(var(--or-rgb) / 0.1); /* var(--or) at 10% */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--or-hi);
+  font-size: 13px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+}
+
+.composer-stop-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--or);
+}
+
+.composer-stop:hover {
+  background: rgb(var(--or-rgb) / 0.16);
+}
+
+/* .composer-steer: joins Stop while `running && steer`. Send's own circle and
+   arrow, reused so the two read as the same action — only Send's running refusal is lifted. */
+.composer-steer {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--or);
+  color: var(--on-or);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.composer-steer:disabled {
+  background: var(--g3);
+  color: var(--t3);
+  cursor: default;
+}
+
+.composer-steer:hover:not(:disabled) {
+  background: var(--or-hi);
+}
+
+/* .composer-refusal: a refusal the server never saw, so nothing else on screen says it happened
+   (a refusal the server DID see draws its own BlockedCard or ErrorCard in the column). App
+   renders it in Shell's composer slot directly above the pill, the way styles/app.css's
+   .fork-note is rendered — the rule lives here rather than there because this line is the
+   composer's. Geometry copied from
+   .fork-note so the two stack evenly; var(--or-hi) rather than .fork-note's dim var(--t3),
+   because this one is not a passing reminder — the app refused to send and gave the words back,
+   and the user has to notice that they are back. */
+.composer-refusal {
+  max-width: 760px;
+  margin: 0 auto 6px;
+  font-size: 12.5px;
+  color: var(--or-hi);
+}
+
+/* .composer-blocked: the line above the pill saying why a blocked Enter did nothing. Same
+   geometry as .composer-refusal above, dimmer var(--t2): .composer-refusal gives the user's
+   own words back after App declined to send them, so it stays until they act on it again;
+   this one names a block Composer already knew about before any attempt, and self-clears the
+   moment that block lifts or the user edits — a passing reminder, not returned words. */
+.composer-blocked {
+  max-width: 760px;
+  margin: 0 auto 6px;
+  font-size: 12.5px;
+  color: var(--t2);
+}
+
+/* Shared in substance with SlashMenu.css's identical rule for the same key-cap glyph — see that
+   file's own header comment for why a component this small duplicates rather than imports.
+   Scoped under .composer-stop, not bare, so it cannot leak globally. */
+.composer-stop .kbd {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--t2);
+  border: 1px solid var(--b-strong); /* the pill's own --b-strong border, reused */
+  border-radius: 3px;
+  padding: 0 5px;
+  line-height: 16px;
+  margin-left: 2px; /* the key-cap's gap after the word */
+}
+
+/* S (below 800px). At 400 CSS px the pill is 368px wide and its contents have to fit:
+   the textarea's 120px floor + 12 gap + the chip's 110 cap + 10 gap + the 36px submit + 20 of
+   padding = 308px, and 292px while the Stop pill stands in for the chip and submit. What goes is
+   decoration only — the plus mark and the mic are both aria-hidden in Composer.tsx, neither is a
+   control, and the Esc hint on the Stop pill is a reminder of a key that goes on working. */
+@media not all and (min-width: 800px) {
+  .composer {
+    padding: 0 8px 0 12px;
+  }
+
+  .composer-icon,
+  .composer-mic {
+    display: none;
+  }
+
+  .composer-actions {
+    gap: 10px;
+  }
+
+  .composer-box {
+    min-width: 120px;
+  }
+
+  .composer-stop .kbd {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .composer:focus-within {
+    outline-color: Highlight;
+  }
+
+  .composer-activity-name,
+  .composer-activity-caption,
+  .composer-activity-label {
+    color: CanvasText;
+  }
+
+  .composer-box:focus-visible {
+    outline: 2px solid Highlight;
+  }
+
+  .composer-submit:focus-visible,
+  .composer-stop:focus-visible,
+  .composer-steer:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+
+/* Reduced motion, both triggers (OS-level and the app's own Settings › Appearance): the label
+   span's fade-and-rise and the shimmer sweep are both off. */
+@media (prefers-reduced-motion: reduce) {
+  .composer-activity-text {
+    animation: none;
+  }
+
+  .composer-activity-text.working-shimmer {
+    animation: none;
+    background: none;
+    color: var(--t2);
+  }
+}
+
+html[data-motion="reduce"] .composer-activity-text {
+  animation: none;
+}
+
+html[data-motion="reduce"] .composer-activity-text.working-shimmer {
+  animation: none;
+  background: none;
+  color: var(--t2);
+}
+
+.composer-slot .draft-conflict pre,
+.composer-slot .local-drafts ul {
+  max-height: var(--composer-panel-height, 160px);
+}

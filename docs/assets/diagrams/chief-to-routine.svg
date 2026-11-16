@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 580" width="1160" height="580" role="img" aria-labelledby="title desc">
+  <title id="title">From a Chief request to a reviewed result</title>
+  <desc id="desc">In a vault with the Kanban pack, send a request in Chief's conversation. Chief creates a todo card owned by Research with checkable Done when items. VIKI checks the tested, enabled routine, your Start Bots' work grant and local limits. Ask first offers Start; Allowed can begin an eligible routine. Research works in a fresh Claude Code run. Open the run session and card to review its reply, sources, file changes or decision requests. The regular Bot conversation is separate from the run.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#b3b3c0"/>
+    </marker>
+  </defs>
+  <rect width="1160" height="580" fill="#0b0b0b"/>
+  <g fill="none" stroke="#b3b3c0" stroke-width="2.5" marker-end="url(#arrow)">
+    <path d="M350 155H425"/>
+    <path d="M755 155H820"/>
+    <path d="M975 240V330"/>
+    <path d="M820 415H755"/>
+    <path d="M425 415H350"/>
+  </g>
+  <g fill="#151515" stroke="#41414c" stroke-width="2">
+    <rect x="30" y="70" width="320" height="170" rx="12"/>
+    <rect x="425" y="70" width="330" height="170" rx="12"/>
+    <rect x="820" y="70" width="310" height="170" rx="12" stroke="#97d6be"/>
+    <rect x="820" y="330" width="310" height="170" rx="12" stroke="#97d6be"/>
+    <rect x="425" y="330" width="330" height="170" rx="12"/>
+    <rect x="30" y="330" width="320" height="170" rx="12"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif" fill="#f8f8ff" font-size="26" font-weight="600">
+    <text x="52" y="116">01  Ask Chief</text>
+    <text x="447" y="116">02  Card in the vault</text>
+    <text x="842" y="116">03  VIKI checks</text>
+    <text x="842" y="376">04  Research runs</text>
+    <text x="447" y="376">05  Result</text>
+    <text x="52" y="376">06  You review</text>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif" fill="#c6c6d0" font-size="22">
+    <text x="30" y="34">Example: compare three backup tools, with sources and a recommendation</text>
+    <text x="52" y="158">Open conversation</text>
+    <text x="52" y="190">Add the request and Send</text>
+    <text x="52" y="222">Chief routes the work</text>
+    <text x="447" y="158">status: todo</text>
+    <text x="447" y="190">owner/research</text>
+    <text x="447" y="222">Done when checklist</text>
+    <text x="842" y="158">Tested, enabled routine</text>
+    <text x="842" y="190">Grant + local limits</text>
+    <text x="842" y="222">Offer Start, or begin</text>
+    <text x="842" y="418">Fresh Claude Code chat</text>
+    <text x="842" y="450">Routine prompt + profile</text>
+    <text x="842" y="482">Normal tool permissions</text>
+    <text x="447" y="418">Reply, sources and files</text>
+    <text x="447" y="450">Card may need a decision</text>
+    <text x="447" y="482">or be ready for review</text>
+    <text x="52" y="418">Open session + card</text>
+    <text x="52" y="450">Check the outcome</text>
+    <text x="52" y="482">Answer, accept or revise</text>
+    <text x="30" y="552" font-size="20">This Kanban workflow needs a configured routine. Its run is separate from the Bot's regular conversation.</text>
+  </g>
+</svg>

@@ -1,0 +1,70 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.test-tmp/
+
+# Frontend
+frontend/node_modules/
+desktop/node_modules/
+frontend/dist/
+frontend/test-results/
+frontend/.vitest/
+/src/viki_agent/resources/ui/
+/dist/
+
+# Raw captures and app state live under %LOCALAPPDATA%\viki-agent, never here.
+/captures/
+*.log
+
+# Credentials and local application state
+.env
+.env.*
+*.env
+[.]credentials*
+credentials.json
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.sqlite
+*.sqlite-*
+*.sqlite.*
+*.sqlite3
+*.sqlite3-*
+*.sqlite3.*
+*.db
+*.db-*
+*.db.*
+state.json
+sealing-key-id
+settings.local.json
+# Words that identify you beyond your account name (scripts/scrub_fixture.py's PRIVATE_FILE)
+/.private-words.json
+
+# Editors / OS
+.vscode/
+Thumbs.db
+
+# Local work plans and notes, kept out of the repository
+docs/work/
+docs/internal/
+
+# scripts/linux_check.py's run logs and cached base results; nothing here is ever committed
+/.linux-check/
+
+# Maintainer tooling, design records and the sources of the documentation media: kept on disk,
+# not published
+/.agents/
+/.claude/
+/docs/decisions/
+/docs/assets/README.md
+/docs/assets/motion/
+/docs/assets/videos/manifest.json
+/docs/assets/videos/*.provenance.json
+/docs/assets/videos/user-guide.*

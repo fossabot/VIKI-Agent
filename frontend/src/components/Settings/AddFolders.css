@@ -1,0 +1,46 @@
+/* The Add folders result rows. Everything else AddFolders.tsx renders — .settings-actions,
+   .settings-note, .settings-error, the .btn variants, .sr-only — is Settings.css/base.css's own,
+   already loaded wherever this component is used; this file only adds what those do not cover. */
+
+.ws-add-rows {
+  list-style: none;
+  margin: 8px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ws-add-rows li {
+  /* Icon + text as two flex items that stay on one line: `flex-wrap: wrap` would let the
+     icon item and the text run after it land on separate lines whenever that text overflowed —
+     nowrap (the default) keeps them side by side, and `.ws-add-row-text`'s own `min-width: 0`
+     below is what then lets its own long text wrap inside its own box instead. */
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.ws-add-rows li > span {
+  color: var(--t2);
+}
+
+.ws-add-row-text {
+  min-width: 0;
+}
+
+/* Same override as VaultCard.css's `.ws-vault > h3.lbl`: Settings.css's `.settings-page h3` is
+   more specific than a bare `.lbl`, so font-size/weight/color must be restated here. */
+.ws-add > h3.lbl {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--t3);
+}
+
+/* The typed-path submit button defaults to a full-width stretched bar: `.onboarding-form` is a
+   column flex container (Onboarding.css) with the default `align-items: stretch`, which the
+   PathForm field above it wants but the button does not. */
+.ws-add .onboarding-form > button {
+  align-self: flex-start;
+}

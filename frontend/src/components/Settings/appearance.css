@@ -1,0 +1,79 @@
+/* The appearance mechanism's own rules: `applyAppearance` (appearance.ts)
+   only ever touches `document.documentElement`'s dataset and `--font-scale`; every visible
+   effect other than the zoom itself is a selector here, never a `<style>` element (the CSP's
+   `style-src` stays `'self' 'unsafe-inline'` with no inline tag needed).
+
+   This file is imported once, by AppearancePage.tsx, which is enough: Vite bundles an imported
+   stylesheet into the build regardless of whether the importing component is ever mounted, and
+   nothing here is scoped to a class this file owns — every selector below keys off `<html>`, so
+   the rules apply globally from app start. */
+
+/* Font scale: Chromium's standardized root `zoom` scales the whole document — the shell, the
+   out-of-shell search palette, the fixed app-menu panel, the drawers and the toasts — in one
+   coordinate space. The `1` fallback means a page that has not
+   yet run `applyAppearance` (before the first settings read resolves) never zooms. */
+html {
+  zoom: var(--font-scale, 1);
+}
+
+/* Density: "compact" tightens exactly five surfaces, nothing else.
+   Each delta below is read against that surface's own base rule (Shell.css, Conversation.css,
+   LeftRail.css, RightRail.css) minus 4px — a plain override, since a media query cannot read a
+   custom property and `calc()` against another stylesheet's literal is not simpler than writing
+   the result once. */
+
+/* Base: Shell.css's `.conversation-scroll { padding: 24px 24px 0 }`. */
+html[data-density="compact"] .conversation-scroll {
+  padding: 16px 16px 0;
+}
+
+/* This is the turn-to-turn gap, but `.turn` (Conversation.css) sets no gap of its
+   own — the 18px that spaces one turn from the next is `.conversation-list`'s, `.turn`'s direct
+   parent, so that is the selector this rule needs. Base: `gap: 18px`. */
+html[data-density="compact"] .conversation-list {
+  gap: 14px;
+}
+
+/* Base: LeftRail.css's `.sess { padding: 8px 12px }` / `.sess-selected { padding: 7px 11px }` —
+   2px off each of the top/bottom sides is 4px off the row's total height. */
+html[data-density="compact"] .sess {
+  padding: 6px 12px;
+}
+
+html[data-density="compact"] .sess-selected {
+  padding: 5px 11px;
+}
+
+/* Base: Shell.css's `.composer-slot { padding: 10px 16px 14px }`. */
+html[data-density="compact"] .composer-slot {
+  padding: 6px 16px 10px;
+}
+
+/* This delta is a section's top spacing: RightRail.css's `.rail-section` sets only
+   `margin-top: 18px`, so margin-top is the property overridden here. This selector's
+   specificity (0,2,1) also beats RightRail.css's `.rail-section--routines { margin-top: 16px }`
+   (0,1,0), so in compact the routines section's own tighter gap folds into the same 14px as
+   every other section — accepted rather than chased with a second, routines-only override,
+   since the density setting gives this key one number, not one per section. */
+html[data-density="compact"] .rail-section {
+  margin-top: 14px;
+}
+
+/* Reduced motion: "reduce" stops four animated surfaces outright. The loading kit's spinner
+   (.banner-spin among its sites) is not one of them: Loading.css's own reduced-motion rule for
+   `.spinner svg` already slows its lap instead of stopping it, so this file does not repeat
+   the switch for it. Each selector below pairs an
+   attribute and a class (specificity 0,2,1), which beats every base rule it overrides (each a
+   bare class, 0,1,0) regardless of stylesheet order, so this never depends on being loaded after
+   Shell/Conversation/LeftRail/RightRail's own sheets. "allow" and "system" set no rule here:
+   "system" is the `prefers-reduced-motion` query already in each base sheet, and "allow" cannot
+   cancel an OS-level reduce-motion setting, so it asks for nothing rather than claim it can. */
+html[data-motion="reduce"] .breathe,
+html[data-motion="reduce"] .caret,
+html[data-motion="reduce"] .rail-drawer,
+/* .rail-drawer-backdrop carries no animation of its own in RailDrawer.css — only the
+   panel it sits behind does. Named anyway so that a future backdrop fade does not silently
+   miss this switch; the rule is a no-op until then. */
+html[data-motion="reduce"] .rail-drawer-backdrop {
+  animation: none;
+}

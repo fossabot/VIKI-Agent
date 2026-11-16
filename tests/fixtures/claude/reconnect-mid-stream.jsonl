@@ -1,0 +1,25 @@
+{"dir": "in", "frame": {"type": "user", "message": {"role": "user", "content": "count for me"}, "parent_tool_use_id": null}}
+{"dir": "out", "frame": {"type": "system", "subtype": "init", "session_id": "11111111-1111-4111-8111-111111111111", "model": "sonnet"}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "message_start", "message": {"id": "msg_reconnect_1"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "n01"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "fake.sleep", "s": 0.15}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "\nn02"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "fake.sleep", "s": 0.15}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "\nn03"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "fake.sleep", "s": 0.15}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "\nn04"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "fake.sleep", "s": 0.15}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "\nn05"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "fake.sleep", "s": 0.15}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "\nn06"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "fake.sleep", "s": 0.15}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "\nn07"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "fake.sleep", "s": 0.15}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "\nn08"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "fake.sleep", "s": 0.15}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "\nn09"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "out", "frame": {"type": "fake.sleep", "s": 0.15}}
+{"dir": "out", "frame": {"type": "stream_event", "event": {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "\nn10"}}, "session_id": "11111111-1111-4111-8111-111111111111"}}
+{"dir": "in", "frame": {"type": "control_request", "request_id": "req_reconnect_interrupt", "request": {"subtype": "interrupt"}}}
+{"dir": "out", "frame": {"type": "control_response", "response": {"subtype": "success", "request_id": "req_reconnect_interrupt", "response": {"still_queued": []}}}}
+{"dir": "out", "frame": {"type": "result", "subtype": "error_during_execution", "is_error": true, "terminal_reason": "aborted_streaming", "session_id": "11111111-1111-4111-8111-111111111111"}}

@@ -1,0 +1,33 @@
+/* The tiles take the Ghost White accent (black in the light theme). The halo stands in for the
+   film's bloom, so only the dark theme has it. */
+.tile-wordmark {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  color: var(--or);
+  fill: currentColor;
+}
+
+.tile-wordmark-small {
+  height: 14px;
+  width: auto;
+  filter: drop-shadow(0 0 2px rgb(var(--or-rgb) / 0.35));
+}
+
+/* Sized by the surrounding font size; 7.95em is the width the earlier lettering took. */
+.tile-wordmark-large {
+  width: min(100%, 7.95em);
+  height: auto;
+  filter: drop-shadow(0 0 0.06em rgb(var(--or-rgb) / 0.3));
+}
+
+[data-theme="light"] .tile-wordmark {
+  filter: none;
+}
+
+@media (forced-colors: active) {
+  .tile-wordmark {
+    color: CanvasText;
+    filter: none;
+  }
+}

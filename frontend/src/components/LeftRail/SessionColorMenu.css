@@ -1,0 +1,101 @@
+[data-radix-popper-content-wrapper]:has(> .session-color-menu) {
+  zoom: calc(1 / var(--font-scale, 1));
+}
+
+.session-color-menu {
+  zoom: var(--font-scale, 1);
+  width: 200px;
+  max-width: min(
+    calc((100vw - 16px) / var(--font-scale, 1)),
+    calc(var(--radix-dropdown-menu-content-available-width) / var(--font-scale, 1))
+  );
+  max-height: min(
+    calc((100dvh - 16px) / var(--font-scale, 1)),
+    calc(var(--radix-dropdown-menu-content-available-height) / var(--font-scale, 1))
+  );
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 4px 0;
+  box-sizing: border-box;
+  z-index: 101;
+}
+
+/* A narrow window has room over the parent menu, rather than beside it. */
+@media not all and (min-width: 800px) {
+  .session-color-menu {
+    max-width: calc((100vw - 16px) / var(--font-scale, 1));
+  }
+  .session-color-menu[data-side="right"] {
+    translate: -100% 0;
+  }
+  .session-color-menu[data-side="left"] {
+    translate: 100% 0;
+  }
+}
+
+.session-color-menu .mi {
+  height: auto;
+  min-height: 34px;
+  padding-block: 7px;
+}
+
+.session-color-choice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.session-color-name {
+  flex: 1 1 48px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.session-color-trigger::after {
+  content: "›";
+  margin-left: auto;
+  color: var(--t2);
+}
+
+.session-color-choice[data-state="checked"] {
+  font-weight: 600;
+}
+
+.session-color-choice[data-highlighted] {
+  background: var(--fill-hi);
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+}
+
+.session-color-choice[data-disabled] {
+  color: var(--t3);
+  cursor: default;
+}
+
+.session-color-selected {
+  margin-left: auto;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: 10px;
+  color: var(--t2);
+}
+
+.session-color-swatch {
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--t3);
+  box-sizing: border-box;
+}
+
+@media (forced-colors: active) {
+  .session-color-choice[data-highlighted] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+  .session-color-swatch {
+    border-color: CanvasText;
+  }
+}

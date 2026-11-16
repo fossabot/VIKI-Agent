@@ -1,0 +1,42 @@
+/* RowMenu, with sizes that follow the design 1:1. Two primitives live in styles/base.css and are
+   deliberately not restated here: `.mi`, the row, and `.menu-panel`, the panel chrome that the
+   design's `.menu` rule became once the third and fourth dropdowns arrived. What is left
+   below is this menu's own — where it floats, how wide it is, its row highlight and the warm
+   tint on the destructive action. Adding a fill or a border to `.row-menu` would take effect
+   (component CSS loads after base.css), which is the danger: it forks chrome that four menus
+   are drawn from one rule to keep identical. */
+.row-menu {
+  position: absolute;
+  width: 214px;
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+
+/* Fork carries no default highlight: the design shows this menu frozen in a hover state, not
+   as it looks on open, so the highlight is real `:hover`/`:focus-visible` rather than a
+   hard-coded `.on` — the same three declarations `.mi.on` sets in base.css, plus the
+   outline suppression focus-visible needs. They are restated rather than shared because
+   base.css's `.menu-panel` note keeps row highlighting with each component on purpose: a
+   `.mi:hover` in base.css would light a second row in the slash menu (already highlighted by
+   keyboard position) and in the model chip (by current selection). HeaderMenu.css carries the
+   same declarations for the one other menu that highlights on hover; one rule covering both
+   would have to live in base.css beside `.menu-panel`, not in either component. */
+.row-menu .mi:hover,
+.row-menu .mi:focus-visible {
+  background: var(--fill-hi);
+  box-shadow: inset 2px 0 0 var(--or);
+  color: var(--t0);
+  outline: none;
+}
+
+.row-menu-close {
+  color: var(--or-hi);
+}
+
+@media (forced-colors: active) {
+  .row-menu .mi:hover,
+  .row-menu .mi:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

@@ -1,0 +1,80 @@
+.routine-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.routine-editor h2,
+.routine-editor p {
+  margin: 0;
+}
+
+.routine-editor-form,
+.routine-editor-fields,
+.routine-editor-group,
+.routine-editor-days {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.routine-editor-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.routine-editor input:not([type="checkbox"], [type="radio"]),
+.routine-editor select,
+.routine-editor textarea {
+  max-width: 420px;
+  padding: 6px 8px;
+  border: 1px solid var(--b1);
+  border-radius: 5px;
+  background: var(--s0);
+  color: var(--t0);
+  font: inherit;
+}
+
+.routine-editor textarea {
+  max-width: none;
+  resize: vertical;
+}
+
+.routine-editor-kinds,
+.routine-editor-time,
+.routine-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.routine-editor-days {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.routine-editor-days legend {
+  width: 100%;
+}
+
+.routine-editor-add {
+  align-self: flex-start;
+}
+
+.routine-editor-note {
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.routine-editor [role="alert"] {
+  color: var(--err);
+}

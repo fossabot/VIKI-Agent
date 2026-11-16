@@ -1,0 +1,126 @@
+.artifact-inspector {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--g1);
+  max-width: 56rem;
+  min-width: 0;
+}
+.artifact-inspector header,
+.artifact-inspector dl div {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+}
+.artifact-inspector header {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.artifact-inspector header strong {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.artifact-status {
+  flex: none;
+  font-size: 0.75rem;
+  line-height: 18px;
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--t2);
+}
+.artifact-status-failed {
+  color: var(--err);
+}
+.artifact-status-unknown {
+  color: var(--t2);
+}
+.artifact-inspector dl {
+  margin: 12px 0;
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 18px;
+}
+.artifact-inspector dt {
+  flex: none;
+  color: var(--t2);
+  min-width: 4rem;
+}
+.artifact-inspector dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.artifact-path {
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+.artifact-inspector .artifact-target {
+  font-size: 12.5px;
+  color: var(--t1);
+}
+.artifact-facts {
+  margin: 12px 0;
+}
+.artifact-facts summary {
+  width: fit-content;
+  color: var(--t2);
+  font-size: 12px;
+  line-height: 24px;
+  cursor: pointer;
+}
+.artifact-inspector pre {
+  max-height: 20rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--fill-tool);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 20px;
+  user-select: text;
+}
+.artifact-inspector pre + pre {
+  margin-top: 12px;
+}
+.artifact-inspector > button {
+  margin-top: 12px;
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--g2);
+  color: var(--t1);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.artifact-inspector > button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.artifact-inspector > p {
+  margin: 12px 0 0;
+  color: var(--t2);
+  font-size: 12px;
+  line-height: 18px;
+}
+.artifact-inspector summary:focus-visible,
+.artifact-inspector button:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+@media (forced-colors: active) {
+  .artifact-inspector summary:focus-visible,
+  .artifact-inspector button:focus-visible {
+    outline-color: Highlight;
+  }
+}

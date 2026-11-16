@@ -1,0 +1,197 @@
+.capture-triage-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.capture-triage {
+  width: 520px;
+  max-width: 100%;
+  height: 100%;
+  background: var(--g1);
+  border-left: 1px solid var(--line);
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media not all and (min-width: 800px) {
+  .capture-triage {
+    width: 100%;
+  }
+}
+
+/* Every status/suggestion/footer line is a bare <p> (text, not a heading); reset once here
+   rather than on each one. */
+.capture-triage p {
+  margin: 0;
+}
+
+.capture-triage-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.capture-triage-details {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.capture-triage-status {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.capture-triage-note {
+  font-size: 12.5px;
+  color: var(--t3);
+}
+
+.capture-triage-suggest {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--g2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.capture-triage-hint {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.capture-triage-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.capture-triage-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.capture-triage-foot {
+  flex: none;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* CaptureCard renders .capture-card* as plain text nodes with no CSS of its own, so they are
+   styled here, in the dialog's own stylesheet, on the same surface/border tokens
+   .capture-triage-suggest above already uses. Every state these rules distinguish (suggested,
+   chosen via suggestion vs. chosen by the user, discarded, unread) is already named in the
+   card's own text, never by colour alone; paragraph margins come from the shared
+   ".capture-triage p" rule above, since every card renders inside .capture-triage-cards. */
+.capture-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--g2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* The lone "Open note" button sits as a direct child of the card (every other button is nested
+   one level deeper, in one of the three row classes below); without this it would stretch to the
+   card's full width under the column flex's default stretch. */
+.capture-card > button {
+  align-self: flex-start;
+}
+
+.capture-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.capture-card-head code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--t0);
+}
+
+.capture-card-head span {
+  flex: none;
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.capture-card-preview {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--t1);
+  overflow-wrap: anywhere;
+}
+
+.capture-card-suggestion {
+  font-size: 13px;
+  color: var(--t2);
+  overflow-wrap: anywhere;
+}
+
+.capture-card .dim {
+  color: var(--t3);
+}
+
+.capture-card-choice,
+.capture-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.capture-card-change {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.capture-card-change label {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.capture-card-change select {
+  min-width: 0;
+  max-width: 100%;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--g1);
+  color: var(--t0);
+  font: inherit;
+}

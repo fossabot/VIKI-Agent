@@ -1,0 +1,91 @@
+/* Dictation controls: the mic button inside the composer pill and the strip above it.
+
+   - .voice-mic        32px round button in the place of the composer's mic glyph: no border,
+                       transparent, var(--t2). aria-pressed (starting, recording) turns it
+                       var(--err) with a 1px ring.
+   - .voice-mic-stop   square indicator shown during recording (starting, recording phases).
+   - .voice-mic-spin   rotating spinner shown during finalization.
+   - .voice-mic-unready  dictation is not ready: var(--t3), and the one thing hidden below 800px:
+                       a ready mic stays inside the pill at S, an unready one has
+                       nothing to offer there.
+   - .voice-mic-badge  the "CPU" mark while a GPU failure runs on the CPU.
+   - .voice-strip      the line above the pill, same geometry as .composer-blocked, wrapping. */
+
+.voice-mic {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--t2);
+  cursor: pointer;
+}
+
+.voice-mic-unready {
+  color: var(--t3);
+}
+
+.voice-mic[aria-pressed="true"] {
+  color: var(--err);
+  box-shadow: 0 0 0 1px var(--err);
+}
+
+.voice-mic[aria-disabled="true"] {
+  cursor: default;
+}
+
+.voice-mic-badge {
+  position: absolute;
+  right: -4px;
+  bottom: -2px;
+  font-size: 9px;
+  line-height: 12px;
+  color: var(--t2);
+}
+
+/* Stop square shown while recording. */
+.voice-mic-stop {
+  display: inline-flex;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.voice-strip {
+  max-width: 760px;
+  margin: 0 auto 6px;
+  font-size: 12.5px;
+  color: var(--t2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.voice-provisional {
+  color: var(--t3);
+  font-style: italic;
+}
+
+.voice-notice {
+  color: var(--or-hi);
+}
+
+@media not all and (min-width: 800px) {
+  .voice-mic-unready {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .voice-mic:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}

@@ -1,0 +1,250 @@
+.routines-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  overflow-y: auto;
+  color: var(--t0);
+}
+
+.routines-view > .btn {
+  align-self: flex-start;
+}
+
+.routines-note,
+.routines-controls-note {
+  margin: 0;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.routines-scheduler {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--s0);
+  font-size: 13px;
+}
+
+.routines-scheduler > .routines-note {
+  flex: 1 1 260px;
+}
+
+.routines-policy {
+  min-width: 0;
+  font-size: 12px;
+  color: var(--t1);
+}
+
+.routines-policy[open] {
+  flex-basis: 100%;
+}
+
+.routines-policy summary {
+  color: var(--t0);
+  cursor: pointer;
+}
+
+.routines-policy summary:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+.routines-policy p {
+  max-width: 76ch;
+  margin: 8px 0 0;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.routines-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.routines-controls-notify {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.routines-controls-quiet-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.routines-controls-quiet-group legend {
+  float: left;
+  padding: 0;
+  margin-right: 12px;
+  font-size: 13px;
+}
+
+.routines-controls-quiet {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.routines-controls select {
+  padding: 4px 6px;
+  border: 1px solid var(--b1);
+  border-radius: 5px;
+  background: var(--s0);
+  color: var(--t0);
+  font: inherit;
+}
+
+.routines-controls-note {
+  flex-basis: 100%;
+}
+
+.routines-body {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.routines-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.routines-list > .btn {
+  align-self: flex-start;
+}
+
+.routines-list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.routines-row {
+  display: grid;
+  grid-template-columns: minmax(0, 7em) minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--b1);
+  border-radius: 6px;
+  background: var(--s0);
+  font-size: 13px;
+}
+
+.routines-group {
+  margin-top: 12px;
+  padding: 0 4px;
+}
+
+.routines-group:first-child {
+  margin-top: 4px;
+}
+
+.routines-group h2 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--t2);
+}
+
+.routines-row--archived {
+  opacity: 0.6;
+}
+
+.routines-row--selected {
+  border-color: var(--b-strong);
+  background: var(--fill-hi);
+}
+
+.routines-row--attention {
+  border-inline-start-color: var(--or);
+}
+
+.routines-row-name {
+  grid-column: 2;
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--t0);
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+.routines-row-name:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+
+.routines-row-name[aria-current="true"] {
+  text-decoration: underline;
+}
+
+.routines-row-next {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 6px;
+  border-radius: 5px;
+  background: var(--s1);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: normal;
+}
+
+.routines-row-clock {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--t0);
+}
+
+.routines-row-time-label {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--t2);
+}
+
+.routines-row-status {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+}
+
+.routines-pane {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .routines-body {
+    grid-template-columns: 1fr;
+  }
+}

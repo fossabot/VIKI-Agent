@@ -1,0 +1,174 @@
+WEBVTT
+
+00:00:00.460 --> 00:00:03.220
+VIKI Agent is a proactive coding agent
+
+00:00:03.400 --> 00:00:06.240
+with a decision engine that chooses when to
+help,
+
+00:00:06.640 --> 00:00:09.570
+what to suggest, and which work may start.
+
+00:00:10.560 --> 00:00:15.060
+It brings Claude Code and your Markdown
+project knowledge together,
+
+00:00:15.060 --> 00:00:18.970
+so a useful next step can reach you before
+you ask.
+
+00:00:19.370 --> 00:00:22.130
+With proactivity enabled and the app open,
+
+00:00:22.230 --> 00:00:26.830
+it considers your goals, context, timing,
+and granted authority.
+
+00:00:27.410 --> 00:00:32.930
+It can stay quiet, surface a suggestion, or
+start eligible work.
+
+00:00:33.630 --> 00:00:40.500
+Your vault provides durable goals, tasks,
+sources, and decisions.
+
+00:00:40.500 --> 00:00:45.580
+VIKI turns that context into opportunities
+to move your project forward.
+
+00:00:45.810 --> 00:00:49.170
+That includes proposing work beyond your
+task list.
+
+00:00:49.520 --> 00:00:51.530
+After repeated API reviews,
+
+00:00:51.530 --> 00:00:55.650
+VIKI offers to turn that workflow into a
+reusable skill.
+
+00:00:55.650 --> 00:00:58.920
+The launcher explains why and links to the
+source chats.
+
+00:00:59.350 --> 00:01:02.810
+Make this a skill prepares an unsent message
+for your review.
+
+00:01:03.270 --> 00:01:06.300
+Other offers help you learn from captured
+sources,
+
+00:01:06.320 --> 00:01:10.070
+run a retrospective, or improve Decision
+questions.
+
+00:01:10.170 --> 00:01:12.610
+These proposals stay in your hands.
+
+00:01:12.700 --> 00:01:16.370
+Now follow a separate coding task from
+context to result.
+
+00:01:16.370 --> 00:01:20.980
+A due vault task asks for positive checkout
+quantities.
+
+00:01:21.060 --> 00:01:24.920
+Ask first reserves mission starts for you.
+
+00:01:25.000 --> 00:01:29.690
+Allowed lets eligible work begin within your
+activity limits.
+
+00:01:29.860 --> 00:01:31.320
+On its next decision cycle,
+
+00:01:31.320 --> 00:01:33.360
+VIKI starts without another chat prompt.
+
+00:01:33.430 --> 00:01:36.990
+The agent reads the task and code, then
+requests an edit.
+
+00:01:36.990 --> 00:01:39.780
+Independent work still respects native
+permissions:
+
+00:01:39.830 --> 00:01:41.500
+Allow once approves the edit,
+
+00:01:41.580 --> 00:01:44.120
+and running the test command needs a
+separate approval.
+
+00:01:44.193 --> 00:01:45.843
+The agent responses are scripted;
+
+00:01:45.863 --> 00:01:49.713
+the app workflow, disposable edit, and local
+checks are real.
+
+00:01:49.733 --> 00:01:51.953
+You can follow what happened and review the
+evidence
+
+00:01:51.953 --> 00:01:53.471
+before deciding what comes next.
+
+00:01:53.631 --> 00:01:56.201
+Your responses also shape future decisions.
+
+00:01:56.321 --> 00:01:58.371
+Opening a suggestion, acting on it,
+
+00:01:58.411 --> 00:02:01.021
+or choosing Not useful gives VIKI feedback.
+
+00:02:01.581 --> 00:02:03.261
+With enough labeled decisions,
+
+00:02:03.281 --> 00:02:05.441
+local learning adapts the scoring weights;
+
+00:02:05.651 --> 00:02:07.571
+attention estimates also adjust.
+
+00:02:08.041 --> 00:02:09.731
+Learning shows what changed,
+
+00:02:09.931 --> 00:02:13.461
+the starting and current values, and the
+evidence behind them.
+
+00:02:14.101 --> 00:02:15.961
+You can turn it off or reset it.
+
+00:02:15.961 --> 00:02:20.186
+This adapts VIKI's decisions, without
+retraining Claude.
+
+00:02:20.186 --> 00:02:23.781
+Broader improvements to skills, knowledge,
+and Decision questions
+
+00:02:23.781 --> 00:02:25.831
+begin as drafts for review.
+
+00:02:25.951 --> 00:02:30.091
+Sensitive instruction and system files are
+excluded from knowledge upkeep.
+
+00:02:30.191 --> 00:02:32.661
+The optional starter supplies deny rules;
+
+00:02:32.661 --> 00:02:36.171
+your configured Claude Code hooks can block
+covered operations.
+
+00:02:36.171 --> 00:02:40.121
+Discover useful work. Delegate with control.
+
+00:02:40.141 --> 00:02:42.531
+Learn from the outcome. VIKI Agent.
